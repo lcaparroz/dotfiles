@@ -30,11 +30,11 @@ export GIT_PS1_SHOWSTASHSTATE=true
 export GIT_PS1_SHOWCOLORHINTS=true
 export GIT_PS1_SHOWUPSTREAM="auto"
 export GIT_PS1_DESCRIBE_STYLE="branch"
-source /usr/share/git-core/contrib/completion/git-prompt.sh
+source "${HOME}/.git-prompt.sh"
 
 # Get bash aliases from file if there is one
-if [ -f ~/.bash_aliases ]; then
-  source ~/.bash_aliases
+if [ -f "${HOME}/.bash_aliases" ]; then
+  source "${HOME}/.bash_aliases"
 fi
 
 # Bash prompt (PS1)
