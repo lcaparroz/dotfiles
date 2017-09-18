@@ -1,0 +1,44 @@
+#!/bin/bash
+#
+# Bash Run Command script for custom prompt
+
+# Prompt style related constants
+readonly COMMIT_STYLE="\[\e[33m\]"
+readonly PROMPT_STYLE="\[\e[36m\]"
+readonly CLEAR_STYLE="\[\e[0m\]"
+
+###########################################################
+# Prints Git commit hash (short) on current directory
+# Globals:
+#   None
+# Arguments:
+#   None
+# Returns:
+#   None
+###########################################################
+git_commit_id() {
+  local commit_id=$(git rev-parse --short HEAD 2>/dev/null)
+  if [[ -n "${commit_id}" ]]; then
+    echo "─┤${commit_id}│"
+  fi
+}
+
+# Export options for __git_ps1 command
+export GIT_PS1_SHOWDIRTYSTATE=true
+export GIT_PS1_SHOWUNTRACKEDFILES=true
+export GIT_PS1_SHOWSTASHSTATE=true
+export GIT_PS1_SHOWCOLORHINTS=true
+export GIT_PS1_SHOWUPSTREAM="auto"
+export GIT_PS1_DESCRIBE_STYLE="branch"
+source /usr/share/git-core/contrib/completion/git-prompt.sh
+
+# Get bash aliases from file if there is one
+if [ -f ~/.bash_aliases ]; then
+  source ~/.bash_aliases
+fi
+
+# Bash prompt (PS1)
+UPPER_START="\n${PROMPT_STYLE}┌┤\w│${CLEAR_STYLE}"
+LOWER_START="\n${PROMPT_STYLE}└─▶ \\\$ ${CLEAR_STYLE}"
+UPPER_END="${COMMIT_STYLE}\$(git_commit_id)${CLEAR_STYLE}"
+PROMPT_COMMAND='__git_ps1 "${UPPER_START}" "${UPPER_END}${LOWER_START}"'

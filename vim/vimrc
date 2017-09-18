@@ -1,0 +1,32 @@
+" Plugin manager
+so ~/.vim/plugins.vim
+
+" Row numbers
+set number
+set numberwidth=5
+set relativenumber
+
+" Text columns
+set textwidth=80
+set colorcolumn=+1
+
+" Highlight rsor line
+set cursorline
+
+" syntax
+syntax on
+
+" Extra whitespace
+set list listchars=tab:»·,trail:·,nbsp:·
+
+" Theme
+syntax enable
+set background=dark
+colorscheme solarized
+
+" Clipboard
+set clipboard=unnamedplus
+set go+=a
+
+" Statusbar
+set laststatus=2
