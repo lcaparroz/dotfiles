@@ -10,14 +10,23 @@ set relativenumber
 set textwidth=80
 set colorcolumn=+1
 
-" Highlight rsor line
+" Highlight cursor line
 set cursorline
 
-" syntax
-syntax on
+" Highlight and incremental search
+if has("extra_search")
+  set hlsearch
+  set incsearch
+endif
+
+" Assures that Backspace deletes indent, eol and start
+set backspace=indent,eol,start
 
 " Extra whitespace
-set list listchars=tab:»·,trail:·,nbsp:·
+set list listchars=tab:»\ ,trail:·,nbsp:·
+
+" Syntax
+syntax on
 
 " Theme
 syntax enable
@@ -25,8 +34,15 @@ set background=dark
 colorscheme solarized
 
 " Clipboard
-set clipboard=unnamedplus
+if has("clipboard")
+  set clipboard=unnamed
+  if has("unnamedplus")
+    set clipboard+=unnamedplus
+  endif
+endif
+
 set go+=a
 
 " Statusbar
 set laststatus=2
+set ruler
