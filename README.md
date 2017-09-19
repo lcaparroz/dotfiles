@@ -8,7 +8,7 @@ The following softwares must be installed prior to configuring these dotfiles:
 
 * **bash**
 * **vim**
-* **tmux**: version 2.5+
+* **tmux**
 * **xclip**
 * **curl**
 
