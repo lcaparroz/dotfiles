@@ -23,6 +23,11 @@ git_commit_id() {
   fi
 }
 
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+  source /etc/bashrc
+fi
+
 # Export options for __git_ps1 command
 export GIT_PS1_SHOWDIRTYSTATE=true
 export GIT_PS1_SHOWUNTRACKEDFILES=true
