@@ -43,6 +43,20 @@ endif
 
 set go+=a
 
+" Persistent undo
+if has('persistent_undo')
+  set undodir=~/.vim/.undo//
+  set undofile
+endif
+
+" Backup and swap files on ~/.vim folder
+set backup
+set backupdir=~/.vim/.backup//
+set directory=~/.vim/.swap//
+
+" Show vim mode on last line
+set showmode
+
 " Statusbar
 set laststatus=2
 set ruler

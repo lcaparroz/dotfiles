@@ -107,6 +107,18 @@ function install_vim_plug() {
   return "${SUCCESS}"
 }
 
+function create_directory() {
+  local directory=$1
+  echo -e "│\n├─┬─ Creating directory ${directory}:"
+  mkdir -p "${directory}" 2>>"${DOTFILES_LOG}"
+  if [[ "$?" -ne 0 ]] ; then
+    echo '│ └─── Error on creating directory.'
+    echo -e "└─── Error on creating directory.\n" >>"${DOTFILES_LOG}"
+  else
+    echo '│ └─── Directory successfully created.'
+  fi
+}
+
 echo -e "\n[DOTFILES INSTALLATION] Started at $(date)\n" >>"${DOTFILES_LOG}"
 
 echo '┌───────────────────────┐'
@@ -125,6 +137,10 @@ create_symbolic_link "${HOME}/.dotfiles/vim/vimrc" \
   "${HOME}/.vimrc"
 
 install_vim_plug
+
+create_directory "${HOME}/.vim/.undo"
+create_directory "${HOME}/.vim/.backup"
+create_directory "${HOME}/.vim/.swap"
 
 echo -e "│\n├────────┐"
 echo       '│ Finish │'
