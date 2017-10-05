@@ -42,6 +42,11 @@ if [ -f "${HOME}/.bash_aliases" ]; then
   source "${HOME}/.bash_aliases"
 fi
 
+# Source RVM (Ruby Version Manager utility if it is installed
+if [ -f "${HOME}/.rvm/scripts/rvm" ]; then
+  source "${HOME}/.rvm/scripts/rvm"
+fi
+
 # Bash prompt (PS1)
 UPPER_START="\n${PROMPT_STYLE}┌┤\w│${CLEAR_STYLE}"
 LOWER_START="\n${PROMPT_STYLE}└─▶ \\\$ ${CLEAR_STYLE}"
