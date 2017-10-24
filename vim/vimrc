@@ -25,6 +25,12 @@ set backspace=indent,eol,start
 " Extra whitespace
 set list listchars=tab:»\ ,trail:·,nbsp:·
 
+" Soft tabs (spaces instead of tab characters)
+set tabstop=2
+set shiftwidth=2
+set shiftround
+set expandtab
+
 " Syntax
 syntax on
 
