@@ -8,7 +8,7 @@ set relativenumber
 
 " Text columns
 set textwidth=80
-set colorcolumn=+1
+set colorcolumn=+1,+21,+41
 
 " Splits are open in 'natural' reading direction (right then below)
 set splitright
@@ -23,11 +23,15 @@ if has("extra_search")
   set incsearch
 endif
 
+" Search ignores case, unless specified
+set ignorecase
+set smartcase
+
 " Assures that Backspace deletes indent, eol and start
 set backspace=indent,eol,start
 
 " Extra whitespace
-set list listchars=tab:»\ ,trail:·,nbsp:·
+set list listchars=tab:»\ ,eol:¬,trail:·,nbsp:·
 
 " Soft tabs (spaces instead of tab characters)
 set tabstop=2
@@ -41,9 +45,9 @@ syntax on
 " Theme
 syntax enable
 set background=dark
-colorscheme solarized
+colorscheme gruvbox
 
-" Clipboard
+" Clipboard (yank/paste from/to clipboard, if available)
 if has("clipboard")
   set clipboard=unnamed
   if has("unnamedplus")
@@ -51,7 +55,7 @@ if has("clipboard")
   endif
 endif
 
-set go+=a
+set guioptions+=a
 
 " Persistent undo
 if has('persistent_undo')
@@ -64,9 +68,25 @@ set backup
 set backupdir=~/.vim/.backup//
 set directory=~/.vim/.swap//
 
+" Netrw
+
+" No header (banner)
+let g:netrw_banner = 0
+
+" Open files in a vertical split
+let g:netrw_browse_split = 2
+let g:netrw_altv = 1
+
+" netrw tree mode
+let g:netrw_liststyle = 3
+
 " Show vim mode on last line
 set showmode
 
-" Statusbar
+" Statusbar/Tabline
+set showtabline=2
 set laststatus=2
 set ruler
+
+" Do not automatically insert comment leader after hitting o/O (normal mode)
+autocmd FileType * setlocal formatoptions-=o

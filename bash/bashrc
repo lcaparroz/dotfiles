@@ -1,5 +1,5 @@
 #!/bin/bash
-#
+
 # Bash Run Command script for custom prompt
 
 # Prompt style related constants
@@ -67,9 +67,19 @@ if [ -f "${HOME}/.bash_aliases" ]; then
   source "${HOME}/.bash_aliases"
 fi
 
+# Source machine-specific configuration
+if [ -f "${HOME}/.bashrc.local" ]; then
+  source "${HOME}/.bashrc.local"
+fi
+
 # Source RVM (Ruby Version Manager utility if it is installed
 if [ -f "${HOME}/.rvm/scripts/rvm" ]; then
   source "${HOME}/.rvm/scripts/rvm"
+fi
+
+# Source gruvbox theme colors for vim running on terminal
+if [ -f "${HOME}/.vim/bundle/gruvbox/gruvbox_256palette.sh" ] ; then
+  source "${HOME}/.vim/bundle/gruvbox/gruvbox_256palette.sh"
 fi
 
 # Bash prompt (PS1)
