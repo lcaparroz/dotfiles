@@ -1,8 +1,13 @@
 #!/bin/bash
-#
+
 # bash script for aliases
 
-if [ -e /usr/bin/vimx ]; then alias vim='/usr/bin/vimx'; fi
+if [[ -e /usr/bin/vimx ]]; then alias vim="/usr/bin/vimx"; fi
+
+# tmux minimal session for workspace
+if [[ -n "$(command -v tmux)" && -d ${HOME}/workspace ]]; then
+  alias workspace="tmux new-session -s main -n workspace -c $HOME/workspace"
+fi
 
 # Local aliases
 
