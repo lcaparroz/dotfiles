@@ -3,28 +3,19 @@
 # Bash Run Command script for custom prompt
 
 # Prompt style related constants
-readonly COMMIT_STYLE="\[\e[33m\]"
-readonly PROMPT_STYLE="\[\e[36m\]"
-readonly RUBY_STYLE="\[\e[95m\]"
-readonly CLEAR_STYLE="\[\e[0m\]"
+declare -r COMMIT_STYLE="\[\e[33m\]"
+declare -r PROMPT_STYLE="\[\e[36m\]"
+declare -r RUBY_STYLE="\[\e[95m\]"
+declare -r CLEAR_STYLE="\[\e[0m\]"
 
-###########################################################
-# Prints Git commit hash (short) on current directory
-# Globals:
-#   None
-# Arguments:
-#   None
-# Returns:
-#   None
-###########################################################
 git_commit_id() {
-  local commit_id=$(git rev-parse --short HEAD 2>/dev/null)
+  local commit_id=$(git rev-parse --short HEAD 2> /dev/null)
   if [[ -n "${commit_id}" ]]; then
     echo "─┤${commit_id}│"
   fi
 }
 
-rvm_ruby_info() {
+ruby_info() {
   local current_directory="$(pwd)"
   local is_ruby_project_dir=false
 
@@ -38,19 +29,38 @@ rvm_ruby_info() {
   done
 
   if [[ "${is_ruby_project_dir}" = true ]]; then
-    if [[ -n "$(command -v rvm-prompt)" ]]; then
-      echo "<< $(~/.rvm/bin/rvm-prompt) >>"
-    elif [[ -n "$(command -v ruby)" ]]; then
-      echo "<< $(ruby --version | grep -oP "(ruby (\.?\d+){1,3})") >>"
-    else
-      echo '<< ruby >>'
+    local ruby_text='ruby'
+
+    if [[ -n "$(command -v ruby)" ]]; then
+      ruby_text="$(ruby --version | grep -oP "(ruby (\.?\d+){1,3})")"
     fi
+
+    echo "«${ruby_text}»"
   fi
 }
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
   source /etc/bashrc
+fi
+
+# Source machine-specific configuration
+if [ -f "${HOME}/.bashrc.local" ]; then
+  source "${HOME}/.bashrc.local"
+fi
+
+# Get bash aliases from file if there is one
+if [ -f "${HOME}/.bash_aliases" ]; then
+  source "${HOME}/.bash_aliases"
+fi
+
+# Define vim/vi as the default editor, if available
+if [[ -n "$(command -v vimx)" ]]; then
+  export EDITOR=vimx
+elif [[ -n "$(command -v vim)" ]]; then
+  export EDITOR=vim
+elif [[ -n "$(command -v vi)" ]]; then
+  export EDITOR=vi
 fi
 
 # Export options for __git_ps1 command
@@ -62,29 +72,9 @@ export GIT_PS1_SHOWUPSTREAM="auto"
 export GIT_PS1_DESCRIBE_STYLE="branch"
 source "${HOME}/.git-prompt.sh"
 
-# Get bash aliases from file if there is one
-if [ -f "${HOME}/.bash_aliases" ]; then
-  source "${HOME}/.bash_aliases"
-fi
-
-# Source machine-specific configuration
-if [ -f "${HOME}/.bashrc.local" ]; then
-  source "${HOME}/.bashrc.local"
-fi
-
-# Source RVM (Ruby Version Manager utility if it is installed
-if [ -f "${HOME}/.rvm/scripts/rvm" ]; then
-  source "${HOME}/.rvm/scripts/rvm"
-fi
-
-# Source gruvbox theme colors for vim running on terminal
-if [ -f "${HOME}/.vim/bundle/gruvbox/gruvbox_256palette.sh" ] ; then
-  source "${HOME}/.vim/bundle/gruvbox/gruvbox_256palette.sh"
-fi
-
 # Bash prompt (PS1)
 GIT_COMMIT="${COMMIT_STYLE}\$(git_commit_id)${CLEAR_STYLE}"
-RUBY_INFO="${RUBY_STYLE}\$(rvm_ruby_info)${CLEAR_STYLE}"
+RUBY_INFO="${RUBY_STYLE}\$(ruby_info)${CLEAR_STYLE}"
 UPPER_START="\n${PROMPT_STYLE}┌┤\w│${CLEAR_STYLE}"
 LOWER_START="\n${PROMPT_STYLE}└─▶ \\\$ ${CLEAR_STYLE}"
 UPPER_END="${GIT_COMMIT} ${RUBY_INFO}"
