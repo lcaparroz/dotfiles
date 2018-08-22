@@ -16,12 +16,15 @@ set splitbelow
 
 " Highlight cursor line
 set cursorline
+highlight CursorLine cterm=NONE ctermbg=lightcyan ctermfg=NONE
+highlight CursorLineNR cterm=bold ctermbg=lightcyan ctermfg=darkblue
 
 " Highlight and incremental search
 if has("extra_search")
   set hlsearch
   set incsearch
 endif
+highlight Search cterm=NONE ctermbg=lightgreen ctermfg=NONE
 
 " Search ignores case, unless specified
 set ignorecase
@@ -41,11 +44,7 @@ set expandtab
 
 " Syntax
 syntax on
-
-" Theme
 syntax enable
-set background=dark
-colorscheme gruvbox
 
 " Clipboard (yank/paste from/to clipboard, if available)
 if has("clipboard")
@@ -74,7 +73,7 @@ set directory=~/.vim/.swap//
 let g:netrw_banner = 0
 
 " Open files in a vertical split
-let g:netrw_browse_split = 2
+" let g:netrw_browse_split = 2
 let g:netrw_altv = 1
 
 " netrw tree mode
