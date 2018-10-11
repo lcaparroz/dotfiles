@@ -5,6 +5,7 @@ so ~/.vim/plugins.vim
 set number
 set numberwidth=5
 set relativenumber
+highlight LineNr cterm=NONE ctermbg=NONE ctermfg=grey
 
 " Text columns
 set textwidth=80
@@ -35,6 +36,13 @@ set backspace=indent,eol,start
 
 " Extra whitespace
 set list listchars=tab:»\ ,eol:¬,trail:·,nbsp:·
+" http://vim.wikia.com/wiki/Highlight_unwanted_spaces
+highlight ExtraWhitespace cterm=bold ctermbg=red ctermfg=NONE
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
 
 " Soft tabs (spaces instead of tab characters)
 set tabstop=2
@@ -45,6 +53,8 @@ set expandtab
 " Syntax
 syntax on
 syntax enable
+
+filetype plugin indent on
 
 " Clipboard (yank/paste from/to clipboard, if available)
 if has("clipboard")
@@ -86,6 +96,9 @@ set showmode
 set showtabline=2
 set laststatus=2
 set ruler
+
+" No vertical characters for separating windows
+set fillchars+=vert:\ 
 
 " Do not automatically insert comment leader after hitting o/O (normal mode)
 autocmd FileType * setlocal formatoptions-=o
