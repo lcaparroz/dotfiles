@@ -3,15 +3,13 @@
 # Bash Run Command script for custom prompt
 
 # Prompt style related constants
-declare -r COMMIT_STYLE="\[\e[33m\]"
 declare -r PROMPT_STYLE="\[\e[36m\]"
-declare -r RUBY_STYLE="\[\e[95m\]"
 declare -r CLEAR_STYLE="\[\e[0m\]"
 
 git_commit_id() {
   local commit_id=$(git rev-parse --short HEAD 2> /dev/null)
   if [[ -n "${commit_id}" ]]; then
-    echo "─┤${commit_id}│"
+    echo "${commit_id}"
   fi
 }
 
@@ -37,6 +35,65 @@ ruby_info() {
 
     echo "«${ruby_text}»"
   fi
+}
+
+full_git_directory() {
+  local git_dir=$(git rev-parse --show-toplevel 2> /dev/null)
+
+  if [[ -n "${git_dir}" ]]; then
+    echo "${git_dir}"
+  fi
+}
+
+git_base_directory() {
+  local full_git_dir=$(full_git_directory)
+
+  if [[ -n "${full_git_dir}" ]]; then
+    local git_base_dir="$(basename ${full_git_dir})"
+    echo "${git_base_dir}" #| awk '{print toupper($0)}'
+  fi
+}
+
+git_subdirectory() {
+  local full_git_dir="$(full_git_directory)"
+
+  if [[ -n "${full_git_dir}" ]]; then
+    local current_dir="$(pwd)"
+    local git_subdir="${current_dir/$full_git_dir/''}"
+
+    if [[ -n "${git_subdir}" ]]; then
+      echo "${git_subdir:1}"
+    fi
+  fi
+}
+
+upper_prompt() {
+  local dir_style="\e[46;97m"
+  local clear_style="\e[0m"
+  local prompt="${dir_style} $(dirs) ${clear_style}"
+
+  local git_base_dir="$(git_base_directory)"
+
+  if [[ -n "${git_base_dir}" ]]; then
+    local git_dir_style="\e[101;97m"
+    local git_dir_slice="${git_dir_style} ${git_base_dir} ${clear_style}"
+
+    local git_subdir_style="\e[46;97m"
+    local git_subdir
+    git_subdir="$(git_subdirectory)"
+    if [[ -z "${git_subdir}" ]]; then git_subdir="~"; fi
+    local git_subdir_slice="${git_subdir_style} ${git_subdir} ${clear_style}"
+
+    local git_commit_style="\e[43;97m"
+    local git_commit
+    git_commit="$(git_commit_id)"
+    if [[ -z "${git_commit}" ]]; then git_commit="--"; fi
+    local git_commit_slice="${git_commit_style} ${git_commit} ${clear_style}"
+
+    prompt="${git_dir_slice}${git_subdir_slice}${git_commit_slice}"
+  fi
+
+  echo -e "${prompt}\e[0m"
 }
 
 # Source global definitions
@@ -73,9 +130,6 @@ export GIT_PS1_DESCRIBE_STYLE="branch"
 source "${HOME}/.git-prompt.sh"
 
 # Bash prompt (PS1)
-GIT_COMMIT="${COMMIT_STYLE}\$(git_commit_id)${CLEAR_STYLE}"
-RUBY_INFO="${RUBY_STYLE}\$(ruby_info)${CLEAR_STYLE}"
-UPPER_START="\n${PROMPT_STYLE}┌┤\w│${CLEAR_STYLE}"
-LOWER_START="\n${PROMPT_STYLE}└─▶ \\\$ ${CLEAR_STYLE}"
-UPPER_END="${GIT_COMMIT} ${RUBY_INFO}"
-PROMPT_COMMAND='__git_ps1 "${UPPER_START}" "${UPPER_END}${LOWER_START}"'
+UPPER_LINE="\n\$(upper_prompt)${CLEAR_STYLE}"
+LOWER_LINE="\n❯ "
+PROMPT_COMMAND='__git_ps1 "${UPPER_LINE}" "${LOWER_LINE}"'

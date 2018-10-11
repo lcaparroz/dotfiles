@@ -2,12 +2,25 @@
 
 # bash script for aliases
 
+# Alias for vimx (on Fedora)
 if [[ -e /usr/bin/vimx ]]; then alias vim="/usr/bin/vimx"; fi
 
 # tmux minimal session for workspace
 if [[ -n "$(command -v tmux)" && -d ${HOME}/workspace ]]; then
-  alias workspace="tmux new-session -s main -n workspace -c $HOME/workspace"
+  alias workspace="tmux new-session -s workspace -n home -c $HOME/workspace"
 fi
+
+_rename_tmux_window() {
+  if [[ -n $TMUX ]]; then
+    if [[ -n "$(git_base_directory)" ]]; then
+      tmux rename-window $(git_base_directory)
+    else
+      tmux rename-window $(basename $PWD)
+    fi
+  fi
+}
+
+alias tname='_rename_tmux_window'
 
 # Local aliases
 
