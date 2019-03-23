@@ -89,6 +89,9 @@ let g:netrw_altv = 1
 " netrw tree mode
 let g:netrw_liststyle = 3
 
+" ctrlp lists files based on .gitignore
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+
 " Show vim mode on last line
 set showmode
 
