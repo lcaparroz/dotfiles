@@ -21,11 +21,50 @@
     magit
     markdown-mode
     material-theme
-    org
     paredit
     projectile
     rainbow-delimiters
     rspec-mode))
+
+;; use-package package for package configuration/requirement
+(unless (package-installed-p 'use-package)
+  (package-install 'use-package))
+
+(require 'use-package)
+(setq use-package-verbose t)
+
+;; Built-in packages
+
+(use-package hl-line
+  :config
+  (global-hl-line-mode +1))
+
+(use-package lisp-mode
+  :config
+  (add-hook 'emacs-lisp-mode-hook #'eldoc-mode)
+  (add-hook 'emacs-lisp-mode-hook #'paredit-mode)
+  (add-hook 'emacs-lisp-mode-hook #'rainbow-delimiters-mode))
+
+(use-package paren
+  :config
+  (show-paren-mode +1))
+
+(use-package whitespace
+  :config
+  (setq whitespace-line-column 80)
+  (setq whitespace-style
+        '(face empty lines-tail newline newline-mark tabs tabs-mark trailing))
+  (setq whitespace-display-mappings
+        '((newline-mark 10 [172 10])
+          (tabs-mark 9 [187 9])))
+  (setq whitespace-global-modes '(not org-mode))
+  (global-whitespace-mode))
+
+
+(use-package windmove
+  :config
+  ;; shift + arrow keys to switch between windows
+  (windmove-default-keybindings))
 
 ;; Install packages
 (dolist (p my-packages)
@@ -56,8 +95,6 @@
 (column-number-mode t)
 (global-display-line-numbers-mode)
 
-; Highlight current line (under cursor)
-(global-hl-line-mode +1)
 (blink-cursor-mode -1)
 
 ;; enable y/n answers
@@ -79,7 +116,6 @@
 
 ;; Auto-pair parenthesis, brackets and quote marks
 (electric-pair-mode 1)
-(show-paren-mode 1)
 
 (electric-indent-mode 1)
 
@@ -92,20 +128,11 @@
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
 
-(require 'whitespace)
-(setq whitespace-style '(face empty newline newline-mark tabs tabs-mark trailing))
-(setq whitespace-display-mappings
-      '((newline-mark 10 [172 10])
-        (tabs-mark 9 [187 9])))
-(setq whitespace-global-modes '(not org-mode))
-(global-whitespace-mode)
-
 ;; disable startup screen
 (setq inhibit-startup-screen t)
 
 ;; disable the annoying bell ring
 (setq ring-bell-function 'ignore)
-(windmove-default-keybindings)
 
 (global-set-key (kbd "C-x g") 'magit-status)
 (projectile-mode +1)
