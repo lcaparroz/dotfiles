@@ -15,17 +15,6 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 
-(defvar my-packages
-  '(deft
-    ido-completing-read+
-    magit
-    markdown-mode
-    material-theme
-    paredit
-    projectile
-    rainbow-delimiters
-    rspec-mode))
-
 ;; use-package package for package configuration/requirement
 (unless (package-installed-p 'use-package)
   (package-install 'use-package))
@@ -66,10 +55,53 @@
   ;; shift + arrow keys to switch between windows
   (windmove-default-keybindings))
 
-;; Install packages
-(dolist (p my-packages)
-  (when (not (package-installed-p p))
-    (package-install p)))
+;; Third-party packages
+
+(use-package deft
+  :ensure t)
+
+(use-package ido-completing-read+
+  :ensure t
+  :config
+  ;; CWD-files only/partial matches/recent file in buffer names
+  (setq ido-auto-merge-work-directories-length -1)
+  (setq ido-enable-flex-matching t)
+  (setq ido-use-virtual-buffers t)
+  ;; enable ido in all (possible) contexts
+  (ido-mode t)
+  (ido-ubiquitous-mode t)
+  (ido-everywhere t))
+
+(use-package magit
+  :ensure t
+  :bind (("C-x g" . magit-status)))
+
+(use-package markdown-mode
+  :ensure t)
+
+(use-package material-theme
+  :ensure t
+  :config
+  (load-theme 'material-light t))
+
+(use-package paredit
+  :ensure t
+  :config
+  ;; enable in *scratch* buffer
+  (add-hook 'lisp-interaction-mode-hook #'paredit-mode)
+  (add-hook 'eval-expression-minibuffer-setup-hook #'paredit-mode))
+
+(use-package projectile
+  :ensure t
+  :config
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  (projectile-mode +1))
+
+(use-package rainbow-delimiters
+  :ensure t)
+
+(use-package rspec-mode
+  :ensure t)
 
 ;; Create the autosave/backup directory
 (defconst my-backup-directory (expand-file-name "backups" user-emacs-directory))
@@ -81,9 +113,6 @@
 (setq auto-save-default t
       auto-save-file-name-transforms `((".*" ,my-backup-directory t))
       auto-save-list-file-prefix my-backup-directory)
-
-;; Default theme
-(load-theme 'material-light t)
 
 ;; mode line settings
 (setq-default display-line-numbers-type 'relative
@@ -105,15 +134,6 @@
 (toggle-scroll-bar -1)
 (tool-bar-mode -1)
 
-;; enable ido in all (possible) contexts
-(ido-mode t)
-(ido-ubiquitous-mode t)
-(ido-everywhere t)
-
-(setq ido-auto-merge-work-directories-length -1 ;; only matches files in the CWD
-      ido-enable-flex-matching t                ;; partial matches
-      ido-use-virtual-buffers t)                ;; include recently used files in buffer names
-
 ;; Auto-pair parenthesis, brackets and quote marks
 (electric-pair-mode 1)
 
@@ -133,10 +153,6 @@
 
 ;; disable the annoying bell ring
 (setq ring-bell-function 'ignore)
-
-(global-set-key (kbd "C-x g") 'magit-status)
-(projectile-mode +1)
-(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 
 ;; nice scrolling
 (setq scroll-margin 0
