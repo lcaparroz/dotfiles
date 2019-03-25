@@ -1,4 +1,3 @@
-;; Packages
 (require 'package)
 
 ;; Package repositories
@@ -9,11 +8,98 @@
 (add-to-list 'package-archives
              '("gnu-elpa" . "https://elpa.gnu.org/packages/") t)
 
-;; Initialize packages before modifying them
+;; Kepp the installed packages in .emacs.d
+(setq package-user-dir (expand-file-name "elpa" user-emacs-directory))
 (package-initialize)
 
-(when (not package-archive-contents)
+;; Update package metadada if local cache is missing
+(unless package-archive-contents
   (package-refresh-contents))
+
+;; Create and set the autosave/backup directory
+(defconst my-backup-directory (expand-file-name "backups/" user-emacs-directory))
+
+(unless (file-exists-p my-backup-directory)
+  (make-directory my-backup-directory))
+
+(setq make-backup-files t)
+(setq backup-directory-alist `((".*" . ,my-backup-directory)))
+
+(setq auto-save-default t)
+(setq auto-save-file-name-transforms `((".*" ,my-backup-directory t)))
+(setq auto-save-list-file-prefix my-backup-directory)
+
+;; UI customization
+
+;; Disable blink cursor
+(when (fboundp 'blink-cursor-mode)
+  (blink-cursor-mode -1))
+
+;; Disable startup screen
+(setq inhibit-startup-screen t)
+
+;; Disable the annoying bell ring
+(setq ring-bell-function 'ignore)
+
+;; Hide menu, tool and scroll bars
+(when (fboundp 'menu-bar-mode)
+  (menu-bar-mode -1))
+(when (fboundp 'toggle-scroll-bar)
+  (toggle-scroll-bar -1))
+(when (fboundp 'tool-bar-mode)
+  (tool-bar-mode -1))
+
+;; Display line/column number and size in every buffer
+(when (fboundp 'column-number-mode)
+  (column-number-mode t))
+(when (fboundp 'line-number-mode)
+  (line-number-mode t))
+(when (fboundp 'size-indication-mode)
+  (size-indication-mode t))
+(when (fboundp 'global-display-line-numbers-mode)
+  (global-display-line-numbers-mode))
+
+;; Left-margin relative line numbers (mode line settings)
+(setq-default display-line-numbers-type 'relative)
+(setq-default display-line-numbers-current-absolute t)
+(setq-default display-line-numbers-width 3)
+(setq-default display-line-numbers-widen t)
+
+;; Natural (a.k.a nice) scrolling
+(setq scroll-margin 0)
+(setq scroll-conservatively 100000)
+(setq scroll-preserve-screen-position 1)
+
+;; Enable y/n answers
+(fset 'yes-or-no-p 'y-or-n-p)
+
+;; Menlo font
+(set-frame-font "Menlo 12")
+
+;; Editing customization
+
+;; Auto-pairing (parenthesis, brackets, quotes, etc)
+(electric-pair-mode +1)
+
+;; Some indentation automation
+(electric-indent-mode +1)
+
+;; Always use spaces instead of tabs, but maintain correct appearance
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 8)
+
+;; Miscellaneous
+(setq-default fill-column 80)
+(setq x-select-enable-clipboard t)
+(setq confirm-kill-emacs 'yes-or-no-p)
+
+;; UTF-8 encoding
+(prefer-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+
+;; Packages configuration/installation/requirement
 
 ;; use-package package for package configuration/requirement
 (unless (package-installed-p 'use-package)
@@ -103,63 +189,3 @@
 (use-package rspec-mode
   :ensure t)
 
-;; Create the autosave/backup directory
-(defconst my-backup-directory (expand-file-name "backups" user-emacs-directory))
-(unless (file-exists-p my-backup-directory)
-  (make-directory my-backup-directory))
-
-(setq make-backup-files t
-      backup-directory-alist `((".*" . ,my-backup-directory)))
-(setq auto-save-default t
-      auto-save-file-name-transforms `((".*" ,my-backup-directory t))
-      auto-save-list-file-prefix my-backup-directory)
-
-;; mode line settings
-(setq-default display-line-numbers-type 'relative
-              display-line-numbers-current-absolute t
-              display-line-numbers-width 3
-              display-line-numbers-widen t)
-
-(line-number-mode t)
-(column-number-mode t)
-(global-display-line-numbers-mode)
-
-(blink-cursor-mode -1)
-
-;; enable y/n answers
-(fset 'yes-or-no-p 'y-or-n-p)
-
-;; Hide menu, tool and scroll bars
-(menu-bar-mode -1)
-(toggle-scroll-bar -1)
-(tool-bar-mode -1)
-
-;; Auto-pair parenthesis, brackets and quote marks
-(electric-pair-mode 1)
-
-(electric-indent-mode 1)
-
-(setq-default fill-column 80) ;; Sets a 80 character line width
-(setq x-select-enable-clipboard t) ;; Enable copy/past-ing from clipboard
-(setq confirm-kill-emacs 'yes-or-no-p) ;; Ask for confirmation before closing emacs
-
-(prefer-coding-system 'utf-8) ;; Prefer UTF-8 encoding
-(set-default-coding-systems 'utf-8)
-(set-terminal-coding-system 'utf-8)
-(set-keyboard-coding-system 'utf-8)
-
-;; disable startup screen
-(setq inhibit-startup-screen t)
-
-;; disable the annoying bell ring
-(setq ring-bell-function 'ignore)
-
-;; nice scrolling
-(setq scroll-margin 0
-      scroll-conservatively 100000
-      scroll-preserve-screen-position 1)
-
-(setq rspec-use-docker-when-possible t)
-(set-frame-font "Menlo 12")
-(setq-default indent-tabs-mode nil) ;; don't use tabs to indent
-(setq-default tab-width 8) ;; but maintain correct appearance
