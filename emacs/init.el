@@ -93,11 +93,21 @@
 (setq x-select-enable-clipboard t)
 (setq confirm-kill-emacs 'yes-or-no-p)
 
+;; Revert buffers automatically when underlying files are changed externally
+(global-auto-revert-mode t)
+
 ;; UTF-8 encoding
 (prefer-coding-system 'utf-8)
 (set-default-coding-systems 'utf-8)
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
+
+;; Set custom file name so Emacs won't change init.el
+(defconst my-custom-file
+  (expand-file-name "custom.el" user-emacs-directory))
+(setq custom-file my-custom-file)
+(when (file-exists-p my-custom-file)
+  (load custom-file))
 
 ;; Packages configuration/installation/requirement
 
@@ -188,4 +198,3 @@
 
 (use-package rspec-mode
   :ensure t)
-
