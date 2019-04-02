@@ -196,5 +196,10 @@
 (use-package rainbow-delimiters
   :ensure t)
 
+(use-package rg
+  :ensure t
+  :config
+  (rg-enable-default-bindings))
+
 (use-package rspec-mode
   :ensure t)
