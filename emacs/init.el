@@ -168,6 +168,9 @@
   (ido-ubiquitous-mode t)
   (ido-everywhere t))
 
+(use-package inf-ruby
+  :ensure t)
+
 (use-package magit
   :ensure t
   :bind (("C-x g" . magit-status)))
@@ -202,4 +205,6 @@
   (rg-enable-default-bindings))
 
 (use-package rspec-mode
-  :ensure t)
+  :ensure t
+  :config
+  (add-hook 'after-init-hook 'inf-ruby-switch-setup))
