@@ -1,5 +1,5 @@
 call plug#begin('~/.vim/bundle')
-Plug 'altercation/vim-colors-solarized'
-Plug 'morhetz/gruvbox'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'tpope/vim-surround'
+Plug 'junegunn/fzf.vim'
 call plug#end()
