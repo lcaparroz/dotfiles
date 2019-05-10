@@ -10,6 +10,7 @@ if [[ -n "$(command -v tmux)" && -d ${HOME}/workspace ]]; then
   alias workspace="tmux new-session -s workspace -n home -c $HOME/workspace"
 fi
 
+# tmux rename window based on current working directory
 _rename_tmux_window() {
   if [[ -n $TMUX ]]; then
     if [[ -n "$(git_base_directory)" ]]; then
@@ -21,6 +22,21 @@ _rename_tmux_window() {
 }
 
 alias tname='_rename_tmux_window'
+
+# Alias for listing local branches which no longer have their remote counterpart
+alias ggone="git branch -vv | grep -i '\[.* gone\]' | awk '{ print \$1 }'"
+
+_filter_git_modified_untracked_files() {
+  local filter=$1
+
+  git status -su \
+    | grep -E "^(\?\?|[R ]M| D)" \
+    | awk '{ print $2 }' \
+    | grep -iE "${filter}"
+}
+
+# Alias for filtering modified/untracked git files in a branch
+alias gmu="_filter_git_modified_untracked_files"
 
 # Local aliases
 

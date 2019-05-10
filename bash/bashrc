@@ -79,7 +79,7 @@ upper_prompt() {
 }
 
 source_file() {
-  local file_name="$1"
+  local -r file_name="$1"
 
   [ -f "${file_name}" ] && source "${file_name}"
 }
@@ -87,14 +87,15 @@ source_file() {
 # Source global definitions
 source_file /etc/bashrc
 
-# Source machine-specific configuration
-source_file "${HOME}/.bashrc.local"
-
 # Get bash aliases from file if there is one
 source_file "${HOME}/.bash_aliases"
 
-# Source fzf key-bindings
+# Source machine-specific configuration
+source_file "${HOME}/.bashrc.local"
+
+# Source fzf key-bindings/completion
 source_file /usr/share/fzf/shell/key-bindings.bash
+source_file /usr/share/bash-completion/completions/fzf
 
 # Define vim/vi as the default editor, if available
 if [[ -n "$(command -v vimx)" ]]; then
