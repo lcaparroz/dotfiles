@@ -1,3 +1,5 @@
+let g:ale_completion_enabled = 1
+
 " Plugin manager
 so ~/.vim/plugins.vim
 
@@ -54,7 +56,9 @@ set expandtab
 syntax on
 syntax enable
 
+set nocompatible
 filetype plugin indent on
+set omnifunc=syntaxcomplete#Complete
 
 " Clipboard (yank/paste from/to clipboard, if available)
 if has("clipboard")
@@ -105,6 +109,30 @@ set fillchars+=vert:\
 
 " Do not automatically insert comment leader after hitting o/O (normal mode)
 autocmd FileType * setlocal formatoptions-=o
+
+" configure ale KotlinLanguageServer
+let g:ale_kotlin_languageserver_executable = expand("$HOME/.lsp/KotlinLanguageServer/server/build/install/server/bin/server")
+
+" Theme
+let g:seoul256_background = 237
+let g:seoul256_light_background = 256
+colorscheme seoul256-light
+
+" fzf colors that match the colorscheme
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
 
 " Map leader
 let mapleader = " "
