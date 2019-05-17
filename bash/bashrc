@@ -47,30 +47,30 @@ git_subdirectory() {
 }
 
 upper_prompt() {
-  local -r dir_style="\e[46;97m"
+  local -r dir_style="\e[36m"
   local -r clear_style="\e[0m"
   local -r git_base_dir="$(git_base_directory)"
   local prompt
 
-  prompt="${dir_style} $(dirs) ${clear_style}"
+  prompt="${dir_style}[$(dirs)]${clear_style}"
 
   if [[ -n "${git_base_dir}" ]]; then
-    local -r git_dir_style="\e[101;97m"
-    local -r git_dir_slice="${git_dir_style} ${git_base_dir} ${clear_style}"
+    local -r git_dir_style="\e[1;91m"
+    local -r git_dir_slice="${git_dir_style}[${git_base_dir}]${clear_style}"
 
-    local -r git_subdir_style="\e[46;97m"
+    local -r git_subdir_style="\e[36m"
     local git_subdir
     git_subdir="$(git_subdirectory)"
 
     if [[ -z "${git_subdir}" ]]; then git_subdir="~"; fi
-    local -r git_subdir_slice="${git_subdir_style} ${git_subdir} ${clear_style}"
+    local -r git_subdir_slice=" ${git_subdir_style}${git_subdir}${clear_style}"
 
-    local git_commit_style="\e[43;97m"
+    local git_commit_style="\e[33m"
     local git_commit
     git_commit="$(git_commit_id)"
 
     if [[ -z "${git_commit}" ]]; then git_commit="--"; fi
-    local git_commit_slice="${git_commit_style} ${git_commit} ${clear_style}"
+    local git_commit_slice=" ${git_commit_style}${git_commit}${clear_style}"
 
     prompt="${git_dir_slice}${git_subdir_slice}${git_commit_slice}"
   fi
