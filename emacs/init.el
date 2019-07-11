@@ -89,7 +89,7 @@
 (setq-default tab-width 8)
 
 ;; Miscellaneous
-(setq-default fill-column 80)
+(setq-default fill-column 81)
 (setq x-select-enable-clipboard t)
 (setq confirm-kill-emacs 'yes-or-no-p)
 
@@ -136,7 +136,7 @@
 
 (use-package whitespace
   :config
-  (setq whitespace-line-column 80)
+  (setq whitespace-line-column 81)
   (setq whitespace-style
         '(face empty lines-tail newline newline-mark tabs tabs-mark trailing))
   (setq whitespace-display-mappings
@@ -182,6 +182,13 @@
   :ensure t
   :config
   (load-theme 'material-light t))
+
+(use-package seoul256-theme
+  :ensure t
+  :config
+  (setq seoul256-background 256)
+  (setq seoul256-alternative-background 237)
+  (load-theme 'seoul256 t))
 
 (use-package paredit
   :ensure t
