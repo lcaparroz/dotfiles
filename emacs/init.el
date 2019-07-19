@@ -8,7 +8,7 @@
 (add-to-list 'package-archives
              '("gnu-elpa" . "https://elpa.gnu.org/packages/") t)
 
-;; Kepp the installed packages in .emacs.d
+;; Keep the installed packages in .emacs.d
 (setq package-user-dir (expand-file-name "elpa" user-emacs-directory))
 (package-initialize)
 
@@ -109,6 +109,10 @@
 (when (file-exists-p my-custom-file)
   (load custom-file))
 
+;; Spell-checking configuration
+(setq ispell-program-name (executable-find "hunspell")
+      ispell-dictionary "en_US")
+
 ;; Packages configuration/installation/requirement
 
 ;; use-package package for package configuration/requirement
@@ -119,6 +123,10 @@
 (setq use-package-verbose t)
 
 ;; Built-in packages
+
+(use-package flyspell
+  :config
+  (setq flyspell-issue-message-flag nil))
 
 (use-package hl-line
   :config
@@ -176,7 +184,10 @@
   :bind (("C-x g" . magit-status)))
 
 (use-package markdown-mode
-  :ensure t)
+  :ensure t
+  :config
+  (add-hook 'markdown-mode-hook 'imenu-add-menubar-index)
+  (setq imenu-auto-rescan t))
 
 (use-package material-theme
   :ensure t
