@@ -1,5 +1,5 @@
 #!/bin/bash
-#
+
 # Dotfiles installation
 readonly SUCCESS=0
 readonly FAIL=1
@@ -129,8 +129,6 @@ create_symbolic_link "${HOME}/.dotfiles/bash/bash_aliases" \
   "${HOME}/.bash_aliases"
 create_symbolic_link "${HOME}/.dotfiles/bash/bashrc" \
   "${HOME}/.bashrc"
-create_symbolic_link "${HOME}/.dotfiles/lib/git-prompt.sh" \
-  "${HOME}/.git-prompt.sh"
 create_symbolic_link "${HOME}/.dotfiles/tmux/tmux.conf" \
   "${HOME}/.tmux.conf"
 create_symbolic_link "${HOME}/.dotfiles/vim/vimrc" \
