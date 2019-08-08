@@ -181,7 +181,11 @@
 
 (use-package magit
   :ensure t
-  :bind (("C-x g" . magit-status)))
+  :bind (("C-x g" . magit-status))
+  :config
+  (setq magit-remote-set-if-missing t)
+  (setq git-commit-summary-max-length 50)
+  (setq git-commit-fill-column 72))
 
 (use-package markdown-mode
   :ensure t
