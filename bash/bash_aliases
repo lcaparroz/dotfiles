@@ -30,7 +30,7 @@ _filter_git_modified_untracked_files() {
   local filter=$1
 
   git status -su \
-    | grep -E "^(\?\?|[R ]M| D)" \
+    | grep -E "^(\?\?|[MR ]M| D)" \
     | awk '{ print $2 }' \
     | grep -iE "${filter}"
 }
