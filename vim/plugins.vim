@@ -6,12 +6,19 @@ endif
 
 call plug#begin('~/.vim/bundle')
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'tpope/vim-surround'
-Plug 'junegunn/seoul256.vim'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
+Plug 'junegunn/seoul256.vim'
+Plug 'tpope/vim-surround'
+Plug 'udalov/kotlin-vim'
 Plug 'vim-ruby/vim-ruby'
 Plug 'w0rp/ale'
-Plug 'udalov/kotlin-vim'
+
+if has('macunix')
+  if filereadable('/usr/local/opt/fzf')
+    Plug '/usr/local/opt/fzf'
+  endif
+endif
+
 call plug#end()

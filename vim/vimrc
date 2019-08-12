@@ -110,9 +110,6 @@ set fillchars+=vert:\
 " Do not automatically insert comment leader after hitting o/O (normal mode)
 autocmd FileType * setlocal formatoptions-=o
 
-" configure ale KotlinLanguageServer
-let g:ale_kotlin_languageserver_executable = expand("$HOME/.lsp/KotlinLanguageServer/server/build/install/server/bin/server")
-
 " Theme
 let g:seoul256_background = 237
 let g:seoul256_light_background = 256
