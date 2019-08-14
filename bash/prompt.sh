@@ -90,6 +90,9 @@ upper_prompt() {
   echo -e "${prompt}\e[0m"
 }
 
+UPPER_LINE="\n\$(upper_prompt)${CLEAR_STYLE}"
+LOWER_LINE="\n❯ "
+
 if [ -f "${HOME}/.git-prompt.sh" ]
 then
   source "${HOME}/.git-prompt.sh"
@@ -102,8 +105,8 @@ then
   export GIT_PS1_SHOWUPSTREAM="auto"
   export GIT_PS1_DESCRIBE_STYLE="branch"
 
-# Bash prompt (PS1)
-UPPER_LINE="\n\$(upper_prompt)${CLEAR_STYLE}"
-LOWER_LINE="\n❯ "
-PROMPT_COMMAND='__git_ps1 "${UPPER_LINE}" "${LOWER_LINE}"'
+  # Bash prompt (PS1)
+  PROMPT_COMMAND='__git_ps1 "${UPPER_LINE}" "${LOWER_LINE}"'
+else
+  PS1="${UPPER_LINE}${LOWER_LINE}"
 fi
