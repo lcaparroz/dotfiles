@@ -12,8 +12,8 @@ create_symbolic_link \
   "${HOME}/.dotfiles/macos/karabiner/custom_modifications.json" \
   "${KARABINER_MODS_DIR}/custom.json"
 
-create_symbolic_link /usr/local/etc/bash_completion.d/git-prompt.sh \
+create_symbolic_link "/usr/local/etc/bash_completion.d/git-prompt.sh" \
   "${HOME}/.git-prompt.sh"
 
-create_symbolic_link "${HOME}/.dotfiles/bash/macos.sh" \
-  "${HOME}/.bashrc_os"
+create_symbolic_link "${HOME}/.dotfiles/bash/bashrc.macos" \
+  "${HOME}/.bashrc.os"

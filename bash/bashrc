@@ -4,7 +4,7 @@
 source "${HOME}/.dotfiles/bash/functions.sh"
 
 # Source global definitions
-source_file /etc/bashrc
+source_file "/etc/bashrc"
 
 # Get bash aliases from file if there is one
 source_file "${HOME}/.bash_aliases"
@@ -13,11 +13,7 @@ source_file "${HOME}/.bash_aliases"
 source_file "${HOME}/.bashrc.local"
 
 # Source OS-specific configuration
-source_file "${HOME}/.bashrc_os"
-
-# Source fzf key-bindings/completion
-source_file "/usr/share/fzf/shell/key-bindings.bash"
-source_file "/usr/share/bash-completion/completions/fzf"
+source_file "${HOME}/.bashrc.os"
 
 # Define vim/vi as the default editor, if available
 if [ -n "$(command -v vimx)" ]
