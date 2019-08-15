@@ -7,7 +7,7 @@ readonly KARABINER_DIR="${HOME}/.config/karabiner"
 readonly KARABINER_MODS_DIR="${KARABINER_DIR}/assets/complex_modifications"
 
 # Karabiner configuration
-create_directory KARABINER_MODS_DIR
+create_directory "${KARABINER_MODS_DIR}"
 create_symbolic_link \
   "${HOME}/.dotfiles/macos/karabiner/custom_modifications.json" \
   "${KARABINER_MODS_DIR}/custom.json"
