@@ -19,7 +19,7 @@ Plug 'udalov/kotlin-vim'
 Plug 'vim-ruby/vim-ruby'
 
 if has('macunix')
-  if filereadable('/usr/local/opt/fzf')
+  if !empty(glob('/usr/local/opt/fzf'))
     Plug '/usr/local/opt/fzf'
   endif
 endif
