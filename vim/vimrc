@@ -17,6 +17,9 @@ set colorcolumn=+1,+21,+41
 set splitright
 set splitbelow
 
+" Scroll
+set scrolloff=0
+
 " Highlight cursor line
 set cursorline
 highlight CursorLine cterm=NONE ctermbg=lightcyan ctermfg=NONE
@@ -144,3 +147,7 @@ nnoremap <leader>fb :Buffers<cr>
 nnoremap <leader>fl :Lines<cr>
 nnoremap <leader>fbl :BLines<cr>
 nnoremap <leader>rg :Rg<cr>
+nnoremap <leader>ww :W<cr>
+
+" vim-fugitive mappings
+nnoremap <leader>gg :Git<cr>
