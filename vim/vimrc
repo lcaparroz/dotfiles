@@ -150,4 +150,6 @@ nnoremap <leader>rg :Rg<cr>
 nnoremap <leader>ww :W<cr>
 
 " vim-fugitive mappings
+nnoremap <leader>gb :Gblame<cr>
+nnoremap <leader>gd :Gdiff<cr>
 nnoremap <leader>gg :Git<cr>
