@@ -154,3 +154,8 @@ nnoremap <leader>ww :W<cr>
 nnoremap <leader>gb :Gblame<cr>
 nnoremap <leader>gd :Gdiff<cr>
 nnoremap <leader>gg :Git<cr>
+
+" custom mappings
+nnoremap <leader>jb :%!python3 -m json.tool<cr>
+nnoremap <leader>dff :windo diffthis<cr>
+nnoremap <leader>dfo :diffoff<cr>
