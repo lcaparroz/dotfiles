@@ -89,7 +89,7 @@
 (setq-default tab-width 8)
 
 ;; Miscellaneous
-(setq-default fill-column 81)
+(setq-default fill-column 80)
 (setq x-select-enable-clipboard t)
 (setq confirm-kill-emacs 'yes-or-no-p)
 
@@ -144,7 +144,7 @@
 
 (use-package whitespace
   :config
-  (setq whitespace-line-column 81)
+  (setq whitespace-line-column 80)
   (setq whitespace-style
         '(face empty lines-tail newline newline-mark tabs tabs-mark trailing))
   (setq whitespace-display-mappings
