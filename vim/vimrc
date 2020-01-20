@@ -40,16 +40,6 @@ set smartcase
 " Assures that Backspace deletes indent, eol and start
 set backspace=indent,eol,start
 
-" Extra whitespace
-set list listchars=tab:»\ ,eol:¬,trail:·,nbsp:·
-" http://vim.wikia.com/wiki/Highlight_unwanted_spaces
-highlight ExtraWhitespace cterm=bold ctermbg=red ctermfg=NONE
-match ExtraWhitespace /\s\+$/
-autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-autocmd BufWinLeave * call clearmatches()
-
 " Soft tabs (spaces instead of tab characters)
 set tabstop=2
 set shiftwidth=2
@@ -118,6 +108,16 @@ autocmd FileType * setlocal formatoptions-=o
 let g:seoul256_background = 237
 let g:seoul256_light_background = 256
 colorscheme seoul256-light
+
+" Extra whitespace (configured after loading the theme, or it will be overriden)
+set list listchars=tab:»\ ,eol:¬,trail:·,nbsp:·
+" http://vim.wikia.com/wiki/Highlight_unwanted_spaces
+highlight ExtraWhitespace cterm=bold ctermbg=red ctermfg=NONE
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
 
 " fzf colors that match the colorscheme
 let g:fzf_colors =
