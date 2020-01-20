@@ -1,4 +1,5 @@
 let g:ale_completion_enabled = 1
+let g:ale_sh_shellcheck_exclusions = 'SC1090,SC1091'
 
 " Plugin manager
 so ~/.vim/plugins.vim
@@ -16,6 +17,9 @@ set colorcolumn=+1,+21,+41
 " Splits are open in 'natural' reading direction (right then below)
 set splitright
 set splitbelow
+
+" Scroll
+set scrolloff=0
 
 " Highlight cursor line
 set cursorline
@@ -35,16 +39,6 @@ set smartcase
 
 " Assures that Backspace deletes indent, eol and start
 set backspace=indent,eol,start
-
-" Extra whitespace
-set list listchars=tab:»\ ,eol:¬,trail:·,nbsp:·
-" http://vim.wikia.com/wiki/Highlight_unwanted_spaces
-highlight ExtraWhitespace cterm=bold ctermbg=red ctermfg=NONE
-match ExtraWhitespace /\s\+$/
-autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-autocmd BufWinLeave * call clearmatches()
 
 " Soft tabs (spaces instead of tab characters)
 set tabstop=2
@@ -110,13 +104,20 @@ set fillchars+=vert:\
 " Do not automatically insert comment leader after hitting o/O (normal mode)
 autocmd FileType * setlocal formatoptions-=o
 
-" configure ale KotlinLanguageServer
-let g:ale_kotlin_languageserver_executable = expand("$HOME/.lsp/KotlinLanguageServer/server/build/install/server/bin/server")
-
 " Theme
 let g:seoul256_background = 237
 let g:seoul256_light_background = 256
 colorscheme seoul256-light
+
+" Extra whitespace (configured after loading the theme, or it will be overriden)
+set list listchars=tab:»\ ,eol:¬,trail:·,nbsp:·
+" http://vim.wikia.com/wiki/Highlight_unwanted_spaces
+highlight ExtraWhitespace cterm=bold ctermbg=red ctermfg=NONE
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
 
 " fzf colors that match the colorscheme
 let g:fzf_colors =
@@ -147,3 +148,14 @@ nnoremap <leader>fb :Buffers<cr>
 nnoremap <leader>fl :Lines<cr>
 nnoremap <leader>fbl :BLines<cr>
 nnoremap <leader>rg :Rg<cr>
+nnoremap <leader>ww :W<cr>
+
+" vim-fugitive mappings
+nnoremap <leader>gb :Gblame<cr>
+nnoremap <leader>gd :Gdiff<cr>
+nnoremap <leader>gg :Git<cr>
+
+" custom mappings
+nnoremap <leader>jb :%!python3 -m json.tool<cr>
+nnoremap <leader>dff :windo diffthis<cr>
+nnoremap <leader>dfo :diffoff<cr>

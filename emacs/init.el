@@ -8,7 +8,7 @@
 (add-to-list 'package-archives
              '("gnu-elpa" . "https://elpa.gnu.org/packages/") t)
 
-;; Kepp the installed packages in .emacs.d
+;; Keep the installed packages in .emacs.d
 (setq package-user-dir (expand-file-name "elpa" user-emacs-directory))
 (package-initialize)
 
@@ -109,6 +109,10 @@
 (when (file-exists-p my-custom-file)
   (load custom-file))
 
+;; Spell-checking configuration
+(setq ispell-program-name (executable-find "hunspell")
+      ispell-dictionary "en_US")
+
 ;; Packages configuration/installation/requirement
 
 ;; use-package package for package configuration/requirement
@@ -119,6 +123,10 @@
 (setq use-package-verbose t)
 
 ;; Built-in packages
+
+(use-package flyspell
+  :config
+  (setq flyspell-issue-message-flag nil))
 
 (use-package hl-line
   :config
@@ -173,15 +181,36 @@
 
 (use-package magit
   :ensure t
-  :bind (("C-x g" . magit-status)))
+  :bind (("C-x g" . magit-status))
+  :config
+  (setq magit-remote-set-if-missing t)
+  (setq git-commit-summary-max-length 50)
+  (setq git-commit-fill-column 72))
 
 (use-package markdown-mode
-  :ensure t)
+  :ensure t
+  :config
+  (add-hook 'markdown-mode-hook 'imenu-add-menubar-index)
+  (setq imenu-auto-rescan t))
+
+(use-package imenu-list
+  :ensure t
+  :bind (("C-'" . imenu-list-smart-toggle))
+  :config
+  (setq imenu-list-focus-after-activation t
+        imenu-list-auto-resize nil))
 
 (use-package material-theme
   :ensure t
   :config
   (load-theme 'material-light t))
+
+(use-package seoul256-theme
+  :ensure t
+  :config
+  (setq seoul256-background 256)
+  (setq seoul256-alternative-background 237)
+  (load-theme 'seoul256 t))
 
 (use-package paredit
   :ensure t
