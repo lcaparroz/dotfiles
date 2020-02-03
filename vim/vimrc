@@ -119,6 +119,11 @@ autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 
+" Enable spell checking for some file types
+autocmd Filetype gitcommit setlocal spell
+autocmd Filetype markdown,mkd setlocal spell
+autocmd Filetype text setlocal spell
+
 " fzf colors that match the colorscheme
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],
