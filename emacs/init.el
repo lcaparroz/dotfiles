@@ -73,8 +73,8 @@
 ;; Enable y/n answers
 (fset 'yes-or-no-p 'y-or-n-p)
 
-;; Menlo font
-(set-frame-font "Menlo 12")
+;; JetBrains Mono font
+(set-frame-font "JetBrains Mono 12")
 
 ;; Editing customization
 
