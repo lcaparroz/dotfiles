@@ -1,0 +1,3 @@
+set main-view-date = custom
+set main-view-date-format = "%Y-%m-%d %H:%M"
+set main-view-id-display = yes

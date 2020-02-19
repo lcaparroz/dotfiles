@@ -15,6 +15,8 @@ create_symbolic_link "${HOME}/.dotfiles/bash/bash_aliases" \
   "${HOME}/.bash_aliases"
 create_symbolic_link "${HOME}/.dotfiles/bash/bashrc" \
   "${HOME}/.bashrc"
+create_symbolic_link "${HOME}/.dotfiles/config/tigrc" \
+  "${HOME}/.tigrc"
 create_symbolic_link "${HOME}/.dotfiles/emacs/init.el" \
   "${HOME}/.emacs.d/init.el"
 create_symbolic_link "${HOME}/.dotfiles/tmux/tmux.conf" \
