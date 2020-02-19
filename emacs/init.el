@@ -209,8 +209,13 @@
   :ensure t
   :config
   (setq seoul256-background 256)
-  (setq seoul256-alternative-background 237)
+  (setq seoul256-alternate-background 233)
   (load-theme 'seoul256 t))
+
+(use-package zenburn-theme
+  :ensure t
+  :config
+  (load-theme 'zenburn t))
 
 (use-package paredit
   :ensure t
