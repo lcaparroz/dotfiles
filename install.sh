@@ -6,6 +6,7 @@ source "${HOME}/.dotfiles/install/functions.sh"
 echo -e "# Dotfiles Installation #\n"
 
 create_directory "${HOME}/.emacs.d"
+create_directory "${HOME}/.config/kitty"
 create_directory "${HOME}/.vim/.backup"
 create_directory "${HOME}/.vim/.swap"
 create_directory "${HOME}/.vim/.undo"
@@ -19,6 +20,8 @@ create_symbolic_link "${HOME}/.dotfiles/config/tigrc" \
   "${HOME}/.tigrc"
 create_symbolic_link "${HOME}/.dotfiles/emacs/init.el" \
   "${HOME}/.emacs.d/init.el"
+create_symbolic_link "${HOME}/.dotfiles/kitty/kitty.conf" \
+  "${HOME}/.config/kitty/kitty.conf"
 create_symbolic_link "${HOME}/.dotfiles/tmux/tmux.conf" \
   "${HOME}/.tmux.conf"
 create_symbolic_link "${HOME}/.dotfiles/vim/after/ftplugin" \
