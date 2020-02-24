@@ -12,6 +12,11 @@ create_symbolic_link \
   "${HOME}/.dotfiles/macos/karabiner/custom_modifications.json" \
   "${KARABINER_MODS_DIR}/custom.json"
 
+# Kitty configuration
+create_symbolic_link \
+  "${HOME}/.dotfiles/kitty/kitty.macos.conf" \
+  "${HOME}/.config/kitty/kitty.os.conf" \
+
 create_symbolic_link "/usr/local/etc/bash_completion.d/git-prompt.sh" \
   "${HOME}/.git-prompt.sh"
 
