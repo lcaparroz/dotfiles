@@ -201,16 +201,13 @@
         imenu-list-auto-resize nil))
 
 (use-package material-theme
-  :ensure t
-  :config
-  (load-theme 'material-light t))
+  :ensure t)
 
 (use-package seoul256-theme
   :ensure t
   :config
   (setq seoul256-background 256)
-  (setq seoul256-alternate-background 233)
-  (load-theme 'seoul256 t))
+  (setq seoul256-alternate-background 233))
 
 (use-package zenburn-theme
   :ensure t
