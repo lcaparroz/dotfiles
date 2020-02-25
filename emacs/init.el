@@ -29,6 +29,9 @@
 (setq auto-save-file-name-transforms `((".*" ,my-backup-directory t)))
 (setq auto-save-list-file-prefix my-backup-directory)
 
+;; Does not create lockfiles
+(setq create-lockfiles nil)
+
 ;; UI customization
 
 ;; Disable blink cursor
@@ -134,9 +137,7 @@
 
 (use-package lisp-mode
   :config
-  (add-hook 'emacs-lisp-mode-hook #'eldoc-mode)
-  (add-hook 'emacs-lisp-mode-hook #'paredit-mode)
-  (add-hook 'emacs-lisp-mode-hook #'rainbow-delimiters-mode))
+  (add-hook 'emacs-lisp-mode-hook #'eldoc-mode))
 
 (use-package paren
   :config
@@ -160,6 +161,17 @@
   (windmove-default-keybindings))
 
 ;; Third-party packages
+
+(use-package cider
+  :ensure t)
+
+;; https://github.com/clojure-emacs/clojure-mode
+(use-package clojure-mode
+  :ensure t)
+
+(use-package clojure-mode-extra-font-locking
+  :ensure t
+  :requires clojure-mode-extra-font-locking)
 
 (use-package deft
   :ensure t)
@@ -200,6 +212,37 @@
   (setq imenu-list-focus-after-activation t
         imenu-list-auto-resize nil))
 
+(use-package paredit
+  :ensure t
+  :config
+  ;; enable in *scratch* buffer
+  (add-hook 'emacs-lisp-mode-hook #'paredit-mode)
+  (add-hook 'lisp-interaction-mode-hook #'paredit-mode)
+  (add-hook 'eval-expression-minibuffer-setup-hook #'paredit-mode))
+
+(use-package projectile
+  :ensure t
+  :config
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  (projectile-mode +1))
+
+(use-package rainbow-delimiters
+  :ensure t
+  :config
+  (add-hook 'emacs-lisp-mode-hook #'rainbow-delimiters-mode))
+
+(use-package rg
+  :ensure t
+  :config
+  (rg-enable-default-bindings))
+
+(use-package rspec-mode
+  :ensure t
+  :config
+  (add-hook 'after-init-hook 'inf-ruby-switch-setup))
+
+;; Color themes
+
 (use-package material-theme
   :ensure t)
 
@@ -214,28 +257,10 @@
   :config
   (load-theme 'zenburn t))
 
-(use-package paredit
-  :ensure t
-  :config
-  ;; enable in *scratch* buffer
-  (add-hook 'lisp-interaction-mode-hook #'paredit-mode)
-  (add-hook 'eval-expression-minibuffer-setup-hook #'paredit-mode))
+;; OS-specific packages
+(if (eq system-type 'darwin)
+    (use-package exec-path-from-shell
+      :ensure t))
 
-(use-package projectile
-  :ensure t
-  :config
-  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-  (projectile-mode +1))
-
-(use-package rainbow-delimiters
-  :ensure t)
-
-(use-package rg
-  :ensure t
-  :config
-  (rg-enable-default-bindings))
-
-(use-package rspec-mode
-  :ensure t
-  :config
-  (add-hook 'after-init-hook 'inf-ruby-switch-setup))
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
