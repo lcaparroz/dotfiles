@@ -7,6 +7,18 @@ create_symbolic_link() {
   local target_file=$1
   local symlink_destination=$2
 
+  if [ -L "${symlink_destination}" ]
+  then
+    local symlink_target
+    symlink_target=$(readlink "${symlink_destination}")
+
+    if [ "${symlink_target}" = "${target_file}" ]
+    then
+    echo "=> Symbolic link already exists: ${target_file} -> ${symlink_destination}"
+      return 0
+    fi
+  fi
+
   if ln -sf "${target_file}" "${symlink_destination}"
   then
     echo "=> Symbolic link created: ${target_file} -> ${symlink_destination}"
