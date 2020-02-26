@@ -1,12 +1,11 @@
 (require 'package)
 
+;; TSL/SSL (gnutls 3.6.3+) workaround for emacs below 26.3
+(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
+
 ;; Package repositories
 (add-to-list 'package-archives
-             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
-(add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/") t)
-(add-to-list 'package-archives
-             '("gnu-elpa" . "https://elpa.gnu.org/packages/") t)
 
 ;; Keep the installed packages in .emacs.d
 (setq package-user-dir (expand-file-name "elpa" user-emacs-directory))
@@ -125,6 +124,16 @@
 (require 'use-package)
 (setq use-package-verbose t)
 
+;; Packages/archive signature workaround for emacs below 26.3
+(use-package gnu-elpa-keyring-update
+  :ensure t)
+
+;; If the gnu-elpa-keyring-update fails to install:
+;; * Open emacs
+;; * M-: (setq package-check-signature nil)
+;; * M-x package-refresh-contents RET
+;; * M-x package-install RET gnu-elpa-keyring-update RET
+;; * Close emacs and reopen it
 ;; Built-in packages
 
 (use-package flyspell
@@ -175,6 +184,13 @@
 
 (use-package deft
   :ensure t)
+
+;; https://github.com/purcell/exec-path-from-shell
+(use-package exec-path-from-shell
+  :ensure t
+  :config
+  (when (memq window-system '(mac ns x))
+    (exec-path-from-shell-initialize)))
 
 (use-package ido-completing-read+
   :ensure t
@@ -256,11 +272,3 @@
   :ensure t
   :config
   (load-theme 'zenburn t))
-
-;; OS-specific packages
-(if (eq system-type 'darwin)
-    (use-package exec-path-from-shell
-      :ensure t))
-
-(when (memq window-system '(mac ns x))
-  (exec-path-from-shell-initialize))
