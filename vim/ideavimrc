@@ -1,0 +1,29 @@
+" Copy to/paste from OS clipboard
+set clipboard+=unnamed
+
+" Row numbers
+set number
+set numberwidth=4
+set relativenumber
+
+" Scroll
+set scrolloff=0
+
+" Search ignores case, unless specified
+set ignorecase
+set smartcase
+
+" Assures that Backspace deletes indent, eol and start
+set backspace=indent,eol,start
+
+" Highlight and incremental search
+set hlsearch
+set incsearch
+
+" Show vim mode on last line
+set showmode
+
+" Plugins
+set commentary
+set multiple-cursors
+set surround
