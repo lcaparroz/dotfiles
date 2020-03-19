@@ -25,6 +25,15 @@ create_symbolic_link() {
   fi
 }
 
+create_dotfile_symlink() {
+  local target_file_relative_path=$1
+  local symlink_destination=$2
+
+  local target_file="${HOME}/.dotfiles/${target_file_relative_path}"
+
+  create_symbolic_link "${target_file}" "${symlink_destination}"
+}
+
 create_directory() {
   local directory=$1
 
