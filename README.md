@@ -6,11 +6,28 @@ Dotfiles for customization of `bash`, `vim` and `tmux`.
 
 The following softwares must be installed prior to configuring these dotfiles:
 
-* **bash**
-* **vim**
-* **tmux**
-* **xclip**
-* **curl**
+### Common (cross OS)
+
+* bash
+* curl
+* emacs
+* fzf (command line fuzzy finder)
+* hunspell (command line spell checker)
+* python3
+* rg (ripgrep)
+* tig (text-mode interface for Git)
+* tmux
+* vim
+
+### Linux
+
+* i3 (window manager)
+* nm-applet (network manager applet)
+* xclip (to allow tmux copying to system clipboard)
+
+### macOS
+
+* pbcopy (to allow tmux copying to system clipboard)
 
 Optional:
 
