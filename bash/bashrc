@@ -27,4 +27,7 @@ then
   export EDITOR=vi
 fi
 
+# Dictionaries path for hunspell
+export DICPATH="${HOME}/.dictionaries"
+
 source_file "${HOME}/.dotfiles/bash/prompt.sh"
