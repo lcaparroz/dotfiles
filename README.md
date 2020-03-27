@@ -58,6 +58,28 @@ $ git clone --depth=5 https://github.com/lcaparroz/dotfiles.git ~/.dotfiles
 ```sh
 $ ~/.dotfiles/install.sh
 ```
+
+### Language Dictionaries
+
+In order to the `ispell` command to work properly with hunspell in `emacs`,
+there must be some dictionary files under a specific directory (set in the
+`DICPATH`).
+
+There is a script for downloading and installing the dictionaries. You can
+execute it with the following command:
+
+```sh
+$ ~/.dotfiles/dictionaries/install.sh
+```
+
+The same script can be used to "update" the dictionaries (though I guess they
+are not frequently updated).
+
+P.S.: I decided to do not install the dictionaries automatically, because some
+files has more than 50 MB (e.g.: `pt_BR` dictionary). As I often modify my
+dotfiles and execute the `install.sh` script, downloading dictionaries everytime
+is a costly operation.
+
 ### Linux
 
 On laptops, which probably have a touchpad, you can configure the touchpad
