@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Default terminal for i3
+if [ "${XDG_CURRENT_DESKTOP}" = "i3" ] && [ "${XDG_SESSION_DESKTOP}" = "i3" ]
+then
+  export TERMINAL="kitty"
+fi
+
 # Remap Caps Lock to Control, use Right Alt as the compose key
 setxkbmap \
   -model pc105 \

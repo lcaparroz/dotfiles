@@ -11,6 +11,7 @@ if [ -n "$(command -v i3)" ]
 then
   create_directory "${HOME}/.config/i3"
   create_dotfile_symlink "i3/config" "${HOME}/.config/i3/config"
+  create_dotfile_symlink "config/profile" "${HOME}/.profile"
 fi
 
 # git prompt file
