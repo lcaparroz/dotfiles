@@ -6,11 +6,28 @@ Dotfiles for customization of `bash`, `vim` and `tmux`.
 
 The following softwares must be installed prior to configuring these dotfiles:
 
-* **bash**
-* **vim**
-* **tmux**
-* **xclip**
-* **curl**
+### Common (cross OS)
+
+* bash
+* curl
+* emacs
+* fzf (command line fuzzy finder)
+* hunspell (command line spell checker)
+* python3
+* rg (ripgrep)
+* tig (text-mode interface for Git)
+* tmux
+* vim
+
+### Linux
+
+* i3 (window manager)
+* nm-applet (network manager applet)
+* xclip (to allow tmux copying to system clipboard)
+
+### macOS
+
+* pbcopy (to allow tmux copying to system clipboard)
 
 Optional:
 
@@ -41,6 +58,18 @@ $ git clone --depth=5 https://github.com/lcaparroz/dotfiles.git ~/.dotfiles
 ```sh
 $ ~/.dotfiles/install.sh
 ```
+### Linux
+
+On laptops, which probably have a touchpad, you can configure the touchpad
+behavior for i3 by running the following command:
+
+```sh
+export DOTFILES_DIR="${HOME}/.dotfiles" && sudo -E ./xorg/config.sh
+```
+
+Notice that it must be run as `root`, if the Xorg configuration directory
+already exists, it probably is owned by the `root` user. Otherwise, the script
+will correctly create the directory and symbolic links with `root` credentials.
 
 ## Troubleshooting
 
