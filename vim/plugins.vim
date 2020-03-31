@@ -6,8 +6,10 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/bundle')
+Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'dense-analysis/ale'
+Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'

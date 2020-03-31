@@ -49,6 +49,7 @@ set expandtab
 " Syntax
 syntax on
 syntax enable
+autocmd BufRead,BufNewFile *.tmuxtheme setlocal filetype=tmux
 
 set nocompatible
 filetype plugin indent on
@@ -91,7 +92,7 @@ let g:netrw_liststyle = 3
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
 " Show vim mode on last line
-set showmode
+set noshowmode
 
 " Statusbar/Tabline
 set showtabline=2
@@ -104,11 +105,49 @@ set fillchars+=vert:\
 " Do not automatically insert comment leader after hitting o/O (normal mode)
 autocmd FileType * setlocal formatoptions-=o
 
-" Theme
-let g:seoul256_background = 237
-let g:seoul256_light_background = 256
-let g:seoul256_srgb = 1
-colorscheme seoul256-light
+" Color schemes
+if has('termguicolors')
+  set termguicolors
+endif
+
+" lightline reloading
+function ReloadLightline()
+  call lightline#init()
+  call lightline#colorscheme()
+endfunction
+
+" Seoul 256 Theme
+function SetSeoul256LightScheme()
+  let g:seoul256_light_background = 254
+  let g:seoul256_srgb = 1
+  colorscheme seoul256-light
+  let g:lightline = { 'colorscheme': 'seoul256' }
+  call ReloadLightline()
+endfunction
+
+function SetSeoul256DarkScheme()
+  let g:seoul256_background = 233
+  let g:seoul256_srgb = 1
+  colorscheme seoul256
+  let g:lightline = { 'colorscheme': 'seoul256' }
+  call ReloadLightline()
+endfunction
+
+" Challenger Deep Theme
+function SetChallengerDeepScheme()
+  colorscheme challenger_deep
+  let g:lightline = { 'colorscheme': 'challenger_deep' }
+  call ReloadLightline()
+endfunction
+
+" Color scheme settings based on environment variables
+if $SYSTEM_THEME ==? 'seoul256_light'
+  call SetSeoul256LightScheme()
+elseif $SYSTEM_THEME ==? 'seoul256_dark'
+  call SetSeoul256DarkScheme()
+else
+  call SetChallengerDeepScheme()
+endif
 
 " Extra whitespace (configured after loading the theme, or it will be overriden)
 set list listchars=tab:»\ ,eol:¬,trail:·,nbsp:·
