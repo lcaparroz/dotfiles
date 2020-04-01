@@ -46,6 +46,8 @@
 ;; Hide menu, tool and scroll bars
 (when (fboundp 'menu-bar-mode)
   (menu-bar-mode -1))
+(when (fboundp 'scroll-bar-mode)
+  (scroll-bar-mode -1))
 (when (fboundp 'toggle-scroll-bar)
   (toggle-scroll-bar -1))
 (when (fboundp 'tool-bar-mode)
@@ -134,6 +136,7 @@
 ;; * M-x package-refresh-contents RET
 ;; * M-x package-install RET gnu-elpa-keyring-update RET
 ;; * Close emacs and reopen it
+
 ;; Built-in packages
 
 (use-package flyspell
@@ -258,17 +261,34 @@
   (add-hook 'after-init-hook 'inf-ruby-switch-setup))
 
 ;; Color themes
+(defun system-theme-is (theme-name)
+  (let ((theme (getenv "SYSTEM_THEME")))
+    (and theme (string= theme-name theme))))
 
-(use-package material-theme
-  :ensure t)
+(defun system-theme-starts-with (text)
+  (let ((theme (getenv "SYSTEM_THEME")))
+    (and theme (if (string-prefix-p text theme) t nil))))
 
-(use-package seoul256-theme
-  :ensure t
-  :config
-  (setq seoul256-background 256)
-  (setq seoul256-alternate-background 233))
-
-(use-package zenburn-theme
-  :ensure t
-  :config
-  (load-theme 'zenburn t))
+(cond ((system-theme-is "material_light")
+       (use-package material-theme
+                    :ensure t
+                    :config
+                    (load-theme 'material-light t)))
+      ((system-theme-starts-with "seoul256")
+       (use-package seoul256-theme
+                    :ensure t
+                    :init
+                    (if (system-theme-is "seoul256_dark")
+                      (setq seoul256-background 233)
+                      (setq seoul256-background 254))
+                    :config
+                    (load-theme 'seoul256 t)))
+      ((system-theme-is "zenburn")
+       (use-package zenburn-theme
+                    :ensure t
+                    :config
+                    (load-theme 'zenburn t)))
+      (t (use-package challenger-deep-theme
+                      :ensure t
+                      :config
+                      (load-theme 'challenger-deep t))))
