@@ -1,0 +1,45 @@
+# A combination of seoul256-light (vim)
+# https://github.com/junegunn/seoul256.vim/
+
+# Basic status bar colors
+set-option -g status-style bg=colour95,fg=colour246
+
+# Left side of status bar
+set-option -g status-left-style bg=colour187,fg=colour95
+
+# Right side of status bar
+set-option -g status-right-style bg=colour187,fg=colour95
+
+# Window status
+set-window-option -g window-status-style default
+
+# Active window
+set-window-option -g window-status-current-style bg=colour187,fg=colour95
+
+# Window separator
+set-option -g window-status-separator ''
+
+# Window status alignment
+set-option -g status-justify centre
+
+# Pane border
+set-option -g pane-border-style bg=default,fg=colour187
+
+# Active pane border
+set-option -g pane-active-border-style bg=default,fg=colour95
+
+# Pane number indicator
+set-option -g display-panes-colour colour187
+set-option -g display-panes-active-colour colour95
+
+# Clock mode
+set-option -g clock-mode-colour colour95
+
+# Message
+set-option -g message-style bg=colour187,fg=colour95
+
+# Command message
+set-option -g message-command-style bg=colour187,fg=colour95
+
+# Mode
+set-option -g mode-style bg=colour187,fg=colour95
