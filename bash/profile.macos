@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Load OS specific profile file
+if [ -r "${HOME}/.bashrc" ]
+then
+  source "${HOME}/.bashrc"
+fi
