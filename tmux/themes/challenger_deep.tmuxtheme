@@ -1,0 +1,45 @@
+# Inspired by challenger-deep-theme for tmux (minor custom tweaks)
+# https://github.com/challenger-deep-theme/tmux/
+
+# Basic status bar colors
+set-option -g status-style bg=colour0,fg=colour15
+
+# Left side of status bar
+set-option -g status-left-style bg=colour6,fg=colour0
+
+# Right side of status bar
+set-option -g status-right-style bg=colour6,fg=colour0
+
+# Window status
+set-window-option -g window-status-style default
+
+# Active window
+set-window-option -g window-status-current-style bg=colour6,fg=colour0
+
+# Window separator
+set-option -g window-status-separator ''
+
+# Window status alignment
+set-option -g status-justify centre
+
+# Pane border
+set-option -g pane-border-style bg=default,fg=colour8
+
+# Active pane border
+set-option -g pane-active-border-style bg=default,fg=colour6
+
+# Pane number indicator
+set-option -g display-panes-colour colour0
+set-option -g display-panes-active-colour colour6
+
+# Clock mode
+set-option -g clock-mode-colour colour6
+
+# Message
+set-option -g message-style bg=colour6,fg=colour0
+
+# Command message
+set-option -g message-command-style bg=colour6,fg=colour0
+
+# Mode
+set-option -g mode-style bg=colour6,fg=colour0

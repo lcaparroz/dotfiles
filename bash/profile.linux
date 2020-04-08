@@ -11,3 +11,5 @@ setxkbmap \
   -model pc105 \
   -layout "us,br" \
   -option -option "ctrl:nocaps,compose:ralt,grp:alt_space_toggle"
+
+source "${HOME}/.dotfiles/scripts/system_theme.sh"
