@@ -4,7 +4,7 @@
 source "${HOME}/.dotfiles/install/functions.sh"
 
 create_dotfile_symlink "bash/bashrc.linux" "${HOME}/.bashrc.os"
-create_dotfile_symlink "config/profile" "${HOME}/.profile"
+create_dotfile_symlink "bash/profile.linux" "${HOME}/.profile.os"
 
 # i3wm configuration
 if [ -n "$(command -v i3)" ]

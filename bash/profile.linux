@@ -15,7 +15,7 @@ setxkbmap \
 # vim/emacs/tmux/kitty color themes depending on time
 # Light theme from 07h00 to 20h00, dark theme otherwise
 
-CURRENT_TIME="$(date +%k%H)"
+CURRENT_TIME="$(date +%k%M)"
 
 if [ "${CURRENT_TIME}" -ge 700 ] && [ "${CURRENT_TIME}" -lt 2000 ]
 then

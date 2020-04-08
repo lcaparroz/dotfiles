@@ -14,6 +14,7 @@ create_directory "${HOME}/.vim/after"
 
 create_dotfile_symlink "bash/bash_aliases" "${HOME}/.bash_aliases"
 create_dotfile_symlink "bash/bashrc" "${HOME}/.bashrc"
+create_dotfile_symlink "bash/profile" "${HOME}/.profile"
 create_dotfile_symlink "config/tigrc" "${HOME}/.tigrc"
 create_dotfile_symlink "emacs/init.el" "${HOME}/.emacs.d/init.el"
 create_dotfile_symlink "kitty/kitty.conf" "${HOME}/.config/kitty/kitty.conf"

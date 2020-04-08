@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Language settings
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
+# Load OS specific profile file
+if [ -r "${HOME}/.profile.os" ]
+then
+  source "${HOME}/.profile.os"
+fi
