@@ -1,0 +1,86 @@
+# i3status configuration file.
+# see "man i3status" for documentation.
+
+# It is important that this file is edited as UTF-8.
+# The following line should contain a sharp s:
+# ß
+# If the above line is not correctly displayed, fix your editor first!
+
+general {
+  interval = 5
+  colors = true
+  color_good = "#50FA7B"
+  color_degraded = "#F1FA8C"
+  color_bad = "#FF5555"
+  markup = pango
+}
+
+order += "tztime local_date"
+order += "tztime local_time"
+order += "tztime nuremberg_time"
+order += "cpu_usage"
+order += "memory"
+order += "battery all"
+order += "volume master"
+order += "ethernet _first_"
+order += "wireless _first_"
+
+tztime local_date {
+  format_time = "%F (%j)"
+  format = " &#xf073;  %time" # calendar-alt symbol
+}
+
+tztime local_time {
+  format_time = "%R %z"
+  format = " &#xf017;  %time" # clock symbol
+}
+
+tztime nuremberg_time {
+  format_time = "%R %z"
+  format = " &#xf0ac;  NUE %time" # globe symbol
+  locale = "de_DE.UTF-8"
+  timezone = "Europe/Berlin"
+  hide_if_equals_localtime = true
+}
+
+cpu_usage {
+  format = " &#xf1fe;  %usage" # chart-area symbol
+  max_threshold = "50"
+  degraded_threshold = "30"
+}
+
+memory {
+  format = " &#xf0c7;  %used" # save symbol (for lack of a renderable memory one)
+  threshold_degraded = "10%"
+  format_degraded = "%used"
+}
+
+battery all {
+  integer_battery_capacity = true
+  format = "%status  %percentage"
+  format_down = ""
+  status_chr = "<span foreground='#6272A4'>&#xf1e6;</span>"  # charging station symbol
+  status_bat = "<span foreground='#F1FA8C'>&#xf241;</span>"  # 3/4 battery symbol
+  status_full = "<span foreground='#50FA7B'>&#xf240;</span>" # Full battery symbol
+  status_unk = "<span foreground='#FF5555'>&#xf188;</span>"  # Bug symbol
+  low_threshold = "15"
+  threshold_type = "time"
+}
+
+volume master {
+  format = " &#xf028;  %volume" # volume-up symbol
+  format_muted = " &#xf026; "   # volume-off symbol
+  device = "default"
+  mixer = "Master"
+  mixer_idx = 0
+}
+
+ethernet _first_ {
+  format_up = "&#xf0e8;" # sitemap symbol
+  format_down = "&#xf0e8;"
+}
+
+wireless _first_ {
+  format_up = "&#xf1eb;" # wifi symbol
+  format_down = "&#xf1eb;"
+}
