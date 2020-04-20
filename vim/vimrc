@@ -49,6 +49,9 @@ set expandtab
 " Syntax
 syntax on
 syntax enable
+
+" Syntax highlight for some specific filetypes
+autocmd BufRead,BufNewFile *.rasi setlocal filetype=css
 autocmd BufRead,BufNewFile *.tmuxtheme setlocal filetype=tmux
 
 set nocompatible

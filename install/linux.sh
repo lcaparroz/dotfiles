@@ -14,6 +14,8 @@ then
 
   create_directory "${HOME}/.config/i3status"
   create_dotfile_symlink "i3/i3status/config" "${HOME}/.config/i3status/config"
+
+  create_dotfile_symlink "rofi" "${HOME}/.config"
 fi
 
 # git prompt file

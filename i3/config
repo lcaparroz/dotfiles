@@ -31,10 +31,14 @@ bindsym $mod+Return exec i3-sensible-terminal
 # kill focused window
 bindsym $mod+Shift+q kill
 
+# rofi
+bindsym $mod+d exec "rofi -show"
+
 # start dmenu/dmenu desktop with Dracula theme
-set $dmenu_dracula -nf '#F8F8F2' -nb '#282A36' -sb '#6272A4' -sf '#F8F8F2' -p 'dmenu'
-bindsym $mod+d exec "dmenu_run $dmenu_dracula"
-bindsym $mod+Shift+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i $dmenu_dracula"
+
+# set $dmenu_dracula -nf '#F8F8F2' -nb '#282A36' -sb '#6272A4' -sf '#F8F8F2' -p 'dmenu'
+# bindsym $mod+d exec "dmenu_run $dmenu_dracula"
+# bindsym $mod+Shift+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i $dmenu_dracula"
 
 # change focus
 bindsym $mod+h focus left
@@ -138,6 +142,9 @@ focus_follows_mouse no
 mouse_warping output
 
 workspace_layout tabbed
+workspace_auto_back_and_forth yes
+force_display_urgency_hint 1000 ms
+
 title_align center
 hide_edge_borders none
 
