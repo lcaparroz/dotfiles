@@ -19,7 +19,11 @@ then
 fi
 
 # git prompt file
-if [ -f "/usr/share/git-core/contrib/completion/git-prompt.sh" ]
+if [ -f "/etc/bash_completion.d/git-prompt.sh" ]
+then
+  create_symbolic_link "/etc/bash_completion.d/git-prompt.sh" \
+    "${HOME}/.git-prompt.sh"
+elif [ -f "/usr/share/git-core/contrib/completion/git-prompt.sh" ]
 then
   create_symbolic_link "/usr/share/git-core/contrib/completion/git-prompt.sh" \
     "${HOME}/.git-prompt.sh"
