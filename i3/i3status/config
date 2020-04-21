@@ -26,7 +26,7 @@ order += "ethernet _first_"
 order += "wireless _first_"
 
 tztime local_date {
-  format_time = "%F (%j)"
+  format_time = "%F"
   format = " &#xf073;  %time" # calendar-alt symbol
 }
 
