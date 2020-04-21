@@ -16,7 +16,8 @@
   (package-refresh-contents))
 
 ;; Create and set the autosave/backup directory
-(defconst my-backup-directory (expand-file-name "backups/" user-emacs-directory))
+(defconst my-backup-directory
+  (expand-file-name "backups/" user-emacs-directory))
 
 (unless (file-exists-p my-backup-directory)
   (make-directory my-backup-directory))
@@ -174,12 +175,25 @@
 
 ;; Third-party packages
 
+;; Create and set the cider history directory
+(defconst cider-directory
+  (expand-file-name "cider/" user-emacs-directory))
+(unless (file-exists-p cider-directory)
+  (make-directory cider-directory))
+
 (use-package cider
-  :ensure t)
+  :ensure t
+  :config
+  (add-hook 'cider-mode-hook 'eldoc-mode)
+  (add-hook 'clojure-mode-hook 'cider-mode)
+  (setq cider-repl-pop-to-buffer-on-connect t)
+  (setq cider-repl-history-file
+        (expand-file-name "history" cider-directory)))
 
 ;; https://github.com/clojure-emacs/clojure-mode
 (use-package clojure-mode
-  :ensure t)
+  :ensure t
+  :config)
 
 (use-package clojure-mode-extra-font-locking
   :ensure t
@@ -237,7 +251,8 @@
   ;; enable in *scratch* buffer
   (add-hook 'emacs-lisp-mode-hook #'paredit-mode)
   (add-hook 'lisp-interaction-mode-hook #'paredit-mode)
-  (add-hook 'eval-expression-minibuffer-setup-hook #'paredit-mode))
+  (add-hook 'eval-expression-minibuffer-setup-hook #'paredit-mode)
+  (add-hook 'clojure-mode-hook #'paredit-mode))
 
 (use-package projectile
   :ensure t
@@ -248,6 +263,7 @@
 (use-package rainbow-delimiters
   :ensure t
   :config
+  (add-hook 'clojure-mode-hook #'rainbow-delimiters-mode)
   (add-hook 'emacs-lisp-mode-hook #'rainbow-delimiters-mode))
 
 (use-package rg
