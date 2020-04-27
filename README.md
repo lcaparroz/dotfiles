@@ -69,7 +69,7 @@ There is a script for downloading and installing the dictionaries. You can
 execute it with the following command:
 
 ```sh
-$ ~/.dotfiles/dictionaries/install.sh
+$ ~/.dotfiles/share/dictionaries/install.sh
 ```
 
 The same script can be used to "update" the dictionaries (though I guess they
