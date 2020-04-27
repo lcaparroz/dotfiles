@@ -21,9 +21,9 @@ create_dotfile_symlink "share/kitty/kitty.conf" "${HOME}/.config/kitty/kitty.con
 create_dotfile_symlink "share/kitty/themes" "${HOME}/.config/kitty/themes"
 create_dotfile_symlink "share/tmux/tmux.conf" "${HOME}/.tmux.conf"
 create_dotfile_symlink "share/tmux/themes" "${HOME}/.tmux_themes"
-create_dotfile_symlink "vim/after/ftplugin" "${HOME}/.vim/after/ftplugin"
-create_dotfile_symlink "vim/vimrc" "${HOME}/.vimrc"
-create_dotfile_symlink "vim/plugins.vim" "${HOME}/.vim/plugins.vim"
+create_dotfile_symlink "share/vim/after/ftplugin" "${HOME}/.vim/after/ftplugin"
+create_dotfile_symlink "share/vim/vimrc" "${HOME}/.vimrc"
+create_dotfile_symlink "share/vim/plugins.vim" "${HOME}/.vim/plugins.vim"
 
 source_file_if_linux "${HOME}/.dotfiles/install/linux.sh"
 source_file_if_macos "${HOME}/.dotfiles/install/macos.sh"
