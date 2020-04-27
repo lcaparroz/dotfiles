@@ -4,5 +4,9 @@
 source "${HOME}/.dotfiles/bash/functions.sh"
 
 # Source fzf key-bindings/completion
-source_file "/usr/share/fzf/shell/key-bindings.bash"
-source_file "/usr/share/bash-completion/completions/fzf"
+if [ -n "$(command -v fzf)" ]
+then
+  source_file "/usr/share/bash-completion/completions/fzf"
+  source_file "/usr/share/bash-completion/completions/fzf-key-bindings"
+  source_file "/usr/share/fzf/shell/key-bindings.bash"
+fi

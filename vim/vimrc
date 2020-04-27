@@ -171,6 +171,9 @@ let g:codi#interpreters = {
   \'python': { 'bin': 'python3', 'prompt': '^\(>>>\|\.\.\.\) ' }
   \ }
 
+" Disable preview on fzf
+let g:fzf_preview_window = ''
+
 " fzf colors that match the colorscheme
 let g:fzf_colors = {
   \ 'fg':      ['fg', 'Normal'],
