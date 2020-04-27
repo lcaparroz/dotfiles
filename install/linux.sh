@@ -31,7 +31,7 @@ then
       "${HOME}/.config/i3status/config"
   fi
 
-  create_dotfile_symlink "rofi" "${HOME}/.config"
+  create_dotfile_symlink "linux/share/rofi" "${HOME}/.config"
 fi
 
 # git prompt file
