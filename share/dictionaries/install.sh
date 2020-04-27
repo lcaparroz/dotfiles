@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 # Import functions and env vars
-source "${HOME}/.dotfiles/install/functions.sh"
 source "${HOME}/.dotfiles/share/bash/bashrc"
+source "${HOME}/.dotfiles/share/install/functions.sh"
 
 DICT_LIST_FILE="${HOME}/.dotfiles/share/dictionaries/list.txt"
 

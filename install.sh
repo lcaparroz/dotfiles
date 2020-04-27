@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Import functions
-source "${HOME}/.dotfiles/install/functions.sh"
+source "${HOME}/.dotfiles/share/install/functions.sh"
 
 echo -e "# Dotfiles Installation #\n"
 
@@ -25,7 +25,7 @@ create_dotfile_symlink "share/vim/after/ftplugin" "${HOME}/.vim/after/ftplugin"
 create_dotfile_symlink "share/vim/vimrc" "${HOME}/.vimrc"
 create_dotfile_symlink "share/vim/plugins.vim" "${HOME}/.vim/plugins.vim"
 
-source_file_if_linux "${HOME}/.dotfiles/install/linux.sh"
-source_file_if_macos "${HOME}/.dotfiles/install/macos.sh"
+source_file_if_linux "${HOME}/.dotfiles/linux/share/install.sh"
+source_file_if_macos "${HOME}/.dotfiles/macos/install.sh"
 
 echo -e "\n# Finish #"

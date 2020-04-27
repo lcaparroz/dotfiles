@@ -22,7 +22,7 @@ then
 fi
 
 # Import functions
-source "${DOTFILES_DIR}/install/functions.sh"
+source "${DOTFILES_DIR}/share/install/functions.sh"
 
 # Create Xorg configuration directory and files
 XORG_CONFIG_DIR="/etc/X11/xorg.conf.d"

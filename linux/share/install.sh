@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Import functions
-source "${HOME}/.dotfiles/install/functions.sh"
+source "${HOME}/.dotfiles/share/install/functions.sh"
 
 # Local functions
 

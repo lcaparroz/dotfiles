@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Import functions
-source "${HOME}/.dotfiles/install/functions.sh"
+source "${HOME}/.dotfiles/share/install/functions.sh"
 
 create_dotfile_symlink "macos/bash/bashrc" "${HOME}/.bashrc.os"
 create_dotfile_symlink "macos/bash/profile" "${HOME}/.profile.os"
