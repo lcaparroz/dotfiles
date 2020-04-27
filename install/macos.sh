@@ -12,7 +12,7 @@ readonly USER_STARTUP_AGENT="${USER_LAUNCH_AGENTS_DIR}/com.startup.plist"
 
 create_directory "${USER_LAUNCH_AGENTS_DIR}"
 create_dotfile_symlink "macos/plist/com.startup.plist" "${USER_STARTUP_AGENT}"
-create_dotfile_symlink "scripts/system_theme.sh" "/usr/local/bin/system_theme"
+create_dotfile_symlink "share/bin/system_theme" "/usr/local/bin/system_theme"
 launchctl load -wF "${USER_STARTUP_AGENT}" 2&> /dev/null
 
 # Karabiner configuration
