@@ -11,8 +11,8 @@ linux_distro_is() {
   [ -n "$(hostnamectl | grep -m 1 -i "${distro_string}")" ]
 }
 
-create_dotfile_symlink "bash/bashrc.linux" "${HOME}/.bashrc.os"
-create_dotfile_symlink "bash/profile.linux" "${HOME}/.profile.os"
+create_dotfile_symlink "linux/share/bash/bashrc" "${HOME}/.bashrc.os"
+create_dotfile_symlink "linux/share/bash/profile" "${HOME}/.profile.os"
 
 # i3wm configuration
 if [ -n "$(command -v i3)" ]
