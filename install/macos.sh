@@ -26,7 +26,7 @@ create_dotfile_symlink \
 
 # Kitty configuration
 create_dotfile_symlink \
-  "kitty/kitty.macos.conf" \
+  "macos/kitty/kitty.conf" \
   "${HOME}/.config/kitty/kitty.os.conf" \
 
 # git prompt file
