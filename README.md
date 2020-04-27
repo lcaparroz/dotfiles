@@ -53,15 +53,15 @@ On Fedora 26, installing `vim-X11` worked fine.
 $ git clone --depth=5 https://github.com/lcaparroz/dotfiles.git ~/.dotfiles
 ```
 
-2. Run the installation script `install.sh`:
+2. Run the installation script `install`:
 
 ```sh
-$ ~/.dotfiles/install.sh
+$ ~/.dotfiles/install
 ```
 
 ### Language Dictionaries
 
-In order to the `ispell` command to work properly with hunspell in `emacs`,
+In order to the `ispell` command to work properly with `hunspell` in `emacs`,
 there must be some dictionary files under a specific directory (set in the
 `DICPATH`).
 
