@@ -3,8 +3,8 @@
 # Import functions
 source "${HOME}/.dotfiles/install/functions.sh"
 
-create_dotfile_symlink "bash/bashrc.macos" "${HOME}/.bashrc.os"
-create_dotfile_symlink "bash/profile.macos" "${HOME}/.profile.os"
+create_dotfile_symlink "macos/bash/bashrc" "${HOME}/.bashrc.os"
+create_dotfile_symlink "macos/bash/profile" "${HOME}/.profile.os"
 
 # macOS startup files configuration
 readonly USER_LAUNCH_AGENTS_DIR="${HOME}/Library/LaunchAgents"
