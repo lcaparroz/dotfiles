@@ -18,17 +18,17 @@ create_dotfile_symlink "bash/profile.linux" "${HOME}/.profile.os"
 if [ -n "$(command -v i3)" ]
 then
   create_directory "${HOME}/.config/i3"
-  create_dotfile_symlink "i3/config" "${HOME}/.config/i3/config"
+  create_dotfile_symlink "linux/share/i3/config" "${HOME}/.config/i3/config"
 
   create_directory "${HOME}/.config/i3status"
-
 
   if linux_distro_is "openSUSE"
   then
     create_dotfile_symlink "linux/opensuse/i3/i3status/config" \
       "${HOME}/.config/i3status/config"
   else
-    create_dotfile_symlink "i3/i3status/config" "${HOME}/.config/i3status/config"
+    create_dotfile_symlink "linux/share/i3/i3status/config" \
+      "${HOME}/.config/i3status/config"
   fi
 
   create_dotfile_symlink "rofi" "${HOME}/.config"
