@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Import functions
-source "${HOME}/.dotfiles/install/functions.sh"
+source "${HOME}/.dotfiles/share/install/functions.sh"
 
 # Local functions
 
@@ -11,27 +11,27 @@ linux_distro_is() {
   [ -n "$(hostnamectl | grep -m 1 -i "${distro_string}")" ]
 }
 
-create_dotfile_symlink "bash/bashrc.linux" "${HOME}/.bashrc.os"
-create_dotfile_symlink "bash/profile.linux" "${HOME}/.profile.os"
+create_dotfile_symlink "linux/share/bash/bashrc" "${HOME}/.bashrc.os"
+create_dotfile_symlink "linux/share/bash/profile" "${HOME}/.profile.os"
 
 # i3wm configuration
 if [ -n "$(command -v i3)" ]
 then
   create_directory "${HOME}/.config/i3"
-  create_dotfile_symlink "i3/config" "${HOME}/.config/i3/config"
+  create_dotfile_symlink "linux/share/i3/config" "${HOME}/.config/i3/config"
 
   create_directory "${HOME}/.config/i3status"
-
 
   if linux_distro_is "openSUSE"
   then
     create_dotfile_symlink "linux/opensuse/i3/i3status/config" \
       "${HOME}/.config/i3status/config"
   else
-    create_dotfile_symlink "i3/i3status/config" "${HOME}/.config/i3status/config"
+    create_dotfile_symlink "linux/share/i3/i3status/config" \
+      "${HOME}/.config/i3status/config"
   fi
 
-  create_dotfile_symlink "rofi" "${HOME}/.config"
+  create_dotfile_symlink "linux/share/rofi" "${HOME}/.config"
 fi
 
 # git prompt file

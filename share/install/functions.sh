@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Import functions
-source "${HOME}/.dotfiles/bash/functions.sh"
+source "${HOME}/.dotfiles/share/bash/functions.sh"
 
 create_symbolic_link() {
   local target_file=$1

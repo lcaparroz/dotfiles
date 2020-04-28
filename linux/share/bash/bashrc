@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Import functions
-source "${HOME}/.dotfiles/bash/functions.sh"
+source "${HOME}/.dotfiles/share/bash/functions.sh"
 
 # Source fzf key-bindings/completion
 if [ -n "$(command -v fzf)" ]

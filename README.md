@@ -53,15 +53,15 @@ On Fedora 26, installing `vim-X11` worked fine.
 $ git clone --depth=5 https://github.com/lcaparroz/dotfiles.git ~/.dotfiles
 ```
 
-2. Run the installation script `install.sh`:
+2. Run the installation script `install`:
 
 ```sh
-$ ~/.dotfiles/install.sh
+$ ~/.dotfiles/install
 ```
 
 ### Language Dictionaries
 
-In order to the `ispell` command to work properly with hunspell in `emacs`,
+In order to the `ispell` command to work properly with `hunspell` in `emacs`,
 there must be some dictionary files under a specific directory (set in the
 `DICPATH`).
 
@@ -69,7 +69,7 @@ There is a script for downloading and installing the dictionaries. You can
 execute it with the following command:
 
 ```sh
-$ ~/.dotfiles/dictionaries/install.sh
+$ ~/.dotfiles/share/dictionaries/install.sh
 ```
 
 The same script can be used to "update" the dictionaries (though I guess they
@@ -86,12 +86,13 @@ On laptops, which probably have a touchpad, you can configure the touchpad
 behavior for i3 by running the following command:
 
 ```sh
-export DOTFILES_DIR="${HOME}/.dotfiles" && sudo -E ./xorg/config.sh
+export DOTFILES_DIR="${HOME}/.dotfiles" && sudo -E ./linux/share/xorg/config.sh
 ```
 
 Notice that it must be run as `root`, if the Xorg configuration directory
 already exists, it probably is owned by the `root` user. Otherwise, the script
-will correctly create the directory and symbolic links with `root` credentials.
+will not correctly create the directory and symbolic links with `root`
+credentials.
 
 ## Troubleshooting
 

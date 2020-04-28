@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 
 # Import functions
-source "${HOME}/.dotfiles/install/functions.sh"
+source "${HOME}/.dotfiles/share/install/functions.sh"
 
-create_dotfile_symlink "bash/bashrc.macos" "${HOME}/.bashrc.os"
-create_dotfile_symlink "bash/profile.macos" "${HOME}/.profile.os"
+create_dotfile_symlink "macos/bash/bash_profile" "${HOME}/.bashrc_profile"
+create_dotfile_symlink "macos/bash/bashrc" "${HOME}/.bashrc.os"
+create_dotfile_symlink "macos/bash/profile" "${HOME}/.profile.os"
 
 # macOS startup files configuration
 readonly USER_LAUNCH_AGENTS_DIR="${HOME}/Library/LaunchAgents"
@@ -12,7 +13,7 @@ readonly USER_STARTUP_AGENT="${USER_LAUNCH_AGENTS_DIR}/com.startup.plist"
 
 create_directory "${USER_LAUNCH_AGENTS_DIR}"
 create_dotfile_symlink "macos/plist/com.startup.plist" "${USER_STARTUP_AGENT}"
-create_dotfile_symlink "scripts/system_theme.sh" "/usr/local/bin/system_theme"
+create_dotfile_symlink "share/bin/system_theme" "/usr/local/bin/system_theme"
 launchctl load -wF "${USER_STARTUP_AGENT}" 2&> /dev/null
 
 # Karabiner configuration
@@ -26,7 +27,7 @@ create_dotfile_symlink \
 
 # Kitty configuration
 create_dotfile_symlink \
-  "kitty/kitty.macos.conf" \
+  "macos/kitty/kitty.conf" \
   "${HOME}/.config/kitty/kitty.os.conf" \
 
 # git prompt file
