@@ -9,3 +9,9 @@ if [ -r "${HOME}/.profile.os" ]
 then
   source "${HOME}/.profile.os"
 fi
+
+# Add custom commands to path
+if [ -d ~/opt/bin ]
+then
+  PATH=$PATH:~/opt/bin
+fi

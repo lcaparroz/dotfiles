@@ -11,6 +11,14 @@ linux_distro_is() {
   [ -n "$(hostnamectl | grep -m 1 -i "${distro_string}")" ]
 }
 
+declare CUSTOM_BIN="${HOME}/opt/bin"
+create_directory "${CUSTOM_BIN}"
+
+for f in ~/.dotfiles/linux/share/bin/*
+do
+  create_symbolic_link "$f" "${CUSTOM_BIN}"
+done
+
 create_dotfile_symlink "linux/share/bash/bashrc" "${HOME}/.bashrc.os"
 create_dotfile_symlink "linux/share/bash/profile" "${HOME}/.profile.os"
 
