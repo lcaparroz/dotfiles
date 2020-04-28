@@ -8,10 +8,11 @@ source "${HOME}/.dotfiles/share/install/functions.sh"
 linux_distro_is() {
   local -r distro_string="$1"
 
-  [ -n "$(hostnamectl | grep -m 1 -i "${distro_string}")" ]
+  hostnamectl | grep -qi "${distro_string}"
+  return
 }
 
-declare CUSTOM_BIN="${HOME}/opt/bin"
+readonly CUSTOM_BIN="${HOME}/opt/bin"
 create_directory "${CUSTOM_BIN}"
 
 for f in ~/.dotfiles/linux/share/bin/*
@@ -52,3 +53,6 @@ then
   create_symbolic_link "/usr/share/git-core/contrib/completion/git-prompt.sh" \
     "${HOME}/.git-prompt.sh"
 fi
+
+# fonts installation
+~/.dotfiles/linux/share/fonts/install.sh
