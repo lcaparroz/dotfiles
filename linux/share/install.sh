@@ -20,6 +20,12 @@ do
   create_symbolic_link "$f" "${CUSTOM_BIN}"
 done
 
+# Install dependencies
+if linux_distro_is "openSUSE"
+then
+  ~/.dotfiles/linux/opensuse/install.sh
+fi
+
 create_dotfile_symlink "linux/share/bash/bashrc" "${HOME}/.bashrc.os"
 create_dotfile_symlink "linux/share/bash/profile" "${HOME}/.profile.os"
 
