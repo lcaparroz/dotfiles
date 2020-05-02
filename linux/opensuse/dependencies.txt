@@ -8,6 +8,7 @@ emacs
 fontawesome-fonts
 freetype
 fzf
+fzf-bash-completion
 gvim
 htop
 hunspell
@@ -19,6 +20,8 @@ lxappearance
 pavucontrol
 python3-docker-compose
 ranger
+ripgrep
+ripgrep-bash-completion
 rofi
 tig
 tmux
