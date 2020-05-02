@@ -6,12 +6,6 @@ source "${HOME}/.dotfiles/share/bash/functions.sh"
 # Source global definitions
 source_file "/etc/bashrc"
 
-# Get bash aliases from file if there is one
-source_file "${HOME}/.bash_aliases"
-
-# Source machine-specific configuration
-source_file "${HOME}/.bashrc.local"
-
 # Source OS-specific configuration
 source_file "${HOME}/.bashrc.os"
 
@@ -29,5 +23,11 @@ fi
 
 # Dictionaries path for hunspell
 export DICPATH="${HOME}/.dictionaries"
+
+# Get bash aliases from file if there is one
+source_file "${HOME}/.bash_aliases"
+
+# Source machine-specific configuration
+source_file "${HOME}/.bashrc.local"
 
 source_file "${HOME}/.dotfiles/share/bash/prompt.sh"
