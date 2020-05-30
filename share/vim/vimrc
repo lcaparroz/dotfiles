@@ -1,5 +1,10 @@
 let g:ale_completion_enabled = 1
 let g:ale_sh_shellcheck_exclusions = 'SC1090,SC1091'
+let g:ale_linters = { 'rust': ['rustc'] }
+let g:ale_fixers = {
+  \ '*': ['remove_trailing_lines', 'trim_whitespace'],
+  \ 'terraform': ['terraform'],
+  \ }
 
 " Plugin manager
 so ~/.vim/plugins.vim
