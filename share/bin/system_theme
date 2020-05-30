@@ -19,7 +19,7 @@ readonly DARK_THEME="challenger_deep"
 readonly LIGHT_THEME="seoul256_light"
 readonly CURRENT_TIME="$(date +%k%M)"
 
-if [ "${CURRENT_TIME}" -ge 700 ] && [ "${CURRENT_TIME}" -lt 1830 ]
+if [ "${CURRENT_TIME}" -ge 530 ] && [ "${CURRENT_TIME}" -lt 1830 ]
 then
   export_system_theme "${LIGHT_THEME}"
 else
