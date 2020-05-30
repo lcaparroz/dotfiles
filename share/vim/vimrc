@@ -3,6 +3,7 @@ let g:ale_sh_shellcheck_exclusions = 'SC1090,SC1091'
 let g:ale_linters = { 'rust': ['rustc'] }
 let g:ale_fixers = {
   \ '*': ['remove_trailing_lines', 'trim_whitespace'],
+  \ 'rust': ['rustfmt'],
   \ 'terraform': ['terraform'],
   \ }
 
@@ -198,6 +199,9 @@ let g:fzf_colors = {
 
 " Map leader
 let mapleader = " "
+
+" ALE mappings
+nnoremap <leader>af :ALEFix<cr>
 
 " FZF mappings
 nnoremap <leader>ff :Files<cr>
