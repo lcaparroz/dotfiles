@@ -13,5 +13,18 @@ fi
 # Add custom commands to path
 if [ -d ~/opt/bin ]
 then
-  PATH=$PATH:~/opt/bin
+  export PATH="$PATH:$HOME/opt/bin"
+fi
+
+# Load rbenv into PATH, if available
+if [ -r "$HOME/.rbenv/bin" ]
+then
+  export PATH="$HOME/.rbenv/bin:$PATH"
+fi
+
+# Load rust/cargo tools into PATH, if available
+
+if [ -r "${HOME}/.cargo/bin" ]
+then
+  export PATH="$HOME/.cargo/bin:$PATH"
 fi
