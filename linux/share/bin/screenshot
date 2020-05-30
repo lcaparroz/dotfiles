@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+case "$1" in
+  screen-copy)
+    scrot -q 100 '%Y%m%d-%H%M%S_$wx$h.png' -e 'xclip -sel clip -t image/png -i $f; shred -fzu -n5 $f'
+    ;;
+  screen-copy-move)
+    scrot -q 100 '%Y%m%d-%H%M%S_$wx$h.png' -e 'xclip -sel clip -t image/png -i $f; mv $f ~/Pictures'
+    ;;
+  selection-copy)
+    scrot -s -q 100 '%Y%m%d-%H%M%S_$wx$h.png' -e 'xclip -sel clip -t image/png -i $f; shred -fzu -n5 $f'
+    ;;
+  selection-copy-move)
+    scrot -s -q 100 '%Y%m%d-%H%M%S_$wx$h.png' -e 'xclip -sel clip -t image/png -i $f; mv $f ~/Pictures'
+    ;;
+  window-copy)
+    scrot -u -q 100 '%Y%m%d-%H%M%S_$wx$h.png' -e 'xclip -sel clip -t image/png -i $f; shred -fzu -n5 $f'
+    ;;
+  window-copy-move)
+    scrot -u -q 100 '%Y%m%d-%H%M%S_$wx$h.png' -e 'xclip -sel clip -t image/png -i $f; mv $f ~/Pictures'
+    ;;
+  *)
+    echo "Usage: $0 {screen|selection|window}-copy[-move]"
+    exit 2
+    ;;
+esac
+
+exit 0
