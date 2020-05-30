@@ -3,7 +3,7 @@
 # Import functions
 source "${HOME}/.dotfiles/share/install/functions.sh"
 
-create_dotfile_symlink "macos/bash/bash_profile" "${HOME}/.bashrc_profile"
+create_dotfile_symlink "macos/bash/bash_profile" "${HOME}/.bash_profile"
 create_dotfile_symlink "macos/bash/bashrc" "${HOME}/.bashrc.os"
 create_dotfile_symlink "macos/bash/profile" "${HOME}/.profile.os"
 
