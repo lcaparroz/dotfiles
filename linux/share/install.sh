@@ -45,7 +45,7 @@ then
     create_dotfile_symlink "linux/share/i3/i3status/config" \
       "${HOME}/.config/i3status/config"
   fi
-
+  create_dotfile_symlink "linux/share/feh/fehbg" "${HOME}/.fehbg"
   create_dotfile_symlink "linux/share/rofi" "${HOME}/.config"
 fi
 

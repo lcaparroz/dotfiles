@@ -4,7 +4,9 @@ ShellCheck
 bc
 docker
 docker-bash-completion
+dunst
 emacs
+feh
 fontawesome-fonts
 freetype
 fzf
@@ -20,9 +22,12 @@ lxappearance
 pavucontrol
 python3-docker-compose
 ranger
+redshift
 ripgrep
 ripgrep-bash-completion
 rofi
+scrot
 tig
 tmux
 xev
+x11
