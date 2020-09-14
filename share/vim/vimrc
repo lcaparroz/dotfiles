@@ -217,7 +217,10 @@ let g:fzf_colors = {
 let mapleader = " "
 
 " ALE mappings
+nnoremap <leader>ad :ALEGoToDefinition<cr>
 nnoremap <leader>af :ALEFix<cr>
+nnoremap <leader>ah :ALEHover<cr>
+nnoremap <leader>ar :ALEFindReferences<cr>
 
 " FZF mappings
 nnoremap <leader>ff :Files<cr>
