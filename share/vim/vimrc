@@ -1,8 +1,14 @@
-let g:ale_completion_enabled = 1
+let g:ale_completion_enabled = 0
+let g:ale_ruby_rubocop_executable = 'bundle'
 let g:ale_sh_shellcheck_exclusions = 'SC1090,SC1091'
-let g:ale_linters = { 'rust': ['rustc'] }
+let g:ale_linters = {
+  \ 'go': ['gobuild'],
+  \ 'ruby': ['rubocop', 'solargraph'],
+  \ 'rust': ['analyzer', 'rustc'],
+  \ }
 let g:ale_fixers = {
   \ '*': ['remove_trailing_lines', 'trim_whitespace'],
+  \ 'go': ['gofmt'],
   \ 'rust': ['rustfmt'],
   \ 'terraform': ['terraform'],
   \ }
