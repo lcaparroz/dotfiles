@@ -76,14 +76,14 @@ The same script can be used to "update" the dictionaries (though I guess they
 are not frequently updated).
 
 P.S.: I decided to do not install the dictionaries automatically, because some
-files has more than 50 MB (e.g.: `pt_BR` dictionary). As I often modify my
+files have more than 50 MB (e.g.: `pt_BR` dictionary). As I often modify my
 dotfiles and execute the `install.sh` script, downloading dictionaries everytime
 is a costly operation.
 
 ### Linux
 
-On laptops, which probably have a touchpad, you can configure the touchpad
-behavior for i3 by running the following command:
+Using i3 requires some extra steps to configure hardware. The following commands
+allow configuring a touchpad (for laptops) and a Logitech Marble Trackball.
 
 ```sh
 export DOTFILES_DIR="${HOME}/.dotfiles" && sudo -E ./linux/share/xorg/config.sh

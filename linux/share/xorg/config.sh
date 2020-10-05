@@ -28,5 +28,17 @@ source "${DOTFILES_DIR}/share/install/functions.sh"
 XORG_CONFIG_DIR="/etc/X11/xorg.conf.d"
 
 create_directory "${XORG_CONFIG_DIR}"
-create_dotfile_symlink "xorg/touchpad.conf" \
-  "${XORG_CONFIG_DIR}/90-touchpad.conf"
+
+read -r -p "* Install touchpad? (yes/no): " install_touchpad
+if [ "${install_touchpad}" = "yes" ]
+then
+  create_symbolic_link "${DOTFILES_DIR}/linux/share/xorg/touchpad.conf" \
+    "${XORG_CONFIG_DIR}/90-touchpad.conf"
+fi
+
+read -r -p "* Install Logitech Marble Trackball? (yes/no): " install_trackball
+if [ "${install_trackball}" = "yes" ]
+then
+  create_symbolic_link "${DOTFILES_DIR}/linux/share/xorg/logitech_marble_trackball.conf" \
+    "${XORG_CONFIG_DIR}/10-evdev.conf"
+fi

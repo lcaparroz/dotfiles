@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 
-# Import functions
-source "${HOME}/.dotfiles/share/bash/functions.sh"
+source_file() {
+  local -r file_name="$1"
+
+  [ -f "${file_name}" ] && source "${file_name}"
+}
 
 create_symbolic_link() {
   local target_file=$1
