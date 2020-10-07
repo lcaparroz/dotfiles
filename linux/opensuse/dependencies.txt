@@ -20,6 +20,7 @@ i3status
 kitty
 lxappearance
 pavucontrol
+playerctl
 python3-docker-compose
 ranger
 redshift
