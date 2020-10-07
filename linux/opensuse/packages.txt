@@ -31,4 +31,3 @@ scrot
 tig
 tmux
 xev
-x11
