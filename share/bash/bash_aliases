@@ -16,10 +16,20 @@ fi
 
 # tmux rename window based on current working directory
 _rename_tmux_window() {
+  local -r window_name="$1"
+
   if [ -n "${TMUX}" ]; then
-    if [ -n "$(git_base_directory)" ]
+    if [ -n "${window_name}" ]
     then
-      tmux rename-window "$(git_base_directory)"
+      tmux rename-window "${window_name}"
+      return
+    fi
+
+    local -r git_base_dir="$(git_base_directory)"
+
+    if [ -n "${git_base_dir}" ]
+    then
+      tmux rename-window "${git_base_dir}"
     else
       tmux rename-window "$(basename "${PWD}")"
     fi
@@ -53,6 +63,12 @@ _filter_git_modified_untracked_files() {
 }
 
 alias gmu="_filter_git_modified_untracked_files"
+
+# Securely remove (shred) files
+if [ -n "$(command -v shred)" ]
+then
+  alias rrm="shred -zxuv -n10"
+fi
 
 # Local aliases
 if [ -r "${HOME}/.bash_aliases.local" ]
