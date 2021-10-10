@@ -5,6 +5,7 @@ source "${HOME}/.dotfiles/share/bash/functions.sh"
 
 # Source global definitions
 source_file "/etc/bashrc"
+source_file "/etc/bash.bashrc"
 
 # Source OS-specific configuration
 source_file "${HOME}/.bashrc.os"
@@ -19,6 +20,12 @@ then
 elif [ -n "$(command -v vi)" ]
 then
   export EDITOR=vi
+fi
+
+# bat theme
+if [ -n "$(command -v bat)" ]
+then
+  export BAT_THEME="ansi"
 fi
 
 # Dictionaries path for hunspell
