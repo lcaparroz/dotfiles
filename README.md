@@ -8,20 +8,31 @@ The following softwares must be installed prior to configuring these dotfiles:
 
 ### Common (cross OS)
 
-* bash
-* curl
-* emacs
-* fzf (command line fuzzy finder)
-* hunspell (command line spell checker)
-* python3
-* rg (ripgrep)
-* tig (text-mode interface for Git)
-* tmux
-* vim
+* [bash](https://www.gnu.org/software/bash/) (GNU Project's shell)
+* [bat](https://github.com/sharkdp/bat) (`cat` clone)
+* [curl](https://curl.se) (CLI tool for transfering data)
+* [emacs](https://www.gnu.org/software/emacs) (secondary editor, still learning)
+* [fd](https://github.com/sharkdp/fd) (fast alternative to `find`)
+* [fzf](https://github.com/junegunn/fzf) (command line fuzzy finder)
+* [git-delta](https://github.com/dandavison/delta) (syntax-highlighting pager for git)
+* [hunspell](https://github.com/hunspell/hunspell) (command line spell checker)
+* [kitty](https://github.com/kovidgoyal/kitty) (GPU based terminal emulator)
+* [python3](https://www.python.org) (programming language)
+* [ripgrep](https://github.com/BurntSushi/ripgrep) (fast alternative to `grep`)
+* [tig](https://github.com/jonas/tig) (text-mode interface for git)
+* [tmux](https://github.com/tmux/tmux) (terminal multiplexer)
+* [vim](https://www.vim.org) (primary editor)
+
+#### Font
+
+Currently, using [JetBrains Mono Nerd Fonts](https://github.com/ryanoasis/nerd-fonts).
+
+See [Installation/Font](#font) for instructions on how to intall.
 
 ### Linux
 
-* i3 (window manager)
+* [i3](https://i3wm.org) (window manager)
+* [rofi](https://github.com/davatorium/rofi) (window switcher, application launcher)
 * nm-applet (network manager applet)
 * xclip (to allow tmux copying to system clipboard)
 
@@ -57,6 +68,14 @@ $ git clone --depth=5 https://github.com/lcaparroz/dotfiles.git ~/.dotfiles
 
 ```sh
 $ ~/.dotfiles/install
+```
+
+### Fonts
+
+To install the required fonts for these dotfiles, run the script below:
+
+```sh
+$ ~/.dotfiles/linux/share/fonts/install.sh
 ```
 
 ### Language Dictionaries
