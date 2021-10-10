@@ -2,9 +2,6 @@
 
 # Bash Run Command script for custom prompt
 
-# Prompt style related constants
-declare -r CLEAR_STYLE="\[\e[0m\]"
-
 git_commit_id() {
   local -r commit_id=$(git rev-parse --short HEAD 2> /dev/null)
 
@@ -37,16 +34,34 @@ git_base_directory() {
 }
 
 git_subdirectory() {
-  local -r full_git_dir="$(full_git_directory)"
+  local -r git_subdir="$(git rev-parse --show-prefix 2> /dev/null)"
 
-  if [[ -n "${full_git_dir}" ]]
+  if [[ -n "${git_subdir}" ]]
   then
-    local -r current_dir="$(pwd)"
-    local -r git_subdir="${current_dir/$full_git_dir/''}"
+    local -r current_dir_basename="$(basename "${git_subdir}")"
+    local git_subdir_levels
+    readarray -d '/' -t git_subdir_levels <<< "${git_subdir%%*(/)}"
+    local -r level_count="${#git_subdir_levels[*]}"
 
-    if [[ -n "${git_subdir}" ]]
+    local formatted_dir_levels
+    for (( n = 1; n < level_count - 1; n++))
+    do
+      local level_string="${git_subdir_levels[n]}"
+      if [ "${#level_string}" -gt 3 ]
+      then
+        level_string="${level_string:0:2}."
+      fi
+      formatted_dir_levels="${formatted_dir_levels}/${level_string}"
+    done
+
+    if [ -n "${formatted_dir_levels}" ]
     then
-      echo "${git_subdir:1}"
+      echo "${git_subdir_levels[0]}${formatted_dir_levels}/${current_dir_basename}"
+    elif [ "${level_count}" -gt 1 ]
+    then
+      echo "${git_subdir_levels[0]}/${current_dir_basename}"
+    else
+      echo "${current_dir_basename}"
     fi
   fi
 }
@@ -90,7 +105,7 @@ upper_prompt() {
   echo -e "${prompt}\e[0m"
 }
 
-UPPER_LINE="\n\$(upper_prompt)${CLEAR_STYLE}"
+UPPER_LINE="\n\e[1m\u@\h\e[0m \$(upper_prompt)\e[0m"
 LOWER_LINE="\n❯ "
 
 if [ -f "${HOME}/.git-prompt.sh" ]
