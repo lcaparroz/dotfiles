@@ -23,6 +23,37 @@ let g:ale_fixers = {
   \ 'json': ['prettier'],
   \ 'yaml': ['prettier']
   \ }
+let g:ale_completion_symbols = {
+  \ 'text': '',
+  \ 'method': '',
+  \ 'function': '',
+  \ 'constructor': '',
+  \ 'field': '',
+  \ 'variable': '',
+  \ 'class': '',
+  \ 'interface': '',
+  \ 'module': '',
+  \ 'property': '',
+  \ 'unit': 'unit',
+  \ 'value': 'val',
+  \ 'enum': '',
+  \ 'keyword': 'keyword',
+  \ 'snippet': '',
+  \ 'color': 'color',
+  \ 'file': '',
+  \ 'reference': 'ref',
+  \ 'folder': '',
+  \ 'enum member': '',
+  \ 'constant': '',
+  \ 'struct': '',
+  \ 'event': 'event',
+  \ 'operator': '',
+  \ 'type_parameter': 'type param',
+  \ '<default>': 'v'
+  \ }
+
+" vim-devicon configuration
+let g:webdevicons_enable = 1
 
 " tagbar configuration (to work with Snap universal-ctags)
 let g:tagbar_use_cache = 0
@@ -132,11 +163,21 @@ set ruler
 let g:lightline = {
   \ 'component_function': {
   \   'filename': 'LightlineFilename',
+  \   'filetype': 'DeviconFiletype',
+  \   'fileformat': 'DeviconFileformat',
   \ },
   \ }
 
 function! LightlineFilename()
   return expand('%f')
+endfunction
+
+function! DeviconFiletype()
+  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
+endfunction
+
+function! DeviconFileformat()
+  return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
 endfunction
 
 " No vertical characters for separating windows
