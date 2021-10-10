@@ -21,6 +21,10 @@ let g:ale_fixers = {
   \ 'terraform': ['terraform'],
   \ }
 
+" tagbar configuration (to work with Snap universal-ctags)
+let g:tagbar_use_cache = 0
+let g:tagbar_autofocus = 1
+
 " Plugin manager
 so ~/.vim/plugins.vim
 
@@ -247,6 +251,9 @@ nnoremap <leader>fl :Lines<cr>
 nnoremap <leader>fbl :BLines<cr>
 nnoremap <leader>rg :Rg<cr>
 nnoremap <leader>ww :W<cr>
+
+" tagbar mappings
+nnoremap <silent> <F8> :TagbarOpenAutoClose<CR>
 
 " vim-fugitive mappings
 nnoremap <leader>gb :Gblame<cr>
