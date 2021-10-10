@@ -19,6 +19,9 @@ let g:ale_fixers = {
   \ 'go': ['gofmt'],
   \ 'rust': ['rustfmt'],
   \ 'terraform': ['terraform'],
+  \ 'html': ['prettier'],
+  \ 'json': ['prettier'],
+  \ 'yaml': ['prettier']
   \ }
 
 " tagbar configuration (to work with Snap universal-ctags)
@@ -231,36 +234,74 @@ let g:fzf_colors = {
   \ 'header':  ['fg', 'Comment']
   \ }
 
+" Change default ripgrep fzf integration (doesn't use fzf as fuzzy finder)
+function! RipgrepFzf(query, fullscreen)
+  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
+  let initial_command = printf(command_fmt, shellescape(a:query))
+  let reload_command = printf(command_fmt, '{q}')
+  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+endfunction
+
+command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
+
+" vim-test configuration
+let g:test#echo_command = 0
+let g:test#preserve_screen = 1
+let test#strategy = "vimux"
+let test#ruby#rspec#executable = 'bundle exec rspec'
+let test#ruby#rspec#options = {
+  \ 'nearest': '--format progress',
+  \ 'file':    '--format documentation',
+  \ }
+
 " Map leader
 let mapleader = " "
 
 " ALE mappings
-nnoremap <leader>ad :ALEGoToDefinition<cr>
+nnoremap <leader>ad :ALEGoToDefinition -vsplit<cr>
 nnoremap <leader>af :ALEFix<cr>
 nnoremap <leader>ah :ALEHover<cr>
 nnoremap <leader>ar :ALEFindReferences<cr>
+imap <Nul> <Plug>(ale_complete)
 
 " FZF mappings
 nnoremap <leader>ff :Files<cr>
-nnoremap <leader>fgc :Commits<cr>
-nnoremap <leader>fgbc :BCommits<cr>
-nnoremap <leader>fgf :GFiles<cr>
-nnoremap <leader>fgs :GFiles?<cr>
-nnoremap <leader>bf :Buffers<cr>
 nnoremap <leader>fl :Lines<cr>
-nnoremap <leader>fbl :BLines<cr>
-nnoremap <leader>rg :Rg<cr>
+nnoremap <leader>gc :Commits<cr>
+nnoremap <leader>gf :GFiles<cr>
+nnoremap <leader>gu :GFiles?<cr>
+nnoremap <leader>bb :Buffers<cr>
+nnoremap <leader>bl :BLines<cr>
 nnoremap <leader>ww :W<cr>
+nnoremap <leader>rg :RG<cr>
 
 " tagbar mappings
 nnoremap <silent> <F8> :TagbarOpenAutoClose<CR>
 
 " vim-fugitive mappings
-nnoremap <leader>gb :Gblame<cr>
+nnoremap <leader>gb :Git blame<cr>
 nnoremap <leader>gd :Gdiff<cr>
 nnoremap <leader>gg :Git<cr>
+
+" vim-rails mappings
+nnoremap <leader>aa :A<cr>
+
+" vim-test mappings
+nnoremap <leader>tt :TestNearest<cr>
+nnoremap <leader>tf :TestFile<cr>
+nnoremap <leader>tl :TestLast<cr>
+nnoremap <leader>tv :TestVisit<cr>
+
+" vimux configuration
+nnoremap <Leader>vz :VimuxZoomRunner<CR>
 
 " custom mappings
 nnoremap <leader>jb :%!python3 -m json.tool<cr>
 nnoremap <leader>dff :windo diffthis<cr>
 nnoremap <leader>dfo :diffoff<cr>
+nnoremap <leader>ll :lopen<cr>
+nnoremap <leader>lc :lclose<cr>
+nnoremap <leader>ln :lnext<cr>
+nnoremap <leader>lp :lprevious<cr>
+nnoremap <leader>sf :syn sync fromstart<cr>

@@ -7,7 +7,6 @@ endif
 
 call plug#begin('~/.vim/bundle')
 Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'dense-analysis/ale'
 Plug 'fatih/vim-go'
 Plug 'hashivim/vim-terraform'
@@ -18,13 +17,18 @@ Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'junegunn/seoul256.vim'
+Plug 'keith/rspec.vim'
 Plug 'mracos/mermaid.vim'
 Plug 'metakirby5/codi.vim'
 Plug 'preservim/tagbar'
+Plug 'preservim/vimux'
 Plug 'rust-lang/rust.vim'
+Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rails'
 Plug 'tpope/vim-surround'
 Plug 'vim-ruby/vim-ruby'
+Plug 'vim-test/vim-test'
 Plug 'vimwiki/vimwiki'
 
 if has('macunix')
