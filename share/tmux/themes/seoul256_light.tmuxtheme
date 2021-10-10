@@ -2,7 +2,7 @@
 # https://github.com/junegunn/seoul256.vim/
 
 # Basic status bar colors
-set-option -g status-style bg=colour95,fg=colour246
+set-option -g status-style bg=colour95,fg=colour187
 
 # Left side of status bar
 set-option -g status-left-style bg=colour187,fg=colour95
@@ -11,10 +11,10 @@ set-option -g status-left-style bg=colour187,fg=colour95
 set-option -g status-right-style bg=colour187,fg=colour95
 
 # Window status
-set-window-option -g window-status-style default
+set-window-option -g window-status-style default,italics
 
 # Active window
-set-window-option -g window-status-current-style bg=colour187,fg=colour95
+set-window-option -g window-status-current-style bg=colour187,fg=colour95,bold
 
 # Window separator
 set-option -g window-status-separator ''
