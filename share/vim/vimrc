@@ -1,10 +1,18 @@
+" ALE configuration
 let g:ale_completion_enabled = 0
+
+" ALE linters configuration
 let g:ale_ruby_rubocop_executable = 'bundle'
 let g:ale_sh_shellcheck_exclusions = 'SC1090,SC1091'
+let g:ale_languagetool_options = '--autoDetect --level PICKY --mothertongue pt-BR '
+
 let g:ale_linters = {
   \ 'go': ['gobuild'],
   \ 'ruby': ['rubocop', 'solargraph'],
   \ 'rust': ['analyzer', 'rustc'],
+  \ 'sh': ['language_server', 'shell'],
+  \ 'markdown': ['alex', 'languagetool'],
+  \ 'text': ['alex', 'languagetool']
   \ }
 let g:ale_fixers = {
   \ '*': ['remove_trailing_lines', 'trim_whitespace'],
@@ -188,6 +196,12 @@ autocmd BufWinLeave * call clearmatches()
 autocmd Filetype gitcommit setlocal spell
 autocmd Filetype markdown,mkd setlocal spell
 autocmd Filetype text setlocal spell
+
+" Enable italics for comments
+highlight Comment cterm=italic ctermbg=bg ctermfg=fg
+
+let g:vimwiki_list = [{'path': '~/vimwiki/',
+                      \ 'syntax': 'markdown', 'ext': '.md'}]
 
 let g:codi#interpreters = {
   \'python': { 'bin': 'python3', 'prompt': '^\(>>>\|\.\.\.\) ' }
