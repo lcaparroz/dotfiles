@@ -245,6 +245,9 @@ endfunction
 
 command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 
+" markdown-preview configuration
+let g:mkdp_filetypes = ['markdown', 'mermaid']
+
 " vim-test configuration
 let g:test#echo_command = 0
 let g:test#preserve_screen = 1
