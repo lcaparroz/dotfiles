@@ -5,7 +5,7 @@ set -u
 source "${HOME}/.dotfiles/share/install/functions.sh"
 
 readonly ASSETS_TEMP_DIR="${HOME}/.dotfiles/assets/tmp"
-readonly FONTS_DIR="${HOME}/.local/share/fonts"
+readonly USER_FONTS_DIR="${HOME}/.local/share/fonts"
 
 readonly GH_OWNER_EXP="([a-z1-9]|\.|-)+"
 readonly GH_REPO_EXP="([a-z1-9]|\.|-)+"
@@ -43,19 +43,19 @@ extract_assets_urls() {
 
 filter_asset() {
   local -r assets_urls="$1"
-  local -r filename_regex="$2"
+  local -r filename_regexp="$2"
 
-  local -r assets="$(echo "$assets_urls" | grep -iE "${filename_regex}$")"
+  local -r assets="$(echo "$assets_urls" | grep -iE "${filename_regexp}$")"
   local -r assets_count="$(echo "$assets" | wc -l)"
 
   if [ -n "${assets}" ] && [ "${assets_count}" -gt 1 ]
   then
-      echo "The regexp '${filename_regex}' matches $assets_count assets:" >&2
+      echo "The regexp '${filename_regexp}' matches $assets_count assets:" >&2
       echo "$assets" | grep -iEo "[^/]+$" | sed -E "s/(.*)/ - \1/g" >&2
       return 1
   elif [ -z "${assets}" ]
   then
-      echo "The regexp '${filename_regex}' matches no assets. Availables assets are:" >&2
+      echo "The regexp '${filename_regexp}' matches no assets. Availables assets are:" >&2
       echo "$assets_urls" | grep -iEo "[^/]+$" | sed -E "s/(.*)/ - \1/g" >&2
       return 1
   fi
@@ -124,17 +124,18 @@ download_asset() {
   fi
 }
 
-install_jetbrains_mono_font() {
-  local -r jb_owner="JetBrains"
-  local -r jb_mono_repo="JetBrainsMono"
-  local -r jb_mono_file="\.zip"
-  local -r jb_asset_dir="${FONTS_DIR}/${jb_owner}"
+install_font_from_zip_file() {
+  local -r github_owner="$1"
+  local -r github_repo="$2"
+  local -r filename_regexp="$3"
+  local -r zip_file_regexp="${filename_regexp}\S*\.zip"
+  local -r font_dir="${USER_FONTS_DIR}/${github_owner}"
 
-  echo "=> Installing '${jb_owner}/${jb_mono_repo}'"
-  echo "   Downloading the asset with file expression '${jb_mono_file}'"
+  echo "=> Installing '${github_owner}/${github_repo}'"
+  echo "   Downloading the asset with file expression '${filename_regexp}'"
 
   local asset_path
-  if ! asset_path="$(download_asset "${jb_owner}" "${jb_mono_repo}" "${jb_mono_file}")"
+  if ! asset_path="$(download_asset "${github_owner}" "${github_repo}" "${filename_regexp}")"
   then
     echo "   Downloading the asset has failed"
     return 1
@@ -148,11 +149,11 @@ install_jetbrains_mono_font() {
     return 1
   fi
 
-  rm -rf "${jb_asset_dir}" > /dev/null 2>&1
-  create_directory "${FONTS_DIR}"
+  rm -rf "${font_dir}" > /dev/null 2>&1
+  create_directory "${USER_FONTS_DIR}"
 
-  echo "   Extracting '${asset_path}' to directory '${jb_asset_dir}'"
-  if ! unzip -q "${asset_path}" -d "${jb_asset_dir}" > /dev/null 2>&1
+  echo "   Extracting '${asset_path}' to directory '${font_dir}'"
+  if ! unzip -q "${asset_path}" -d "${font_dir}" > /dev/null 2>&1
   then
     echo " - ERROR: 'unzip' failed to extract the file (error code: $?)" >&2
     return 1
@@ -166,7 +167,8 @@ install_jetbrains_mono_font() {
   fi
 
   rm -rf "${asset_path}" > /dev/null 2>&1
-  echo "   SUCCESS: '${jb_mono_repo}' installed"
+  echo "   SUCCESS: '${github_repo}' installed"
 }
 
-install_jetbrains_mono_font
+# install_font_from_zip_file "JetBrains" "JetBrainsMono" "jetbrainsmono"
+install_font_from_zip_file "ryanoasis" "nerd-fonts" "jetbrainsmono"
