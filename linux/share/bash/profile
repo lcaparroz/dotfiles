@@ -9,7 +9,7 @@ fi
 # Remap Caps Lock to Control, use Right Alt as the compose key
 setxkbmap \
   -model pc105 \
-  -layout "us,br" \
-  -option -option "ctrl:nocaps,compose:ralt,grp:alt_space_toggle"
+  -layout "us" \
+  -option -option "ctrl:nocaps,compose:ralt"
 
 source "${HOME}/.dotfiles/share/bin/system_theme"
