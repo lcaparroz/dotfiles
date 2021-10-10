@@ -1,16 +1,19 @@
 NetworkManager
 NetworkManager-applet
 ShellCheck
+bat
 bc
 docker
 docker-bash-completion
 dunst
 emacs
+fd
 feh
 fontawesome-fonts
 freetype
 fzf
 fzf-bash-completion
+git-delta
 gvim
 htop
 hunspell
@@ -31,3 +34,4 @@ scrot
 tig
 tmux
 xev
+yarn
