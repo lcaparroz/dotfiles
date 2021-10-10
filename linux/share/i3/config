@@ -2,7 +2,7 @@
 
 set $mod Mod4
 
-font pango:JetBrains Mono Regular 10
+font pango:JetBrainsMono Nerd Font 14
 
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
@@ -89,7 +89,7 @@ bindsym $mod+a focus parent
 # Workspace 1: web browsing (firefox symbol)
 set $ws1 "1: &#xf269; "
 # Workspace 2: email client (envelope symbol)
-set $ws2 "2: &#xf0e0; "
+set $ws2 "2: &#xf003; "
 # Workspace 3: programming (terminal symbol)
 set $ws3 "3: &#xf120; "
 # Workspace 3: music players (headphones symbol)

@@ -27,30 +27,30 @@ order += "wireless _first_"
 
 tztime local_date {
   format_time = "%F"
-  format = "&#xf073; %time" # calendar-alt symbol
+  format = "&#xf455; %time" # calendar-alt symbol
 }
 
 tztime local_time {
   format_time = "%R %z"
-  format = "&#xf017; %time" # clock symbol
+  format = "&#xf64f; %time" # clock symbol
 }
 
 tztime nuremberg_time {
   format_time = "%R %z"
-  format = "&#xf0ac; NUE %time" # globe symbol
+  format = "&#xf484; NUE %time" # globe symbol
   locale = "de_DE.UTF-8"
   timezone = "Europe/Berlin"
   hide_if_equals_localtime = true
 }
 
 cpu_usage {
-  format = "&#xf1fe; %usage" # chart-area symbol
+  format = "&#xf9c4; %usage" # chart-area symbol
   max_threshold = "50"
   degraded_threshold = "30"
 }
 
 memory {
-  format = "&#xf538; %used" # memory symbol
+  format = "&#xf85a; %used" # memory symbol
   threshold_degraded = "10%"
 }
 
@@ -58,28 +58,28 @@ battery all {
   integer_battery_capacity = true
   format = "%status %percentage"
   format_down = ""
-  status_chr = "<span foreground='#6272A4'>&#xf1e6;</span>"  # charging station symbol
-  status_bat = "<span foreground='#F1FA8C'>&#xf241;</span>"  # 3/4 battery symbol
-  status_full = "<span foreground='#50FA7B'>&#xf240;</span>" # Full battery symbol
+  status_chr = "<span foreground='#6272A4'>&#xf588;</span>"  # charging station symbol
+  status_bat = "<span foreground='#F1FA8C'>&#xf57d;</span>"  # 3/4 battery symbol
+  status_full = "<span foreground='#50FA7B'>&#xf578;</span>" # Full battery symbol
   status_unk = "<span foreground='#FF5555'>&#xf188;</span>"  # Bug symbol
   low_threshold = "15"
   threshold_type = "time"
 }
 
 volume master {
-  format = "&#xf028; %volume" # volume-up symbol
-  format_muted = "&#xf6a9;"   # volume-mute symbol
+  format = "&#xf485; %volume"   # volume-up symbol
+  format_muted = "&#xf466; 0%%" # volume-mute symbol
   device = "default"
   mixer = "Master"
   mixer_idx = 0
 }
 
 ethernet _first_ {
-  format_up = "&#xf796;" # ethernet symbol
-  format_down = "&#xf796;"
+  format_up = "&#xf700; &#xf55d" # ethernet symbol
+  format_down = "&#xf6ff; &#xf545;"
 }
 
 wireless _first_ {
-  format_up = "&#xf1eb;" # wifi symbol
-  format_down = "&#xf1eb;"
+  format_up = "&#xfaa8; &#xf55d;" # wifi symbol
+  format_down = "&#xfaa9; &#xf545;"
 }
