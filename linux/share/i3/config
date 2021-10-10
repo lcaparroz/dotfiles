@@ -13,7 +13,7 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -i ~/Pictures/desk
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
-exec --no-startup-id nm-applet
+exec_always --no-startup-id nm-applet
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -81,7 +81,7 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 
 # focus the child container
-#bindsym $mod+d focus child
+bindsym $mod+c focus child
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
@@ -135,8 +135,6 @@ for_window [class="^Spotify$"] move to workspace $ws4
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
-# exit i3 (logs you out of your X session)
-#bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Do you really want to exit i3?' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # basic system management
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
@@ -159,7 +157,6 @@ bindsym $mod+Shift+e mode "$mode_system"
 # screenshot mode
 set $mode_screenshot (s) screen, (x) selection, current (w) window, (Shift+s) save screen, (Shift+x) save selection, (Shift+w) save window
 
-# basic system management
 mode "$mode_screenshot" {
     bindsym --release s exec --no-startup-id screenshot screen-copy, mode "default"
     bindsym --release x exec --no-startup-id screenshot selection-copy, mode "default"
@@ -194,10 +191,12 @@ bindsym $mod+r mode "resize"
 focus_follows_mouse no
 mouse_warping output
 
+# workspace configuration
 workspace_layout tabbed
 workspace_auto_back_and_forth yes
 force_display_urgency_hint 1000 ms
 
+# window style
 title_align center
 hide_edge_borders smart
 default_border pixel 1
@@ -234,6 +233,7 @@ bar {
     binding_mode       #FF5555 #FF5555 #F8F8F2
   }
 
+  tray_output primary
   status_command i3status
 }
 
