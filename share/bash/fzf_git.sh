@@ -52,6 +52,6 @@ _fzf_git_stash() {
 	_is_in_git_repo || return
 
 	git stash list \
-		| _fzf_tmux --reverse -d: --preview 'git stash show -p {1} | delta' \
+		| _fzf_tmux --preview 'git stash show -p $(grep -o "^stash@{[0-9]+}" <<< {}) | delta' \
 		| cut -d: -f1
 }
