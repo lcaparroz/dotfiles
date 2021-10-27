@@ -204,10 +204,23 @@ endfunction
 
 " Seoul 256 Theme
 function SetSeoul256LightScheme()
+  " Enable italics for comments
+  highlight Comment cterm=italic ctermbg=bg ctermfg=fg
+
   let g:seoul256_light_background = 254
   let g:seoul256_srgb = 1
   colorscheme seoul256-light
   let g:lightline.colorscheme = 'seoul256'
+
+  if exists('*term_setansicolors')
+    let g:terminal_ansi_colors = [
+      \ '#4E4E4E', '#AF5F5F', '#5F885F', '#AF8760',
+      \ '#5F87AE', '#875F87', '#5F8787', '#808080',
+      \ '#3A3A3A', '#870100', '#005F00', '#D8865F',
+      \ '#0087AF', '#87025F', '#008787', '#8A8A8A'
+      \ ]
+  endif
+
   call ReloadLightline()
 endfunction
 
@@ -216,6 +229,7 @@ function SetSeoul256DarkScheme()
   let g:seoul256_srgb = 1
   colorscheme seoul256
   let g:lightline.colorscheme = 'seoul256'
+
   call ReloadLightline()
 endfunction
 
@@ -223,14 +237,35 @@ endfunction
 function SetChallengerDeepScheme()
   colorscheme challenger_deep
   let g:lightline.colorscheme = 'challenger_deep'
+
+  call ReloadLightline()
+endfunction
+
+" Nord Theme
+function SetNordScheme()
+  let g:nord_bold_vertical_split_line = 1
+  let g:nord_cursor_line_number_background = 1
+  let g:nord_uniform_diff_background = 1
+
+  " Font tweaks
+  let g:nord_bold = 1
+  let g:nord_italic = 1
+  let g:nord_italic_comments = 1
+  let g:nord_underline = 1
+
+  colorscheme nord
+  let g:lightline.colorscheme = 'nord'
+
   call ReloadLightline()
 endfunction
 
 " Color scheme settings based on environment variables
-if $SYSTEM_THEME ==? 'seoul256_light'
+if $SYSTEM_THEME ==? 'seoul256-light'
   call SetSeoul256LightScheme()
-elseif $SYSTEM_THEME ==? 'seoul256_dark'
+elseif $SYSTEM_THEME ==? 'seoul256-dark'
   call SetSeoul256DarkScheme()
+elseif $SYSTEM_THEME ==? 'nord'
+  call SetNordScheme()
 else
   call SetChallengerDeepScheme()
 endif
@@ -249,9 +284,7 @@ autocmd BufWinLeave * call clearmatches()
 autocmd Filetype gitcommit setlocal spell
 autocmd Filetype markdown,mkd setlocal spell
 autocmd Filetype text setlocal spell
-
-" Enable italics for comments
-highlight Comment cterm=italic ctermbg=bg ctermfg=fg
+autocmd Filetype wiki setlocal spell
 
 let g:vimwiki_list = [{'path': '~/vimwiki/',
                       \ 'syntax': 'markdown', 'ext': '.md'}]
@@ -283,14 +316,6 @@ let g:fzf_colors = {
   \ 'header':  ['fg', 'Comment']
   \ }
 
-if exists('*term_setansicolors')
-  let g:terminal_ansi_colors = [
-    \ '#4E4E4E', '#AF5F5F', '#5F885F', '#AF8760',
-    \ '#5F87AE', '#875F87', '#5F8787', '#808080',
-    \ '#3A3A3A', '#870100', '#005F00', '#D8865F',
-    \ '#0087AF', '#87025F', '#008787', '#8A8A8A'
-    \ ]
-endif
 
 " Change default ripgrep fzf integration (doesn't use fzf as fuzzy finder)
 function! RipgrepFzf(query, fullscreen)
