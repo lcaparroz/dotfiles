@@ -1,27 +1,35 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 export_system_theme() {
-  local color_theme="$1"
+	local color_theme="$1"
+	local bat_theme="$2"
 
-  local current_os
-  current_os="$(uname -s)"
+	local current_os
+	current_os="$(uname -s)"
 
-  if [ "${current_os}" = "Darwin" ]
-  then
-    launchctl setenv SYSTEM_THEME "${color_theme}"
-  elif [ "${current_os}" = "Linux" ]
-  then
-    export SYSTEM_THEME="${color_theme}"
-  fi
+	if [ "${current_os}" = "Darwin" ]
+	then
+		launchctl setenv SYSTEM_THEME "${color_theme}"
+		launchctl setenv BAT_THEME "${bat_theme}"
+	elif [ "${current_os}" = "Linux" ]
+	then
+		export SYSTEM_THEME="${color_theme}"
+		export BAT_THEME="${bat_theme}"
+	fi
 }
 
-readonly DARK_THEME="challenger_deep"
-readonly LIGHT_THEME="seoul256_light"
-readonly CURRENT_TIME="$(date +%k%M)"
-
-if [ "${CURRENT_TIME}" -ge 530 ] && [ "${CURRENT_TIME}" -lt 1830 ]
-then
-  export_system_theme "${LIGHT_THEME}"
-else
-  export_system_theme "${DARK_THEME}"
-fi
+# Default theme: seoul256-light
+case "${SYSTEM_THEME}" in
+	challenger-deep)
+		export_system_theme "${SYSTEM_THEME}" "ansi"
+		;;
+	nord)
+		export_system_theme "${SYSTEM_THEME}" "Nord"
+		;;
+	seoul256-dark)
+		export_system_theme "${SYSTEM_THEME}" "ansi"
+		;;
+	*)
+		export_system_theme "seoul256-light" "ansi"
+		;;
+esac

@@ -3,11 +3,11 @@
 # Load ~/.profile
 if [ -r "${HOME}/.profile" ]
 then
-  source "${HOME}/.profile"
+	source "${HOME}/.profile"
 fi
 
 # Load ~/.bashrc
 if [ -r "${HOME}/.bashrc" ]
 then
-  source "${HOME}/.bashrc"
+	source "${HOME}/.bashrc"
 fi

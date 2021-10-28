@@ -1,78 +1,73 @@
 #!/bin/bash
 
+# Import functions
+source "${HOME}/.dotfiles/share/bash/functions.sh"
+
 # Language settings
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
-# Load OS specific profile file
-if [ -r "$HOME/.profile.os" ]
+# Dictionaries path for hunspell
+export DICPATH="${HOME}/.dictionaries"
+
+# Define vim/vi as the default editor, if available
+if [ -n "$(command -v vimx)" ]
 then
-  source "$HOME/.profile.os"
+	export EDITOR=vimx
+elif [ -n "$(command -v vim)" ]
+then
+	export EDITOR=vim
+elif [ -n "$(command -v vi)" ]
+then
+	export EDITOR=vi
 fi
 
-# Initial PATH
-MY_PATH="$HOME/bin:/usr/local/bin:/usr/bin:/bin"
+# FZF settings
+read -r -d '' FZF_CTRL_T_OPTS <<- EOM
+--reverse
+--bind ctrl-/:toggle-preview
+--preview-window right:50%:border-left:hidden
+--preview 'bat --color=always --style=grid,header {}'
+EOM
 
-# Add custom commands to path
-if [ -r "$HOME/opt/bin" ]
-then
-  MY_PATH="$MY_PATH:$HOME/opt/bin"
-fi
+export FZF_CTRL_T_COMMAND='fd --hidden --no-ignore --exclude ".git/" --type f'
+export FZF_CTRL_T_OPTS="$FZF_CTRL_T_OPTS"
+export FZF_TMUX_OPTS="-p 90%,90%"
 
-# Load rbenv into PATH, if available
-if [ -r "$HOME/.rbenv/bin" ]
-then
-  MY_PATH="$HOME/.rbenv/bin:$MY_PATH"
-fi
-
-# Node.js settings (nvm version manager)
+# nvm settings (Node.js version manager)
 export NVM_DIR="$HOME/.nvm"
 
 # Load nvm and its bash completion
-if [ -r "$NVM_DIR/nvm.sh" ]
-then
-  source "$NVM_DIR/nvm.sh"
-fi
-
-if [ -r "$NVM_DIR/bash_completion" ]
-then
-  source "$NVM_DIR/bash_completion"
-fi
-
-# Load rust/cargo tools into PATH, if available
-if [ -r "$HOME/.cargo/bin" ]
-then
-  MY_PATH="$HOME/.cargo/bin:$MY_PATH"
-fi
-
-# Go settings
-export GOPATH="$HOME/go"
-
-# Load GOPATH/bin tools into PATH, if available
-if [ -r "$GOPATH/bin" ]
-then
-  MY_PATH="$GOPATH/bin:$MY_PATH"
-fi
-
-# Load Go tools into PATH, if available
-if [ -r "/usr/local/go/bin" ]
-then
-  MY_PATH="/usr/local/go/bin:$MY_PATH"
-fi
+source_file "$NVM_DIR/nvm.sh"
+source_file "$NVM_DIR/bash_completion"
 
 # SDKMAN settings
 export SDKMAN_DIR="$HOME/.sdkman"
 
 # Init SDKMAN
-if [ -r "$SDKMAN_DIR/bin/sdkman-init.sh" ]
-then
-  MY_PATH="$SDKMAN_DIR/bin/sdkman-init.sh:$MY_PATH"
-fi
+source_file "$SDKMAN_DIR/bin/sdkman-init.sh"
 
-# Snap (package manager)
-if [ -r "/snap/bin" ]
-then
-  MY_PATH="/snap/bin:$MY_PATH"
-fi
+# Go settings
+export GOPATH="$HOME/go"
 
+# List of paths to be loaded (in order of priority)
+read -r -d '' PATHS_TO_LOAD <<- EOM
+$HOME/opt/bin
+$HOME/.rbenv/bin
+$HOME/.cargo/bin
+$GOPATH/bin
+/usr/local/go/bin
+EOM
+
+# Initial PATH
+MY_PATH="$HOME/bin:/usr/local/bin:/usr/bin:/bin"
+
+# Load list of paths into PATH
+for p in $PATHS_TO_LOAD
+do
+	[ -r "$p" ] && MY_PATH="$p:$MY_PATH"
+done
 export PATH="$MY_PATH"
+
+# Load OS specific profile file
+source_file "$HOME/.profile.os"

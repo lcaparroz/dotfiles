@@ -12,6 +12,10 @@ linux_distro_is() {
   return
 }
 
+create_dotfile_symlink "linux/share/bash/bashrc" "${HOME}/.bashrc.os"
+create_dotfile_symlink "linux/share/bash/profile" "${HOME}/.profile.os"
+
+# Link custom scripts
 readonly CUSTOM_BIN="${HOME}/opt/bin"
 create_directory "${CUSTOM_BIN}"
 
@@ -25,9 +29,6 @@ if linux_distro_is "openSUSE"
 then
   ~/.dotfiles/linux/opensuse/install.sh
 fi
-
-create_dotfile_symlink "linux/share/bash/bashrc" "${HOME}/.bashrc.os"
-create_dotfile_symlink "linux/share/bash/profile" "${HOME}/.profile.os"
 
 # i3wm configuration
 if [ -n "$(command -v i3)" ]

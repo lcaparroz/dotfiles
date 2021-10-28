@@ -10,34 +10,11 @@ source_file "/etc/bash.bashrc"
 # Source OS-specific configuration
 source_file "${HOME}/.bashrc.os"
 
-# Define vim/vi as the default editor, if available
-if [ -n "$(command -v vimx)" ]
-then
-	export EDITOR=vimx
-elif [ -n "$(command -v vim)" ]
-then
-	export EDITOR=vim
-elif [ -n "$(command -v vi)" ]
-then
-	export EDITOR=vi
-fi
-
-# fzf configuration
+# fzf keybindings (only on interactive shell sessions)
 if [ -n "$(command -v fzf)" ] && [[ $- =~ i ]]
 then
 	# fzf keybindings for git
 	source_file "${HOME}/.dotfiles/share/bash/fzf_git.sh"
-
-	read -r -d '' FZF_CTRL_T_OPTS <<- EOM
-	--reverse
-	--bind ctrl-/:toggle-preview
-	--preview-window right:50%:border-left:hidden
-	--preview 'bat --color=always --style=grid,header {}'
-	EOM
-
-	export FZF_CTRL_T_COMMAND='fd --hidden --no-ignore --exclude ".git/" --type f'
-	export FZF_CTRL_T_OPTS="$(echo $FZF_CTRL_T_OPTS)"
-	export FZF_TMUX_OPTS="-p 90%,90%"
 
 	bind '"\er": redraw-current-line'
 	bind '"\C-g\C-f": "$(_fzf_git_status)\e\C-e\er"'
@@ -45,15 +22,6 @@ then
 	bind '"\C-g\C-h": "$(_fzf_git_log)\e\C-e\er"'
 	bind '"\C-g\C-u": "$(_fzf_git_stash)\e\C-e\er"'
 fi
-
-# bat theme
-if [ -n "$(command -v bat)" ]
-then
-	export BAT_THEME="ansi"
-fi
-
-# Dictionaries path for hunspell
-export DICPATH="${HOME}/.dictionaries"
 
 # Get bash aliases from file if there is one
 source_file "${HOME}/.bash_aliases"

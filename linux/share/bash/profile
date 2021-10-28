@@ -3,13 +3,19 @@
 # Default terminal for i3
 if [ "${XDG_CURRENT_DESKTOP}" = "i3" ] && [ "${XDG_SESSION_DESKTOP}" = "i3" ]
 then
-  export TERMINAL="kitty"
+	export TERMINAL="kitty"
+fi
+
+# Load brew package manager
+if [ -r '/home/linuxbrew/.linuxbrew/bin/brew' ]
+then
+	eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
 # Remap Caps Lock to Control, use Right Alt as the compose key
 setxkbmap \
-  -model pc105 \
-  -layout "us" \
-  -option -option "ctrl:nocaps,compose:ralt"
+	-model pc105 \
+	-layout "us" \
+	-option -option "ctrl:nocaps,compose:ralt"
 
 source "${HOME}/.dotfiles/share/bin/system_theme"
