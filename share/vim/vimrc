@@ -10,9 +10,9 @@ let g:ale_linters = {
   \ 'go': ['gobuild'],
   \ 'ruby': ['rubocop', 'solargraph'],
   \ 'rust': ['analyzer', 'rustc'],
-  \ 'sh': ['language_server', 'shell'],
+  \ 'sh': ['language_server', 'shell', 'shellcheck'],
   \ 'markdown': ['alex', 'languagetool'],
-  \ 'text': ['alex', 'languagetool']
+  \ 'text': ['alex', 'languagetool'],
   \ }
 let g:ale_fixers = {
   \ '*': ['remove_trailing_lines', 'trim_whitespace'],
@@ -21,7 +21,7 @@ let g:ale_fixers = {
   \ 'terraform': ['terraform'],
   \ 'html': ['prettier'],
   \ 'json': ['prettier'],
-  \ 'yaml': ['prettier']
+  \ 'yaml': ['prettier'],
   \ }
 let g:ale_completion_symbols = {
   \ 'text': '',
@@ -153,9 +153,6 @@ let g:netrw_altv = 1
 
 " netrw tree mode
 let g:netrw_liststyle = 3
-
-" ctrlp lists files based on .gitignore
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
 " Show vim mode on last line
 set noshowmode
@@ -357,9 +354,9 @@ nnoremap <leader>fl :Lines<cr>
 nnoremap <leader>gc :Commits<cr>
 nnoremap <leader>gf :GFiles<cr>
 nnoremap <leader>gu :GFiles?<cr>
-nnoremap <leader>bb :Buffers<cr>
-nnoremap <leader>bl :BLines<cr>
-nnoremap <leader>ww :W<cr>
+nnoremap <leader>fb :Buffers<cr>
+nnoremap <leader>/ :BLines<cr>
+nnoremap <leader>fw :W<cr>
 nnoremap <leader>rg :RG<cr>
 
 " tagbar mappings
