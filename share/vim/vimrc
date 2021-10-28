@@ -1,3 +1,5 @@
+set encoding=UTF-8
+
 " ALE configuration
 let g:ale_completion_enabled = 0
 
@@ -49,13 +51,13 @@ let g:ale_completion_symbols = {
   \ 'event': 'event',
   \ 'operator': '',
   \ 'type_parameter': 'type param',
-  \ '<default>': 'v'
+  \ '<default>': 'v',
   \ }
 
 " vim-devicon configuration
 let g:webdevicons_enable = 1
 
-" tagbar configuration (to work with Snap universal-ctags)
+" tagbar configuration (to work with universal-ctags)
 let g:tagbar_use_cache = 0
 let g:tagbar_autofocus = 1
 
@@ -163,24 +165,43 @@ set showtabline=2
 set laststatus=2
 set ruler
 
+" Lightline configuration
 let g:lightline = {
+  \ 'active': {
+  \   'left': [
+  \     [ 'mode', 'paste' ],
+  \     [ 'gitbranch', 'filename', 'modified' ],
+  \   ],
+  \   'right': [
+  \     [ 'lineinfo' ],
+  \     [ 'percent'],
+  \     [ 'charvaluehex' ],
+  \   ],
+  \ },
+  \ 'tabline': {
+  \   'left': [ [ 'tabs' ] ],
+  \   'right': [ [ 'readonly', 'fileformat', 'fileencoding', 'filetype' ] ]
+  \ },
+  \ 'tab': {
+  \   'active': [ 'tabnum', 'filename', 'modified' ],
+  \   'inactive': [ 'tabnum', 'filename', 'modified' ]
+  \ },
+  \ 'component': {
+  \   'filename': '%f',
+  \   'charvaluehex': '0x%B',
+  \ },
   \ 'component_function': {
-  \   'filename': 'LightlineFilename',
   \   'filetype': 'DeviconFiletype',
-  \   'fileformat': 'DeviconFileformat',
+  \   'gitbranch': 'FugitiveHead',
   \ },
   \ }
-
-function! LightlineFilename()
-  return expand('%f')
-endfunction
+let g:lightline.separator             = { 'left': "\ue0b8", 'right': "\ue0ba" }
+let g:lightline.subseparator          = { 'left': "\ue0b9", 'right': "\ue0bb" }
+let g:lightline.tabline_separator     = { 'left': "\ue0bc", 'right': "\ue0be" }
+let g:lightline.tabline_subseparator  = { 'left': "\ue0bb", 'right': "\ue0bb" }
 
 function! DeviconFiletype()
   return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
-endfunction
-
-function! DeviconFileformat()
-  return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
 endfunction
 
 " No vertical characters for separating windows
@@ -203,7 +224,6 @@ endfunction
 " Seoul 256 Theme
 function SetSeoul256LightScheme()
   " Enable italics for comments
-  highlight Comment cterm=italic ctermbg=bg ctermfg=fg
 
   let g:seoul256_light_background = 254
   let g:seoul256_srgb = 1
@@ -260,12 +280,15 @@ endfunction
 " Color scheme settings based on environment variables
 if $SYSTEM_THEME ==? 'seoul256-light'
   call SetSeoul256LightScheme()
+  highlight Comment cterm=italic ctermbg=bg ctermfg=fg
 elseif $SYSTEM_THEME ==? 'seoul256-dark'
   call SetSeoul256DarkScheme()
+  highlight Comment cterm=italic ctermbg=bg ctermfg=fg
 elseif $SYSTEM_THEME ==? 'nord'
   call SetNordScheme()
 else
   call SetChallengerDeepScheme()
+  highlight Comment cterm=italic ctermbg=bg ctermfg=fg
 endif
 
 " Extra whitespace (configured after loading the theme, or it will be overriden)
