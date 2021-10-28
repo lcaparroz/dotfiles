@@ -116,6 +116,7 @@ syntax enable
 " Syntax highlight for some specific filetypes
 autocmd BufRead,BufNewFile *.rasi setlocal filetype=css
 autocmd BufRead,BufNewFile *.tmuxtheme setlocal filetype=tmux
+autocmd BufRead,BufNewFile *.tmux.conf setlocal filetype=tmux
 
 set nocompatible
 filetype plugin indent on
