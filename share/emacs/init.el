@@ -285,16 +285,11 @@
   (let ((theme (getenv "SYSTEM_THEME")))
     (and theme (if (string-prefix-p text theme) t nil))))
 
-(cond ((system-theme-is "material_light")
-       (use-package material-theme
-                    :ensure t
-                    :config
-                    (load-theme 'material-light t)))
-      ((system-theme-starts-with "seoul256")
+(cond ((system-theme-starts-with "seoul256")
        (use-package seoul256-theme
                     :ensure t
                     :init
-                    (if (system-theme-is "seoul256_dark")
+                    (if (system-theme-is "seoul256-dark")
                       (setq seoul256-background 233)
                       (setq seoul256-background 254))
                     :config
@@ -304,6 +299,11 @@
                     :ensure t
                     :config
                     (load-theme 'zenburn t)))
+      ((system-theme-is "nord")
+       (use-package nord-theme
+                    :ensure t
+                    :config
+                    (load-theme 'nord t)))
       (t (use-package challenger-deep-theme
                       :ensure t
                       :config
