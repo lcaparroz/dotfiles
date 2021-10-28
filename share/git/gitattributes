@@ -1,0 +1,4 @@
+*.sh        diff=bash
+*_spec.rb   diff=rspec
+*.rb        diff=ruby
+*.rake      diff=ruby

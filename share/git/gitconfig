@@ -1,0 +1,59 @@
+[core]
+	attributesfile = ~/.gitattributes
+	whitespace = space-before-tab,trailing-space
+[color]
+	diff = always
+	status = auto
+	branch = auto
+	interactive = auto
+	ui = always
+	pager = true
+
+[color "diff"]
+	whitespace = magenta reverse
+
+[diff]
+	colorMoved = default
+	colorMovedWS = allow-indentation-change
+	wsErrorHighlight = all
+
+[diff "rspec"]
+	xfuncname = "^[ \t]*((RSpec|describe|context|it|before|after|around|feature|scenario)[ \t].*)$"
+
+[interactive]
+	diffFilter = delta --features=\"interactive $SYSTEM_THEME\"
+
+[pager]
+	diff   = delta --features=\"decorations $SYSTEM_THEME\"
+	log    = delta --features=\"decorations $SYSTEM_THEME\"
+	reflog = delta --features=\"decorations $SYSTEM_THEME\"
+	show   = delta --features=\"decorations $SYSTEM_THEME\"
+
+[delta]
+	hyperlinks = true
+	navigate = true
+
+[delta "interactive"]
+	color-only = true
+	keep-plus-minus-markers = false
+
+[delta "decorations"]
+	commit-style = yellow
+	commit-decoration-style = yellow ul
+	hunk-header-style = file line-number syntax
+	inspect-raw-lines = true
+	keep-plus-minus-markers = true
+
+[delta "nord"]
+	dark = true
+	minus-style                   = red    "#3B4252"
+	plus-style                    = green  "#3B4252"
+	minus-non-emph-style          = yellow "#3B4252"
+	plus-non-emph-style           = yellow "#3B4252"
+	minus-emph-style              = blue   brightblack bold
+	plus-emph-style               = blue   brightblack bold
+	minus-empty-line-marker-style = red    "#3B4252"
+	plus-empty-line-marker-style  = green  "#3B4252"
+
+[delta "seoul256-light"]
+	light = true
