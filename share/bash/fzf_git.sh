@@ -6,7 +6,7 @@ _is_in_git_repo() {
 }
 _fzf_tmux() {
 	fzf-tmux "$FZF_TMUX_OPTS" --reverse --bind ctrl-/:toggle-preview \
-	--preview-window right:50%:border-left:hidden "$@"
+	--preview-window down:70%:border-top:wrap:hidden "$@"
 }
 
 # git status
@@ -15,7 +15,7 @@ _fzf_git_status() {
 
 	git -c color.status=always status --untracked-files=all --short \
 	| _fzf_tmux -m --ansi --nth 2..,.. \
-	--preview '(git diff -- {-1} | delta --hunk-header-style="line-number syntax" --features="decorations $SYSTEM_THEME")' \
+	--preview 'git diff -- {-1} | delta --hunk-header-style="line-number syntax" --features="decorations $SYSTEM_THEME"' \
 	| cut -c4- \
 	| sed 's/.* -> //'
 }
@@ -28,7 +28,7 @@ _fzf_git_branch() {
 	| grep -v '/HEAD\s' \
 	| sort \
 	| _fzf_tmux --ansi --multi --tac \
-	--preview 'git log --oneline --date=short --color=always --pretty="format:%C(green)%cd %C(auto)%h%d %s" $(sed s/^..// <<< {} | cut -d" " -f1)' \
+	--preview 'git log --oneline --date=short --color=always --pretty="%C(green)%cd %<(20,trunc)%C(magenta)%an%C(reset) %C(auto)%h%d %s" $(sed s/^..// <<< {} | cut -d" " -f1)' \
 	| sed 's/^..//' \
 	| cut -d' ' -f1 \
 	| sed 's#^remotes/##'
@@ -39,7 +39,7 @@ _fzf_git_log() {
 	_is_in_git_repo || return
 
 	git log --date=short --color=always \
-	--format="%C(green)%cd %<(14,trunc)%C(magenta)%an%C(reset) %C(auto)%h%d %s" \
+	--format="%C(green)%cd %<(20,trunc)%C(magenta)%an%C(reset) %C(auto)%h%d %s" \
 	| _fzf_tmux --ansi --no-sort --multi --bind 'ctrl-s:toggle-sort' \
 	--header 'Press CTRL-S to toggle sort' \
 	--preview 'git show --combined-all-paths -c --color=always $(grep -o "[a-f0-9]\{7,\}" <<< {}) | delta --features="decorations $SYSTEM_THEME"' \
