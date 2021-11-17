@@ -170,7 +170,8 @@ let g:lightline = {
   \ 'active': {
   \   'left': [
   \     [ 'mode', 'paste' ],
-  \     [ 'gitbranch', 'filename', 'modified' ],
+  \     [ 'gitbranch' ],
+  \     [ 'filename', 'modified' ],
   \   ],
   \   'right': [
   \     [ 'lineinfo' ],
@@ -180,7 +181,7 @@ let g:lightline = {
   \ },
   \ 'tabline': {
   \   'left': [ [ 'tabs' ] ],
-  \   'right': [ [ 'readonly', 'fileformat', 'fileencoding', 'filetype' ] ]
+  \   'right': [ [ 'fileformat', 'fileencoding', 'filetype' ], [ 'readonly' ] ]
   \ },
   \ 'tab': {
   \   'active': [ 'tabnum', 'filename', 'modified' ],
@@ -226,7 +227,6 @@ function SetSeoul256LightScheme()
   let g:seoul256_light_background = 254
   let g:seoul256_srgb = 1
   colorscheme seoul256-light
-  let g:lightline.colorscheme = 'seoul256'
 
   if exists('*term_setansicolors')
     let g:terminal_ansi_colors = [
@@ -236,6 +236,58 @@ function SetSeoul256LightScheme()
       \ '#0087AF', '#87025F', '#008787', '#8A8A8A',
       \ ]
   endif
+
+  let s:fg =     [ '#4E4E4E', 239 ]
+  let s:bg =     [ '#E4E4E4', 254 ]
+  let s:gray1 =  [ '#BCBCBC', 250 ]
+  let s:gray2 =  [ '#D0D0D0', 252 ]
+  let s:gray3 =  [ '#808080', 244 ]
+  let s:gray4 =  [ '#A8A8A8', 248 ]
+
+  let s:red =     [ '#AF5F5F', 1 ]
+  let s:green =   [ '#5F885F', 2 ]
+  let s:yellow =  [ '#AF8760', 3 ]
+  let s:blue =    [ '#5F87AE', 4 ]
+  let s:magenta = [ '#875F87', 5 ]
+
+  let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'tabline': {}}
+
+  " Normal mode
+  let s:p.normal.left =    [ [ s:bg, s:blue, 'bold' ], [ s:fg, s:gray1 ] ]
+  let s:p.normal.middle =  [ [ s:fg, s:gray2 ] ]
+  let s:p.normal.right =   [ [ s:bg, s:blue, 'bold' ], [ s:fg, s:gray1 ] ]
+  let s:p.normal.error =   [ [ s:red, s:fg ] ]
+  let s:p.normal.warning = [ [ s:yellow, s:fg ] ]
+
+  " Insert mode
+  let s:p.insert.left =  [ [ s:bg, s:green, 'bold' ], [ s:green, s:gray1 ], [ s:green, s:gray2 ] ]
+  let s:p.insert.right = [ [ s:bg, s:green, 'bold' ], [ s:green, s:gray1 ], [ s:green, s:gray2 ] ]
+
+  " Replace mode
+  let s:p.replace.left =  [ [ s:bg, s:red, 'bold' ], [ s:red, s:gray1 ], [ s:red, s:gray2 ] ]
+  let s:p.replace.right = [ [ s:bg, s:red, 'bold' ], [ s:red, s:gray1 ], [ s:red, s:gray2 ] ]
+
+  " Visual mode
+  let s:p.visual.left =  [ [ s:bg, s:magenta, 'bold' ], [ s:magenta, s:gray1 ], [ s:magenta, s:gray2 ] ]
+  let s:p.visual.right = [ [ s:bg, s:magenta, 'bold' ], [ s:magenta, s:gray1 ], [ s:magenta, s:gray2 ] ]
+
+  " Tabline
+  let s:p.tabline.left =   [ [ s:fg, s:gray1 ] ]
+  let s:p.tabline.tabsel = [ [ s:bg, s:green, 'bold' ] ]
+  let s:p.tabline.middle = copy(s:p.normal.middle)
+  let s:p.tabline.right =  [ [ s:fg, s:gray1 ] ]
+
+  " Inactive windows (statusline)
+  let s:p.inactive.left =   [ [ s:gray1, s:gray3 ], [ s:gray3, s:gray4 ] ]
+  let s:p.inactive.middle = [ [ s:gray3, s:gray1 ] ]
+  let s:p.inactive.right =  copy(s:p.inactive.left)
+
+  " Load color palette
+  let g:lightline#colorscheme#seoul256light#palette = lightline#colorscheme#flatten(s:p)
+  let g:lightline.colorscheme = 'seoul256light'
+
+  " Clear statusline colors set by seoul256 colorscheme
+  highlight StatusLine cterm=bold ctermfg=239 ctermbg=250 gui=bold,reverse guifg=#4E4E4E guibg=#BCBCBC
 
   call ReloadLightline()
 endfunction
@@ -315,7 +367,7 @@ autocmd Filetype text setlocal spell
 autocmd Filetype wiki setlocal spell
 
 let g:vimwiki_list = [{'path': '~/vimwiki/',
-                      \ 'syntax': 'markdown', 'ext': '.md'}]
+                     \ 'syntax': 'markdown', 'ext': '.md'}]
 
 let g:codi#interpreters = {
   \'python': { 'bin': 'python3', 'prompt': '^\(>>>\|\.\.\.\) ' }
