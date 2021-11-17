@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+
+# Arguments
+sr_in="$1"
+sr_in_color="$2"
+fg_color="$3"
+
+# Colors constants (must be the same ones specified in ~/.thymerc)
+running_color="blue"
+warning_color="yellow"
+short_break_color="green"
+
+# Initialization
+pomo_char=''
+
+if thyme_output="$(cat ~/.thyme-tmux 2> /dev/null)"
+then
+	minutes=$(( "$(echo "$thyme_output" | sed -E "s/^\S+]([0-9]+):.+$/\1/g")" + 1 ))
+	cycle="$(echo "$thyme_output" | sed -nE "s/^.+\(([0-9/]+)\)\S+/ [\1]/p")"
+	color="$(echo "$thyme_output" | sed -E "s/^\S+fg=([a-z]+)].+$/\1/g")"
+	time_text=" $minutes$cycle"
+
+	sleep 1
+	current_thyme_output="$(cat ~/.thyme-tmux 2> /dev/null)"
+
+	# Char/symbol
+	if [ "$current_thyme_output" = "$thyme_output" ]
+	then
+		pomo_char='\ue00a' # nf-pom-external_interruption
+		color="red"
+	else
+		case $color in
+			"$running_color")
+				pomo_char='\ue002' # nf-pom-pomodoro_estimated
+				;;
+			"$warning_color")
+				pomo_char='\ue004' # nf-pom-pomodoro_squashed
+				;;
+			"$short_break_color")
+				pomo_char='\ue005' # nf-pom-short_pause
+				;;
+		esac
+	fi
+else
+	pomo_char='\ue006' # nf-pom_long-pause
+	color="cyan"
+fi
+
+echo -e "#[bg=$sr_in_color,fg=$color,none]$sr_in#[bg=$color,fg=$fg_color] $pomo_char$time_text #[bg=$color,none]"

@@ -1,4 +1,4 @@
-# Inspired by nord theme for vim
+# Inspired by nord theme for tmux
 # https://github.com/arcticicestudio/nord-tmux/
 
 # Status bar
@@ -15,13 +15,12 @@ set-option -g status-left ' #S #{@sl_out}'
 
 # Right side of status bar
 set-option -g status-right-style bg=brightblack,fg=white
-set -gs @sr_in '#[bg=black,fg=brightblack,none]#[bg=brightblack,fg=white]'
+set -gs @sr_in '#[fg=black,none]#[bg=black,fg=brightblack,none]#[bg=brightblack,fg=white]'
 set -gs @sr_sep2 '#[bg=brightblack,fg=cyan,none]#[bg=cyan,fg=brightblack,bold]'
 
-set-option -g status-right '#{@sr_in} %H:%M  %Y-%m-%d #{@sr_sep2} P#P #{=-2:--#{?window_marked_flag,M,}#{?window_zoomed_flag,Z,}} '
+set-option -g status-right '#(thyme-format '\ue0b2' black brightblack)#{@sr_in} %H:%M  %Y-%m-%d #{@sr_sep2} P#P #{=-2:--#{?window_marked_flag,M,}#{?window_zoomed_flag,Z,}} '
 
 # Window status
-
 set-option -gw window-status-style bg=brightblack,fg=white,italics
 set-option -gw window-status-activity-style bg=green,fg=white,italics
 set-option -gw window-status-bell-style bg=magenta,fg=white,italics
@@ -34,7 +33,6 @@ set-option -gw window-status-format \
   '#{@ws_in} #I #{@ws_sep} #W #[fg=#{?window_bell_flag,magenta,#{?window_activity_flag,green,brightblack}}]#{@ws_out}'
 
 # Window status current
-
 set-option -gw window-status-current-style bg=cyan,fg=black,bold
 
 set -gs @wsc_in  '#[bg=cyan,fg=black,none]#[default]'

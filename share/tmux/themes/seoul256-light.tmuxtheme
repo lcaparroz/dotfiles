@@ -14,11 +14,11 @@ set -gs @sl_out '#[bg=colour95,fg=cyan,none]'
 set-option -g status-left ' #S #{@sl_out}'
 
 # Right side of status bar
-set-option -g status-right-style bg=colour187,fg=colour95
-set -gs @sr_in '#[bg=colour95,fg=colour187]#[default]'
-set -gs @sr_sep2 '#[bg=colour187,fg=colour95,none]#[bg=colour95,fg=colour187,bold]'
+set-option -g status-right-style bg=colour138,fg=colour187
+set -gs @sr_in '#[fg=colour138]#[default]'
+set -gs @sr_sep2 '#[bg=colour138,fg=colour95,none]#[bg=colour95,fg=colour187,bold]'
 
-set-option -g status-right '#{@sr_in} %H:%M  %Y-%m-%d #{@sr_sep2} P#P #{=-2:--#{?window_marked_flag,M,}#{?window_zoomed_flag,Z,}} '
+set-option -g status-right '#(thyme-format '\ue0ba' colour95 colour187)#{@sr_in} %H:%M  %Y-%m-%d #{@sr_sep2} P#P #{=-2:--#{?window_marked_flag,M,}#{?window_zoomed_flag,Z,}} '
 
 # Window status
 set-option -gw window-status-style bg=colour95
