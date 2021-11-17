@@ -1,20 +1,45 @@
 # Inspired by seoul256-light theme for vim
 # https://github.com/junegunn/seoul256.vim/
 
+# Status bar
+set-option -g status-justify left
+
 # Basic status bar colors
 set-option -g status-style bg=colour95,fg=colour187
 
 # Left side of status bar
-set-option -g status-left-style bg=colour187,fg=colour95
+set-option -g status-left-style bg=cyan,fg=white,bold
+set -gs @sl_out '#[bg=colour95,fg=cyan,none]'
+
+set-option -g status-left ' #S #{@sl_out}'
 
 # Right side of status bar
 set-option -g status-right-style bg=colour187,fg=colour95
+set -gs @sr_in '#[bg=colour95,fg=colour187]#[default]'
+set -gs @sr_sep2 '#[bg=colour187,fg=colour95,none]#[bg=colour95,fg=colour187,bold]'
+
+set-option -g status-right '#{@sr_in} %H:%M  %Y-%m-%d #{@sr_sep2} P#P #{=-2:--#{?window_marked_flag,M,}#{?window_zoomed_flag,Z,}} '
 
 # Window status
-set-option -gw window-status-style default,italics
-set-option -gw window-status-activity-style bg=green,fg=colour187,italics
-set-option -gw window-status-bell-style bg=magenta,fg=colour187,italics
-set-option -gw window-status-current-style bg=colour187,fg=colour95,bold
+set-option -gw window-status-style bg=colour95
+set-option -gw window-status-activity-style bg=green
+set-option -gw window-status-bell-style bg=red
+
+set -gs @ws_in  '#[fg=colour95,none]#[default]'
+set -gs @ws_sep '#[fg=colour187,none]#[default]'
+set -gs @ws_out '#[bg=colour95,none]#[default]'
+
+set-option -gw window-status-format \
+  '#{@ws_in} #I #{@ws_sep} #W #[fg=#{?window_bell_flag,red,#{?window_activity_flag,green,colour95}}]#{@ws_out}'
+
+# Window status current
+set-option -gw window-status-current-style bg=colour138,fg=colour187,bold
+
+set -gs @wsc_in  '#[fg=colour138,bg=colour95,none]#[default]'
+set -gs @wsc_sep '#[bg=colour138,fg=colour187,none]#[default]'
+set -gs @wsc_out '#[bg=colour95,fg=colour138,none]#[default]'
+
+set-option -gw window-status-current-format '#{@wsc_in} #I #{@wsc_sep} #W #{@wsc_out}'
 
 # Pane border
 set-option -g pane-border-style bg=default,fg=colour187
