@@ -2,116 +2,88 @@
 
 # Bash Run Command script for custom prompt
 
-git_commit_id() {
-  local -r commit_id=$(git rev-parse --short HEAD 2> /dev/null)
-
-  if [[ -n "${commit_id}" ]]
-  then
-    echo "${commit_id}"
-  fi
+__git_commit() {
+	git rev-parse --short HEAD 2> /dev/null || return 1
 }
 
-full_git_directory() {
-  local -r git_dir=$(git rev-parse --show-toplevel 2> /dev/null)
-
-  if [[ -n "${git_dir}" ]]
-  then
-    echo "${git_dir}"
-  fi
+__git_repodir() {
+	git rev-parse --show-toplevel 2> /dev/null || return 1
 }
 
-git_base_directory() {
-  local -r full_git_dir=$(full_git_directory)
-
-  if [[ -n "${full_git_dir}" ]]
-  then
-    local git_base_dir
-
-    git_base_dir="$(basename "${full_git_dir}")"
-
-    echo "${git_base_dir}" #| awk '{print toupper($0)}'
-  fi
+__git_basedir() {
+	local repodir
+	repodir=$(__git_repodir) && basename "$repodir" || return 1
 }
 
-git_subdirectory() {
-  local -r git_subdir="$(git rev-parse --show-prefix 2> /dev/null)"
+__git_subdir() {
+	local subdir inside_gitdir
+	if ! subdir="$(git rev-parse --show-prefix 2> /dev/null)"
+	then
+		return 1
+	elif inside_gitdir="$(__inside_gitdir)" && [ "$inside_gitdir" = true ]
+	then
+		dirs && return 0
+	elif [ -z "$subdir" ]
+	then
+		echo "~" && return 0
+	fi
 
-  if [[ -n "${git_subdir}" ]]
-  then
-    local -r current_dir_basename="$(basename "${git_subdir}")"
-    local git_subdir_levels
-    readarray -d '/' -t git_subdir_levels <<< "${git_subdir%%*(/)}"
-    local -r level_count="${#git_subdir_levels[*]}"
+	local dir_levels
+	readarray -d '/' -t dir_levels <<< "${subdir%%*(/)}"
+	local -r levels_count="${#dir_levels[*]}"
 
-    local formatted_dir_levels
-    for (( n = 1; n < level_count - 1; n++))
-    do
-      local level_string="${git_subdir_levels[n]}"
-      if [ "${#level_string}" -gt 3 ]
-      then
-        level_string="${level_string:0:2}."
-      fi
-      formatted_dir_levels="${formatted_dir_levels}/${level_string}"
-    done
+	local abbrev_path="${dir_levels[0]}"
+	for (( n = 1; n < levels_count - 1; n++))
+	do
+		local level="${dir_levels[n]}"
+		[ "${#level}" -gt 3 ] && level="${level:0:2}."
+		abbrev_path+="/$level"
+	done
+	[ "$levels_count" -gt 1 ] && abbrev_path+="/${dir_levels[-1]}"
 
-    if [ -n "${formatted_dir_levels}" ]
-    then
-      echo "${git_subdir_levels[0]}${formatted_dir_levels}/${current_dir_basename}"
-    elif [ "${level_count}" -gt 1 ]
-    then
-      echo "${git_subdir_levels[0]}/${current_dir_basename}"
-    else
-      echo "${current_dir_basename}"
-    fi
-  fi
+	echo "$abbrev_path" && return 0
 }
 
-upper_prompt() {
-  local -r dir_style="\e[36m"
-  local -r clear_style="\e[0m"
-  local -r git_base_dir="$(git_base_directory)"
-  local prompt
-
-  prompt="${dir_style}[$(dirs)]${clear_style}"
-
-  if [[ -n "${git_base_dir}" ]]
-  then
-    local -r git_dir_style="\e[1;91m"
-    local -r git_dir_slice="${git_dir_style}[${git_base_dir}]${clear_style}"
-
-    local -r git_subdir_style="\e[36m"
-    local git_subdir
-    git_subdir="$(git_subdirectory)"
-
-    if [[ -z "${git_subdir}" ]]
-    then
-      git_subdir="~"
-    fi
-    local -r git_subdir_slice=" ${git_subdir_style}${git_subdir}${clear_style}"
-
-    local git_commit_style="\e[33m"
-    local git_commit
-    git_commit="$(git_commit_id)"
-
-    if [[ -z "${git_commit}" ]]
-    then
-      git_commit="--"
-    fi
-    local git_commit_slice=" ${git_commit_style}${git_commit}${clear_style}"
-
-    prompt="${git_dir_slice}${git_subdir_slice}${git_commit_slice}"
-  fi
-
-  echo -e "${prompt}\e[0m"
+__inside_gitdir() {
+	git rev-parse --is-inside-git-dir 2> /dev/null || return 1
 }
 
-UPPER_LINE="\n\e[1m\u@\h\e[0m \$(upper_prompt)\e[0m"
-LOWER_LINE="\n❯ "
+__prompt_start() {
+	local prompt
+	prompt="$PROMPT_DECO┌╼[\e[0;1m$(whoami)\e[0m"
+	prompt+="$PROMPT_DECO@\e[0;1m$(hostname)\e[0m"
+
+	local basedir
+	if basedir="$(__git_basedir)"
+	then
+		prompt+="$PROMPT_DECO]╾─╼[\e[0m"
+		prompt+="\e[1;35m$basedir$PROMPT_DECO/\e[0m"
+		prompt+="\e[1;33m$(__git_commit || echo "--")$PROMPT_DECO/\e[0m"
+	elif inside_gitdir="$(__inside_gitdir)" && [ "$inside_gitdir" = true ]
+	then
+		prompt+="$PROMPT_DECO]╾─╼[\e[0m"
+	fi
+
+	echo -e "$prompt\e[0m"
+}
+
+__prompt_end() {
+	local prompt
+	prompt="$PROMPT_DECO]\e[0m\n$PROMPT_DECO└╼["
+	prompt+="\e[1;36m$(__git_subdir || dirs)"
+	prompt+="$PROMPT_DECO]\e[0m"
+
+	echo -e "$prompt\e[0m"
+}
+
+PROMPT_START="\n\e[0m\$(__prompt_start)\e[0m"
+PROMPT_END="\e[0m\$(__prompt_end)\e[0m\n❯ "
+GIT_PROMPT_FORMAT="\e[0;1m%s"
 
 if [ -r "${HOME}/.git-prompt.sh" ]
 then
-  # Bash prompt (PS1)
-  PROMPT_COMMAND='__git_ps1 "${UPPER_LINE}" "${LOWER_LINE}"'
+	# Bash prompt (PS1)
+	PROMPT_COMMAND='__git_ps1 "$PROMPT_START" "$PROMPT_END" "$GIT_PROMPT_FORMAT"'
 else
-  PS1="${UPPER_LINE}${LOWER_LINE}"
+	PS1="${PROMPT_START}${PROMPT_END}"
 fi

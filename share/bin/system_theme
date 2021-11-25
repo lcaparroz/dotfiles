@@ -3,6 +3,7 @@
 export_system_theme() {
 	local color_theme="$1"
 	local bat_theme="$2"
+	local prompt_deco="$3"
 
 	local current_os
 	current_os="$(uname -s)"
@@ -11,10 +12,12 @@ export_system_theme() {
 	then
 		launchctl setenv SYSTEM_THEME "${color_theme}"
 		launchctl setenv BAT_THEME "${bat_theme}"
+		launchctl setenv PROMPT_DECO "${prompt_deco}"
 	elif [ "${current_os}" = "Linux" ]
 	then
 		export SYSTEM_THEME="${color_theme}"
 		export BAT_THEME="${bat_theme}"
+		export PROMPT_DECO="${prompt_deco}"
 	fi
 }
 
@@ -24,12 +27,12 @@ case "${SYSTEM_THEME}" in
 		export_system_theme "${SYSTEM_THEME}" "ansi"
 		;;
 	nord)
-		export_system_theme "${SYSTEM_THEME}" "Nord"
+		export_system_theme "${SYSTEM_THEME}" "Nord" "\e[0;1;90m"
 		;;
 	seoul256-dark)
 		export_system_theme "${SYSTEM_THEME}" "ansi"
 		;;
 	*)
-		export_system_theme "seoul256-light" "ansi"
+		export_system_theme "seoul256-light" "ansi" "\e[0;1;38;5;248m"
 		;;
 esac
