@@ -108,18 +108,8 @@ upper_prompt() {
 UPPER_LINE="\n\e[1m\u@\h\e[0m \$(upper_prompt)\e[0m"
 LOWER_LINE="\n❯ "
 
-if [ -f "${HOME}/.git-prompt.sh" ]
+if [ -r "${HOME}/.git-prompt.sh" ]
 then
-  source "${HOME}/.git-prompt.sh"
-
-  # Export options for __git_ps1 command
-  export GIT_PS1_SHOWDIRTYSTATE=true
-  export GIT_PS1_SHOWUNTRACKEDFILES=true
-  export GIT_PS1_SHOWSTASHSTATE=true
-  export GIT_PS1_SHOWCOLORHINTS=true
-  export GIT_PS1_SHOWUPSTREAM="auto"
-  export GIT_PS1_DESCRIBE_STYLE="branch"
-
   # Bash prompt (PS1)
   PROMPT_COMMAND='__git_ps1 "${UPPER_LINE}" "${LOWER_LINE}"'
 else

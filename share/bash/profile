@@ -1,7 +1,9 @@
 #!/bin/bash
 
-# Import functions
-source "${HOME}/.dotfiles/share/bash/functions.sh"
+# Helper functions
+source_file() {
+	[ -f "$1" ] && source "$1"
+}
 
 # Language settings
 export LANG=en_US.UTF-8
@@ -9,6 +11,18 @@ export LC_ALL=en_US.UTF-8
 
 # Dictionaries path for hunspell
 export DICPATH="${HOME}/.dictionaries"
+
+# __git_ps1 options
+if [ -f "${HOME}/.git-prompt.sh" ]
+then
+	export GIT_PS1_COMPRESSSPARSESTATE=true
+	export GIT_PS1_SHOWCOLORHINTS=true
+	export GIT_PS1_SHOWDIRTYSTATE=true
+	export GIT_PS1_SHOWSTASHSTATE=true
+	export GIT_PS1_SHOWUNTRACKEDFILES=true
+	export GIT_PS1_SHOWUPSTREAM="verbose"
+	export GIT_PS1_DESCRIBE_STYLE="branch"
+fi
 
 # Define vim/vi as the default editor, if available
 if [ -n "$(command -v vimx)" ]
