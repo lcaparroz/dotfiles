@@ -1,6 +1,7 @@
 [core]
 	attributesfile = ~/.gitattributes
 	whitespace = space-before-tab,trailing-space
+
 [color]
 	diff = always
 	status = auto
@@ -57,3 +58,11 @@
 
 [delta "seoul256-light"]
 	light = true
+	minus-style                   = red    "#C6C6C6"
+	plus-style                    = green  "#C6C6C6"
+	minus-non-emph-style          = yellow "#C6C6C6"
+	plus-non-emph-style           = yellow "#C6C6C6"
+	minus-emph-style              = blue   "#BCBCBC" bold
+	plus-emph-style               = blue   "#BCBCBC" bold
+	minus-empty-line-marker-style = red    "#C6C6C6"
+	plus-empty-line-marker-style  = green  "#C6C6C6"
