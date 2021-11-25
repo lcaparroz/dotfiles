@@ -159,8 +159,27 @@ mode "$mode_system" {
 
 bindsym $mod+Shift+e mode "$mode_system"
 
+# basic display management
+set $mode_display Display (1) 1, (2) 2, (a) 2/1, (b) 1/2, (l) 2|1, (r) 1|2, (m) 2=1
+
+mode "$mode_display" {
+    bindsym 1 exec --no-startup-id xrandr_display only1, mode "default"
+    bindsym 2 exec --no-startup-id xrandr_display only2, mode "default"
+    bindsym a exec --no-startup-id xrandr_display 2above1, mode "default"
+    bindsym b exec --no-startup-id xrandr_display 2below1, mode "default"
+    bindsym l exec --no-startup-id xrandr_display 2left1, mode "default"
+    bindsym r exec --no-startup-id xrandr_display 2right1, mode "default"
+    bindsym m exec --no-startup-id xrandr_display 2mirror1, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+Shift+d mode "$mode_display"
+
 # screenshot mode
-set $mode_screenshot (s) screen, (x) selection, current (w) window, (Shift+s) save screen, (Shift+x) save selection, (Shift+w) save window
+set $mode_screenshot Screenshot (s) screen, (x) selection, (w) window, (Shift+s) save screen, (Shift+x) save selection, (Shift+w) save window
 
 mode "$mode_screenshot" {
     bindsym --release s exec --no-startup-id screenshot screen-copy, mode "default"
