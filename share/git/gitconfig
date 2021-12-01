@@ -45,6 +45,17 @@
 	inspect-raw-lines = true
 	keep-plus-minus-markers = true
 
+[delta "challenger-deep"]
+	light = true
+	minus-style                   = red    "#39364A"
+	plus-style                    = green  "#39364A"
+	minus-non-emph-style          = yellow "#39364A"
+	plus-non-emph-style           = yellow "#39364A"
+	minus-emph-style              = blue   black bold
+	plus-emph-style               = blue   black bold
+	minus-empty-line-marker-style = red    "#39364A"
+	plus-empty-line-marker-style  = green  "#39364A"
+
 [delta "nord"]
 	dark = true
 	minus-style                   = red    "#3B4252"

@@ -24,7 +24,7 @@ export_system_theme() {
 # Default theme: seoul256-light
 case "${SYSTEM_THEME}" in
 	challenger-deep)
-		export_system_theme "${SYSTEM_THEME}" "ansi"
+		export_system_theme "${SYSTEM_THEME}" "ansi" "\e[0;1;30m"
 		;;
 	nord)
 		export_system_theme "${SYSTEM_THEME}" "Nord" "\e[0;1;90m"
