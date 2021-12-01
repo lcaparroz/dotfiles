@@ -76,14 +76,22 @@ __prompt_end() {
 	echo -e "$prompt\e[0m"
 }
 
+__prompt_exit_code() {
+	local exit_code="$1"
+
+	[ "$exit_code" -eq 0 ] \
+		&& printf "$PROMPT_DECO╾─╼[\e[0m\e[32m%d\e[0m$PROMPT_DECO]\e[0m" "$exit_code" \
+		|| printf "$PROMPT_DECO╾─╼[\e[0m\e[31m%d\e[0m$PROMPT_DECO]\e[0m" "$exit_code"
+}
+
 PROMPT_START="\n\e[0m\$(__prompt_start)\e[0m"
-PROMPT_END="\e[0m\$(__prompt_end)\e[0m\n❯ "
+PROMPT_END="\e[0m\$(__prompt_end)\e[0m"
 GIT_PROMPT_FORMAT="\e[0;1m%s"
 
 if [ -r "${HOME}/.git-prompt.sh" ]
 then
 	# Bash prompt (PS1)
-	PROMPT_COMMAND='__git_ps1 "$PROMPT_START" "$PROMPT_END" "$GIT_PROMPT_FORMAT"'
+	PROMPT_COMMAND='__git_ps1 "$PROMPT_START" "$PROMPT_END$(__prompt_exit_code "$?")\n❯ " "$GIT_PROMPT_FORMAT"'
 else
 	PS1="${PROMPT_START}${PROMPT_END}"
 fi
