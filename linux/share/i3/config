@@ -196,6 +196,21 @@ mode "$mode_screenshot" {
 
 bindsym $mod+Print mode "$mode_screenshot"
 
+# terminal theme selection
+set $mode_terminal Theme (s) seoul256-light, (n) nord, (c) challenger-deep
+
+mode "$mode_terminal" {
+  bindsym s exec --no-startup-id env SYSTEM_THEME="seoul256-light" bash -c "source ~/.dotfiles/share/bin/system_theme && kitty --detach", mode "default"
+  bindsym n exec --no-startup-id env SYSTEM_THEME="nord" bash -c "source ~/.dotfiles/share/bin/system_theme && kitty --detach", mode "default"
+  bindsym c exec --no-startup-id env SYSTEM_THEME="challenger-deep" bash -c "source ~/.dotfiles/share/bin/system_theme && kitty --detach", mode "default"
+
+  # back to normal: Enter or Escape
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+
+bindsym $mod+Shift+Return mode "$mode_terminal"
+
 # resize window
 mode "resize" {
   bindsym h resize shrink width 10 px or 10 ppt
