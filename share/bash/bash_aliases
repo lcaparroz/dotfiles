@@ -11,7 +11,8 @@ fi
 # tmux minimal session for workspace
 if [ -n "$(command -v tmux)" ] && [ -d "${HOME}/workspace" ]
 then
-  alias workspace="tmux new-session -s workspace -n home -c \"\${HOME}/workspace\""
+  alias wks="tmux set-environment -g SYSTEM_THEME \"\$SYSTEM_THEME\" 2> /dev/null \
+    ; tmux attach-session -x -f 'active-pane,ignore-size' -c ~/workspace -t workspace"
 fi
 
 # tmux rename window based on current working directory
