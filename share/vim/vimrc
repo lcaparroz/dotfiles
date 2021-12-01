@@ -61,8 +61,20 @@ let g:webdevicons_enable = 1
 let g:tagbar_use_cache = 0
 let g:tagbar_autofocus = 1
 
+" vim git-gutter configuration
+let g:gitgutter_set_sign_backgrounds = 1
+let g:gitgutter_sign_added =                   "\uf457 " " nf-oct-diff_added
+let g:gitgutter_sign_modified =                "\uf459 " " nf-oct-diff_modified
+let g:gitgutter_sign_modified_removed =        "\uf440 " " nf-oct-diff
+let g:gitgutter_sign_removed =                 "\uf458 " " nf-oct-diff_removed
+let g:gitgutter_sign_removed_first_line =      "\uf458 " " nf-oct-diff_removed
+let g:gitgutter_sign_removed_above_and_below = "\uf873 " " nf-mdi-minus
+
 " Plugin manager
 so ~/.vim/plugins.vim
+
+" Set swap file updating time
+set updatetime=500
 
 " Row numbers
 set number
@@ -188,12 +200,14 @@ let g:lightline = {
   \   'inactive': [ 'tabnum', 'filename', 'modified' ]
   \ },
   \ 'component': {
-  \   'filename': '%f',
-  \   'charvaluehex': '0x%B',
+  \   'charvaluehex': '0x%02B',
+  \   'percent': "\uf8ef %P",
+  \   'lineinfo': "\uf911%3l:%-3v",
   \ },
   \ 'component_function': {
+  \   'filename': 'DeviconFilename',
   \   'filetype': 'DeviconFiletype',
-  \   'gitbranch': 'FugitiveHead',
+  \   'gitbranch': 'DeviconGitBranch',
   \ },
   \ }
 let g:lightline.separator             = { 'left': "\ue0b8", 'right': "\ue0ba" }
@@ -202,11 +216,27 @@ let g:lightline.tabline_separator     = { 'left': "\ue0bc", 'right': "\ue0be" }
 let g:lightline.tabline_subseparator  = { 'left': "\ue0bb", 'right': "\ue0bb" }
 
 function! DeviconFiletype()
-  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
+  return winwidth(0) > 70 ? (
+    \ strlen(&filetype) ?
+    \ &filetype . ' ' . WebDevIconsGetFileTypeSymbol() :
+    \ 'no ft'
+    \ ) : ''
+endfunction
+
+function! DeviconGitBranch()
+  let s:devicon_git_branch = FugitiveHead()
+  return strlen(s:devicon_git_branch) ?
+    \ "\uf126 " . s:devicon_git_branch :
+    \ "\uf755 " . expand('%:p:h:t')
+endfunction
+
+function! DeviconFilename()
+  let s:devicon_filename = expand('%:f')
+  return strlen(s:devicon_filename) ? "\uf4a5 " . s:devicon_filename : ''
 endfunction
 
 " No vertical characters for separating windows
-set fillchars+=vert:\ 
+set fillchars+=vert:│
 
 " Do not automatically insert comment leader after hitting o/O (normal mode)
 autocmd FileType * setlocal formatoptions-=o
