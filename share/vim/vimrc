@@ -189,6 +189,7 @@ let g:lightline = {
   \     [ 'lineinfo' ],
   \     [ 'percent'],
   \     [ 'charvaluehex' ],
+  \     [ 'synstack' ],
   \   ],
   \ },
   \ 'tabline': {
@@ -208,6 +209,7 @@ let g:lightline = {
   \   'filename': 'DeviconFilename',
   \   'filetype': 'DeviconFiletype',
   \   'gitbranch': 'DeviconGitBranch',
+  \   'synstack': 'SynStack',
   \ },
   \ }
 let g:lightline.separator             = { 'left': "\ue0b8", 'right': "\ue0ba" }
@@ -235,16 +237,19 @@ function! DeviconFilename()
   return strlen(s:devicon_filename) ? "\uf4a5 " . s:devicon_filename : ''
 endfunction
 
+function! SynStack()
+  if exists("*synstack")
+    let s:highlights = map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+    " nf-fa-i_cursor
+    return "\uf246 " . (len(s:highlights) ? s:highlights[-1] : "--")
+  endif
+endfunc
+
 " No vertical characters for separating windows
 set fillchars+=vert:│
 
 " Do not automatically insert comment leader after hitting o/O (normal mode)
 autocmd FileType * setlocal formatoptions-=o
-
-" Color schemes
-if has('termguicolors')
-  set termguicolors
-endif
 
 " lightline reloading
 function ReloadLightline()
@@ -366,6 +371,67 @@ function SetNordScheme()
   call ReloadLightline()
 endfunction
 
+" Space Vim Light Theme
+function SetSpaceVimLightScheme()
+  set background=light
+
+  colorscheme space_vim_theme
+
+  " Font tweaks
+  hi Comment cterm=italic ctermfg=146 guifg=#A8A8BF
+
+  let s:fg1 =     [ '#504259', 60 ]
+  let s:fg2 =     [ '#6C3163', 89 ]
+  let s:purple1 = [ '#E7E5EB', 189 ]
+  let s:purple2 = [ '#D3D3E7', 146 ]
+  let s:purple3 = [ '#C3C3DB', 242 ]
+
+  let s:red =      [ '#D26487', 168 ]
+  let s:orange =   [ '#CA754B', 172 ]
+  let s:blue =     [ '#6981C5', 69 ]
+  let s:yellow =   [ '#B89F33', 136 ]
+  let s:magenta =  [ '#D194CC', 176 ]
+  let s:white =    [ '#FBF8EF', 231 ]
+
+  let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'tabline': {}}
+
+  " Normal mode
+  let s:p.normal.left =    [ [ s:fg1, s:magenta, 'bold' ], [ s:fg2, s:purple1, 'bold' ] ]
+  let s:p.normal.middle =  [ [ s:fg1, s:purple2 ] ]
+  let s:p.normal.right =   [ [ s:fg1, s:magenta ], [ s:fg2, s:purple1 ] ]
+  let s:p.normal.error =   [ [ s:red, s:fg1 ] ]
+  let s:p.normal.warning = [ [ s:yellow, s:fg1 ] ]
+
+  " Insert mode
+  let s:p.insert.left =  [ [ s:white, s:blue, 'bold' ], [ s:blue, s:purple1, 'bold'  ], [ s:blue, s:purple2 ] ]
+  let s:p.insert.right = [ [ s:white, s:blue, 'bold' ], [ s:blue, s:purple1, 'bold'  ], [ s:blue, s:purple2 ] ]
+
+  " Replace mode
+  let s:p.replace.left =  [ [ s:white, s:red, 'bold' ], [ s:red, s:purple1, 'bold' ], [ s:red, s:purple2 ] ]
+  let s:p.replace.right = [ [ s:white, s:red, 'bold' ], [ s:red, s:purple1, 'bold' ], [ s:red, s:purple2 ] ]
+
+  " Visual mode
+  let s:p.visual.left =  [ [ s:white, s:orange, 'bold' ], [ s:orange, s:purple1, 'bold' ], [ s:orange, s:purple2 ] ]
+  let s:p.visual.right = [ [ s:white, s:orange, 'bold' ], [ s:orange, s:purple1, 'bold' ], [ s:orange, s:purple2 ] ]
+
+  " Tabline
+  let s:p.tabline.left =   [ [ s:fg1, s:purple2 ] ]
+  let s:p.tabline.tabsel = [ [ s:fg2, s:purple1, 'bold' ] ]
+  let s:p.tabline.middle = copy(s:p.normal.middle)
+  let s:p.tabline.right =  [ [ s:fg2, s:purple1 ] ]
+
+  " Inactive windows (statusline)
+  let s:p.inactive.left =   [ [ s:white, s:purple3 ], [ s:white, s:purple2 ] ]
+  let s:p.inactive.middle = [ [ s:purple3, s:purple1 ] ]
+  let s:p.inactive.right =  copy(s:p.inactive.left)
+
+  " Load color palette
+  let g:lightline#colorscheme#spacevimlight#palette = lightline#colorscheme#flatten(s:p)
+  let g:lightline.colorscheme = 'spacevimlight'
+
+  call ReloadLightline()
+endfunction
+
 " Color scheme settings based on environment variables
 if $SYSTEM_THEME ==? 'seoul256-light'
   call SetSeoul256LightScheme()
@@ -375,9 +441,16 @@ elseif $SYSTEM_THEME ==? 'seoul256-dark'
   highlight Comment cterm=italic ctermbg=bg ctermfg=fg
 elseif $SYSTEM_THEME ==? 'nord'
   call SetNordScheme()
-else
+elseif $SYSTEM_THEME ==? 'challenger-deep'
   call SetChallengerDeepScheme()
   highlight Comment cterm=italic ctermbg=bg ctermfg=fg
+else
+  call SetSpaceVimLightScheme()
+endif
+
+" Color schemes
+if has('termguicolors')
+  set termguicolors
 endif
 
 " Extra whitespace (configured after loading the theme, or it will be overriden)

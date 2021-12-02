@@ -304,6 +304,11 @@
                     :ensure t
                     :config
                     (load-theme 'nord t)))
+      ((system-theme-is "space-vim-light")
+       (use-package spacemacs-theme
+                    :ensure t
+                    :defer t
+                    :init (load-theme 'spacemacs-light t)))
       (t (use-package challenger-deep-theme
                       :ensure t
                       :config

@@ -197,9 +197,10 @@ mode "$mode_screenshot" {
 bindsym $mod+Print mode "$mode_screenshot"
 
 # terminal theme selection
-set $mode_terminal Theme (s) seoul256-light, (n) nord, (c) challenger-deep
+set $mode_terminal Theme (p) space-vim-light (s) seoul256-light, (n) nord, (c) challenger-deep
 
 mode "$mode_terminal" {
+  bindsym p exec --no-startup-id env SYSTEM_THEME="space-vim-light" bash -c "source ~/.dotfiles/share/bin/system_theme && kitty --detach", mode "default"
   bindsym s exec --no-startup-id env SYSTEM_THEME="seoul256-light" bash -c "source ~/.dotfiles/share/bin/system_theme && kitty --detach", mode "default"
   bindsym n exec --no-startup-id env SYSTEM_THEME="nord" bash -c "source ~/.dotfiles/share/bin/system_theme && kitty --detach", mode "default"
   bindsym c exec --no-startup-id env SYSTEM_THEME="challenger-deep" bash -c "source ~/.dotfiles/share/bin/system_theme && kitty --detach", mode "default"
