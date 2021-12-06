@@ -1,17 +1,25 @@
 #!/usr/bin/env bash
 
-# Arguments
-sr_in="$1"
-sr_in_color="$2"
-fg_color="$3"
+# Arguments (foreground colors)
+long_break_color="$1"
+running_color="$2"
+warning_color="$3"
+short_break_color="$4"
+stopped_color="$5"
 
 # Colors constants (must be the same ones specified in ~/.thymerc)
-running_color="blue"
-warning_color="yellow"
-short_break_color="green"
+running="blue"
+warning="red"
+short_break="green"
 
 # Initialization
 pomo_char=''
+
+[ -z "$long_break_color" ] && long_break_color="cyan"
+[ -z "$running_color" ] && running_color="$running"
+[ -z "$warning_color" ] && warning_color="$warning"
+[ -z "$short_break_color" ] && short_break_color="$short_break"
+[ -z "$stopped_color" ] && stopped_color="yellow"
 
 if thyme_output="$(cat ~/.thyme-tmux 2> /dev/null)"
 then
@@ -27,23 +35,26 @@ then
 	if [ "$current_thyme_output" = "$thyme_output" ]
 	then
 		pomo_char='\ue00a' # nf-pom-external_interruption
-		color="red"
+		color="$stopped_color"
 	else
 		case $color in
-			"$running_color")
-				pomo_char='\ue002' # nf-pom-pomodoro_estimated
+			"$running")
+				pomo_char='\ue003' # nf-pom-pomodoro_ticking
+				color="$running_color"
 				;;
-			"$warning_color")
+			"$warning")
 				pomo_char='\ue004' # nf-pom-pomodoro_squashed
+				color="$warning_color"
 				;;
-			"$short_break_color")
-				pomo_char='\ue005' # nf-pom-short_pause
+			"$short_break")
+				pomo_char='\ue002' # nf-pom-pomodoro_estimated
+				color="$short_break_color"
 				;;
 		esac
 	fi
 else
 	pomo_char='\ue006' # nf-pom_long-pause
-	color="cyan"
+	color="$long_break_color"
 fi
 
-echo -e "#[bg=$sr_in_color,fg=$color,none]$sr_in#[bg=$color,fg=$fg_color] $pomo_char$time_text #[bg=$color,none]"
+echo -e "#[fg=$color] $pomo_char$time_text "
