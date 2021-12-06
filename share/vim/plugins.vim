@@ -6,7 +6,6 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/bundle')
-Plug 'airblade/vim-gitgutter'
 Plug 'arcticicestudio/nord-vim'
 Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 Plug 'dense-analysis/ale'
@@ -21,6 +20,7 @@ Plug 'junegunn/limelight.vim'
 Plug 'junegunn/seoul256.vim'
 Plug 'keith/rspec.vim'
 Plug 'liuchengxu/space-vim-theme'
+Plug 'mhinz/vim-signify'
 Plug 'mracos/mermaid.vim'
 Plug 'metakirby5/codi.vim'
 Plug 'preservim/nerdtree'

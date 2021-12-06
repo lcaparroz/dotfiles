@@ -6,11 +6,12 @@ let g:ale_completion_enabled = 0
 " ALE linters configuration
 let g:ale_ruby_rubocop_executable = 'bundle'
 let g:ale_sh_shellcheck_exclusions = 'SC1090,SC1091'
+let g:ale_cspell_options = '--gitignore'
 let g:ale_languagetool_options = '--autoDetect --level PICKY --mothertongue pt-BR '
 
 let g:ale_linters = {
   \ 'go': ['gobuild'],
-  \ 'ruby': ['rubocop', 'solargraph'],
+  \ 'ruby': ['rubocop', 'solargraph', 'cspell'],
   \ 'rust': ['analyzer', 'rustc'],
   \ 'sh': ['language_server', 'shell', 'shellcheck'],
   \ 'markdown': ['alex', 'languagetool'],
@@ -61,20 +62,21 @@ let g:webdevicons_enable = 1
 let g:tagbar_use_cache = 0
 let g:tagbar_autofocus = 1
 
-" vim git-gutter configuration
-let g:gitgutter_set_sign_backgrounds = 1
-let g:gitgutter_sign_added =                   "\uf457 " " nf-oct-diff_added
-let g:gitgutter_sign_modified =                "\uf459 " " nf-oct-diff_modified
-let g:gitgutter_sign_modified_removed =        "\uf440 " " nf-oct-diff
-let g:gitgutter_sign_removed =                 "\uf458 " " nf-oct-diff_removed
-let g:gitgutter_sign_removed_first_line =      "\uf458 " " nf-oct-diff_removed
-let g:gitgutter_sign_removed_above_and_below = "\uf873 " " nf-mdi-minus
+" vim-signify configuration
+let g:signify_sign_add               = "\uf914"
+let g:signify_sign_delete            = "\uf873"
+let g:signify_sign_delete_first_line = "\uf873"
+let g:signify_sign_change            = "\ufc23"
+let g:signify_sign_change_delete     = g:signify_sign_change . g:signify_sign_delete_first_line
+
+" vim-signify doesn't show count on sign column
+let g:signify_sign_show_count = 0
 
 " Plugin manager
 so ~/.vim/plugins.vim
 
 " Set swap file updating time
-set updatetime=500
+set updatetime=100
 
 " Row numbers
 set number
@@ -556,6 +558,9 @@ nnoremap <leader>; :TagbarOpenAutoClose<CR>
 nnoremap <leader>gb :Git blame<cr>
 nnoremap <leader>gd :Gdiff<cr>
 nnoremap <leader>gg :Git<cr>
+
+" vim-signify mappings
+nnoremap <leader>gh :SignifyHunkDiff<cr>
 
 " vim-rails mappings
 nnoremap <leader>ra :A<cr>
