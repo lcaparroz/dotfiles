@@ -78,6 +78,9 @@ so ~/.vim/plugins.vim
 " Set swap file updating time
 set updatetime=100
 
+" Inidicates a fast terminal connection
+set ttyfast
+
 " Row numbers
 set number
 set numberwidth=5
@@ -94,6 +97,13 @@ set splitbelow
 
 " Scroll
 set scrolloff=0
+
+" Non text, special characters, and disable line wrapping
+set list listchars=tab:»\ ,lead:·,eol:¬,trail:·,nbsp:·,extends:↪,precedes:↩
+set nowrap
+
+" set showbreak=↪\
+" set wrap
 
 " Different cursor symbols for different modes
 let &t_SI = "\<Esc>[6 q"
@@ -112,9 +122,10 @@ if has("extra_search")
 endif
 highlight Search cterm=NONE ctermbg=lightgreen ctermfg=NONE
 
-" Search ignores case, unless specified
+" Search ignores case, unless specified, sane regex typing
 set ignorecase
 set smartcase
+set magic
 
 " Assures that Backspace deletes indent, eol and start
 set backspace=indent,eol,start
@@ -203,7 +214,7 @@ let g:lightline = {
   \   'inactive': [ 'tabnum', 'filename', 'modified' ]
   \ },
   \ 'component': {
-  \   'charvaluehex': '0x%02B',
+  \   'charvaluehex': "\uf246  0x%02B",
   \   'percent': "\uf8ef %P",
   \   'lineinfo': "\uf911%3l:%-3v",
   \ },
@@ -228,22 +239,21 @@ function! DeviconFiletype()
 endfunction
 
 function! DeviconGitBranch()
-  let s:devicon_git_branch = FugitiveHead()
-  return strlen(s:devicon_git_branch) ?
-    \ "\uf126 " . s:devicon_git_branch :
+  let devicon_git_branch = FugitiveHead()
+  return strlen(devicon_git_branch) ?
+    \ "\uf126 " . devicon_git_branch :
     \ "\uf755 " . expand('%:p:h:t')
 endfunction
 
 function! DeviconFilename()
-  let s:devicon_filename = expand('%:f')
-  return strlen(s:devicon_filename) ? "\uf4a5 " . s:devicon_filename : ''
+  let devicon_filename = expand('%:f')
+  return strlen(devicon_filename) ? "\uf4a5 " . devicon_filename : ''
 endfunction
 
 function! SynStack()
   if exists("*synstack")
-    let s:highlights = map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
-    " nf-fa-i_cursor
-    return "\uf246 " . (len(s:highlights) ? s:highlights[-1] : "--")
+    let highlights = map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+    return (len(highlights) ? highlights[-1] : "--")
   endif
 endfunc
 
@@ -264,6 +274,12 @@ function SetSeoul256LightScheme()
   let g:seoul256_light_background = 252
   let g:seoul256_srgb = 1
   colorscheme seoul256-light
+
+  " Italic comments
+  highlight Comment cterm=italic ctermbg=bg ctermfg=fg
+
+  " Clear statusline colors set by seoul256 colorscheme
+  highlight StatusLine cterm=bold ctermfg=239 ctermbg=248 gui=bold,reverse guifg=#4E4E4E guibg=#A8A8A8
 
   if exists('*term_setansicolors')
     let g:terminal_ansi_colors = [
@@ -297,16 +313,19 @@ function SetSeoul256LightScheme()
   let s:p.normal.warning = [ [ s:yellow, s:fg ] ]
 
   " Insert mode
-  let s:p.insert.left =  [ [ s:bg, s:green, 'bold' ], [ s:green, s:gray1 ], [ s:green, s:gray2 ] ]
-  let s:p.insert.right = [ [ s:bg, s:green, 'bold' ], [ s:green, s:gray1 ], [ s:green, s:gray2 ] ]
+  let s:p.insert.left =   [ [ s:bg, s:green, 'bold' ], [ s:green, s:gray1 ] ]
+  let s:p.insert.middle = [ [ s:green, s:gray2 ] ]
+  let s:p.insert.right =  [ [ s:bg, s:green, 'bold' ], [ s:green, s:gray1 ] ]
 
   " Replace mode
-  let s:p.replace.left =  [ [ s:bg, s:red, 'bold' ], [ s:red, s:gray1 ], [ s:red, s:gray2 ] ]
-  let s:p.replace.right = [ [ s:bg, s:red, 'bold' ], [ s:red, s:gray1 ], [ s:red, s:gray2 ] ]
+  let s:p.replace.left =   [ [ s:bg, s:red, 'bold' ], [ s:red, s:gray1 ] ]
+  let s:p.replace.middle = [ [ s:red, s:gray2 ] ]
+  let s:p.replace.right =  [ [ s:bg, s:red, 'bold' ], [ s:red, s:gray1 ] ]
 
   " Visual mode
-  let s:p.visual.left =  [ [ s:bg, s:magenta, 'bold' ], [ s:magenta, s:gray1 ], [ s:magenta, s:gray2 ] ]
-  let s:p.visual.right = [ [ s:bg, s:magenta, 'bold' ], [ s:magenta, s:gray1 ], [ s:magenta, s:gray2 ] ]
+  let s:p.visual.left =   [ [ s:bg, s:magenta, 'bold' ], [ s:magenta, s:gray1 ] ]
+  let s:p.visual.middle = [ [ s:magenta, s:gray2 ] ]
+  let s:p.visual.right =  [ [ s:bg, s:magenta, 'bold' ], [ s:magenta, s:gray1 ] ]
 
   " Tabline
   let s:p.tabline.left =   [ [ s:fg, s:gray1 ] ]
@@ -322,9 +341,6 @@ function SetSeoul256LightScheme()
   " Load color palette
   let g:lightline#colorscheme#seoul256light#palette = lightline#colorscheme#flatten(s:p)
   let g:lightline.colorscheme = 'seoul256light'
-
-  " Clear statusline colors set by seoul256 colorscheme
-  highlight StatusLine cterm=bold ctermfg=239 ctermbg=248 gui=bold,reverse guifg=#4E4E4E guibg=#A8A8A8
 
   call ReloadLightline()
 endfunction
@@ -342,6 +358,9 @@ endfunction
 function SetChallengerDeepScheme()
   colorscheme challenger_deep
   let g:lightline.colorscheme = 'challenger_deep'
+
+  " Italic comments
+  highlight Comment cterm=italic ctermbg=bg ctermfg=fg
 
   if exists('*term_setansicolors')
     let g:terminal_ansi_colors = [
@@ -379,8 +398,9 @@ function SetSpaceVimLightScheme()
 
   colorscheme space_vim_theme
 
-  " Font tweaks
-  hi Comment cterm=italic ctermfg=146 guifg=#A8A8BF
+  " Italic comments
+  highlight Comment cterm=italic ctermbg=194 guibg=#ECF3EC
+  highlight LineNr cterm=italic ctermbg=255 ctermfg=146 guibg=#EFEAE9 guifg=#A8A8BF
 
   let s:fg1 =     [ '#504259', 60 ]
   let s:fg2 =     [ '#6C3163', 89 ]
@@ -388,12 +408,12 @@ function SetSpaceVimLightScheme()
   let s:purple2 = [ '#D3D3E7', 146 ]
   let s:purple3 = [ '#C3C3DB', 242 ]
 
-  let s:red =      [ '#D26487', 168 ]
-  let s:orange =   [ '#CA754B', 172 ]
-  let s:blue =     [ '#6981C5', 69 ]
-  let s:yellow =   [ '#B89F33', 136 ]
-  let s:magenta =  [ '#D194CC', 176 ]
-  let s:white =    [ '#FBF8EF', 231 ]
+  let s:red =     [ '#D26487', 168 ]
+  let s:orange =  [ '#CA754B', 172 ]
+  let s:blue =    [ '#6981C5', 69 ]
+  let s:yellow =  [ '#B89F33', 136 ]
+  let s:magenta = [ '#D194CC', 176 ]
+  let s:white =   [ '#FBF8EF', 231 ]
 
   let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'tabline': {}}
 
@@ -405,16 +425,19 @@ function SetSpaceVimLightScheme()
   let s:p.normal.warning = [ [ s:yellow, s:fg1 ] ]
 
   " Insert mode
-  let s:p.insert.left =  [ [ s:white, s:blue, 'bold' ], [ s:blue, s:purple1, 'bold'  ], [ s:blue, s:purple2 ] ]
-  let s:p.insert.right = [ [ s:white, s:blue, 'bold' ], [ s:blue, s:purple1, 'bold'  ], [ s:blue, s:purple2 ] ]
+  let s:p.insert.left =   [ [ s:white, s:blue, 'bold' ], [ s:blue, s:purple1, 'bold'  ] ]
+  let s:p.insert.middle = [ [ s:blue, s:purple2 ] ]
+  let s:p.insert.right =  [ [ s:white, s:blue, 'bold' ], [ s:blue, s:purple1, 'bold'  ] ]
 
   " Replace mode
-  let s:p.replace.left =  [ [ s:white, s:red, 'bold' ], [ s:red, s:purple1, 'bold' ], [ s:red, s:purple2 ] ]
-  let s:p.replace.right = [ [ s:white, s:red, 'bold' ], [ s:red, s:purple1, 'bold' ], [ s:red, s:purple2 ] ]
+  let s:p.replace.left =   [ [ s:white, s:red, 'bold' ], [ s:red, s:purple1, 'bold' ] ]
+  let s:p.replace.middle = [ [ s:red, s:purple2 ] ]
+  let s:p.replace.right =  [ [ s:white, s:red, 'bold' ], [ s:red, s:purple1, 'bold' ] ]
 
   " Visual mode
-  let s:p.visual.left =  [ [ s:white, s:orange, 'bold' ], [ s:orange, s:purple1, 'bold' ], [ s:orange, s:purple2 ] ]
-  let s:p.visual.right = [ [ s:white, s:orange, 'bold' ], [ s:orange, s:purple1, 'bold' ], [ s:orange, s:purple2 ] ]
+  let s:p.visual.left =   [ [ s:white, s:orange, 'bold' ], [ s:orange, s:purple1, 'bold' ] ]
+  let s:p.visual.middle = [ [ s:orange, s:purple2 ] ]
+  let s:p.visual.right =  [ [ s:white, s:orange, 'bold' ], [ s:orange, s:purple1, 'bold' ] ]
 
   " Tabline
   let s:p.tabline.left =   [ [ s:fg1, s:purple2 ] ]
@@ -437,15 +460,12 @@ endfunction
 " Color scheme settings based on environment variables
 if $SYSTEM_THEME ==? 'seoul256-light'
   call SetSeoul256LightScheme()
-  highlight Comment cterm=italic ctermbg=bg ctermfg=fg
 elseif $SYSTEM_THEME ==? 'seoul256-dark'
   call SetSeoul256DarkScheme()
-  highlight Comment cterm=italic ctermbg=bg ctermfg=fg
 elseif $SYSTEM_THEME ==? 'nord'
   call SetNordScheme()
 elseif $SYSTEM_THEME ==? 'challenger-deep'
   call SetChallengerDeepScheme()
-  highlight Comment cterm=italic ctermbg=bg ctermfg=fg
 else
   call SetSpaceVimLightScheme()
 endif
@@ -456,8 +476,6 @@ if has('termguicolors')
 endif
 
 " Extra whitespace (configured after loading the theme, or it will be overriden)
-set list listchars=tab:»\ ,lead:·,eol:¬,trail:·,nbsp:·
-
 " http://vim.wikia.com/wiki/Highlight_unwanted_spaces
 highlight ExtraWhitespace cterm=bold ctermbg=red ctermfg=NONE
 match ExtraWhitespace /\s\+$/
@@ -465,6 +483,10 @@ autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
+
+" Paint SpecialKey characters like NonText ones
+highlight clear SpecialKey
+highlight link SpecialKey NonText
 
 " Enable spell checking for some file types
 autocmd Filetype gitcommit setlocal spell
