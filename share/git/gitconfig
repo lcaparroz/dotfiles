@@ -36,7 +36,7 @@
 
 [delta "interactive"]
 	color-only = true
-	keep-plus-minus-markers = false
+	keep-plus-minus-markers = true
 
 [delta "decorations"]
 	commit-style = yellow
@@ -45,46 +45,35 @@
 	inspect-raw-lines = true
 	keep-plus-minus-markers = true
 
-[delta "challenger-deep"]
-	dark = true
-	minus-style                   = red    "#39364A"
-	plus-style                    = green  "#39364A"
-	minus-non-emph-style          = yellow "#39364A"
-	plus-non-emph-style           = yellow "#39364A"
-	minus-emph-style              = blue   black bold
-	plus-emph-style               = blue   black bold
-	minus-empty-line-marker-style = red    "#39364A"
-	plus-empty-line-marker-style  = green  "#39364A"
+[delta "gruvbox-material-light"]
+	light = true
+	minus-style                   = syntax    "#F7D9B9"
+	minus-empty-line-marker-style = syntax    "#F7D9B9"
+	plus-style                    = syntax    "#DFE1B4"
+	plus-empty-line-marker-style  = syntax    "#DFE1B4"
+	minus-non-emph-style          = syntax    "#DBDDBF"
+	plus-non-emph-style           = syntax    "#DBDDBF"
+	minus-emph-style              = "#F2E5BC" "#45707A"
+	plus-emph-style               = "#F2E5BC" "#45707A"
 
 [delta "nord"]
 	dark = true
 	minus-style                   = red    "#3B4252"
+	minus-empty-line-marker-style = red    "#3B4252"
 	plus-style                    = green  "#3B4252"
+	plus-empty-line-marker-style  = green  "#3B4252"
 	minus-non-emph-style          = yellow "#3B4252"
 	plus-non-emph-style           = yellow "#3B4252"
 	minus-emph-style              = blue   brightblack bold
 	plus-emph-style               = blue   brightblack bold
-	minus-empty-line-marker-style = red    "#3B4252"
-	plus-empty-line-marker-style  = green  "#3B4252"
 
-[delta "seoul256-light"]
-	light = true
-	minus-style                   = red    "#C6C6C6"
-	plus-style                    = green  "#C6C6C6"
-	minus-non-emph-style          = yellow "#C6C6C6"
-	plus-non-emph-style           = yellow "#C6C6C6"
-	minus-emph-style              = blue   "#BCBCBC" bold
-	plus-emph-style               = blue   "#BCBCBC" bold
-	minus-empty-line-marker-style = red    "#C6C6C6"
-	plus-empty-line-marker-style  = green  "#C6C6C6"
-
-[delta "space-vim-light"]
-	light = true
-	minus-style                   = red        "#EFEAE9"
-	plus-style                    = green      "#EFEAE9"
-	minus-non-emph-style          = yellow     "#EFEAE9"
-	plus-non-emph-style           = yellow     "#EFEAE9"
-	minus-emph-style              = brightblue "#D3D3E7" bold
-	plus-emph-style               = brightblue "#D3D3E7" bold
-	minus-empty-line-marker-style = red        "#EFEAE9"
-	plus-empty-line-marker-style  = green      "#EFEAE9"
+[delta "iceberg-dark"]
+	dark = true
+	minus-style                   = "#CEB0B6" "#53343B"
+	minus-empty-line-marker-style = "#CEB0B6" "#53343B"
+	plus-style                    = "#C0C5B9" "#45493E"
+	plus-empty-line-marker-style  = "#C0C5B9" "#45493E"
+	minus-non-emph-style          = "#B3C3CC" "#384851"
+	plus-non-emph-style           = "#B3C3CC" "#384851"
+	minus-emph-style              = "#C6C8D1" "#5B7881"
+	plus-emph-style               = "#C6C8D1" "#5B7881"

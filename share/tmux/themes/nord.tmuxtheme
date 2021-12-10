@@ -15,11 +15,10 @@ set-option -g status-left ' #S #{@sl_out}'
 
 # Right side of status bar
 set-option -g status-right-style bg=brightblack,fg=white
-set -gs @sr_in '#[fg=black,none]#[bg=black,fg=brightblack,none]#[bg=brightblack,fg=white]'
-set -gs @sr_sep2 '#[bg=brightblack,fg=cyan,none]#[bg=cyan,fg=brightblack,bold]'
-set -gs @pomo_in '#[bg=black,fg=brightblack,none]#[bg=brightblack,none]'
+set -gs @sr_in '#[bg=black,fg=brightblack,none]#[bg=brightblack,none]'
+set -gs @sr_sep '#[bg=brightblack,fg=cyan,none]#[bg=cyan,fg=brightblack,bold]'
 
-set-option -g status-right '#{@pomo_in}#(thyme-format white)#{@sr_in} %H:%M  %Y-%m-%d #{@sr_sep2} P#P #{=-2:--#{?window_marked_flag,M,}#{?window_zoomed_flag,Z,}} '
+set-option -g status-right '#{@sr_in} #(thyme-format white) #{@sr_sep2} %H:%M '
 
 # Window status
 set-option -gw window-status-style bg=brightblack,fg=white,italics

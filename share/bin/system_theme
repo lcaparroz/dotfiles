@@ -23,16 +23,12 @@ export_system_theme() {
 
 # Default theme: space-vim-light
 case "${SYSTEM_THEME}" in
-	challenger-deep)
-		export_system_theme "$SYSTEM_THEME" "ansi" "\e[0;1;30m"
-		;;
 	nord)
 		export_system_theme "$SYSTEM_THEME" "Nord" "\e[0;1;90m"
 		;;
-	seoul256-light)
-		export_system_theme "$SYSTEM_THEME" "ansi" "\e[0;1;38;5;248m"
+	iceberg-dark)
+		export_system_theme "$SYSTEM_THEME" "base16" "\e[0;1;90m"
 		;;
 	*)
-		export_system_theme "space-vim-light" "OneHalfLight" "\e[0;1;38;5;146m"
-		;;
+		export_system_theme "gruvbox-material-light" "ansi" "\e[0;1;30m"
 esac

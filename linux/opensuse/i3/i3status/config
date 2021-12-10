@@ -44,7 +44,7 @@ tztime nuremberg_time {
 }
 
 cpu_usage {
-  format = "<span foreground='#627CC2'>&#xf9c4;</span> %usage" # chart-area symbol
+  format = "<span foreground='#627CC2'>&#xf463;</span> %usage" # chart-area symbol
   max_threshold = "50"
   degraded_threshold = "30"
 }

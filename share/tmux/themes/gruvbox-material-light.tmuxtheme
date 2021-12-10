@@ -1,0 +1,61 @@
+# Inspired by gruvbox-material-light theme for vim
+# https://github.com/sainnhe/gruvbox-material/
+
+# Status bar
+set-option -g status-justify center
+
+# Basic status bar colors
+set-option -g status-style bg='#EBDBB2',fg='#4F3829'
+
+# Left side of status bar
+set-option -g status-left-style bg='#7C6F64',fg='#F2E5BC',bold
+set -gs @sl_sep '#[fg=#EBDBB2]#[default]'
+
+set-option -g status-left ' #S #{@sl_sep}'
+
+# Right side of status bar
+set-option -g status-right-style bg='#DAC9A5',fg='#EBDBB2'
+set -gs @sr_in '#[default]#[fg=#4F3829]'
+set -gs @sr_sep '#[bg=#7C6F64,fg=#DAC9A5]#[fg=#EBDBB2,bold]'
+
+set-option -g status-right '#{@sr_in}#(thyme-format "#7C6F64")#{@sr_sep} %H:%M '
+
+# Window status
+set-option -gw window-status-style bg=default,fg=default
+set-option -gw window-status-activity-style bg=green,fg='#EBDBB2'
+set-option -gw window-status-bell-style bg=red,fg='#EBDBB2'
+
+set -gs @ws_in  '#[fg=#EBDBB2,none]#[default]'
+set -gs @ws_out '#[fg=#EBDBB2,none]#[default]'
+
+set-option -gw window-status-format '#{@ws_in} #I  #W #{@ws_out}'
+
+# Window status current
+set-option -gw window-status-current-style bg='#DAC9A5',fg='#4F3829'
+
+set -gs @wsc_in  '#[fg=#EBDBB2,none]#[default]'
+set -gs @wsc_out '#[fg=#EBDBB2,none]#[default]'
+
+set-option -gw window-status-current-format '#{@wsc_in} #I  #W #{@wsc_out}'
+
+# Pane border
+set-option -g pane-border-style bg=default,fg='#DAC9A5'
+
+# Active pane border
+set-option -g pane-active-border-style bg=default,fg='#7C6F64'
+
+# Pane number indicator
+set-option -g display-panes-colour '#DAC9A5'
+set-option -g display-panes-active-colour '#7C6F64'
+
+# Clock mode
+set-option -g clock-mode-colour '#7C6F64'
+
+# Message
+set-option -g message-style bg='#DAC9A5',fg='#7C6F64'
+
+# Command message
+set-option -g message-command-style bg='#DAC9A5',fg='#7C6F64'
+
+# Mode
+set-option -g mode-style bg='#DAC9A5',fg='#7C6F64'

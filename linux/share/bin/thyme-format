@@ -53,7 +53,7 @@ then
 		esac
 	fi
 else
-	pomo_char='\ue006' # nf-pom_long-pause
+	pomo_char='\ue001' # nf-pom-pomodoro_done
 	color="$long_break_color"
 fi
 

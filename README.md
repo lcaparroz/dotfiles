@@ -10,7 +10,7 @@ The following softwares must be installed prior to configuring these dotfiles:
 
 * [bash](https://www.gnu.org/software/bash/) (GNU Project's shell)
 * [bat](https://github.com/sharkdp/bat) (`cat` clone)
-* [curl](https://curl.se) (CLI tool for transfering data)
+* [curl](https://curl.se) (CLI tool for transferring data)
 * [emacs](https://www.gnu.org/software/emacs) (secondary editor, still learning)
 * [fd](https://github.com/sharkdp/fd) (fast alternative to `find`)
 * [fzf](https://github.com/junegunn/fzf) (command line fuzzy finder)

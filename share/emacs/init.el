@@ -94,7 +94,13 @@
 (setq-default tab-width 8)
 
 ;; Miscellaneous
+
+;; Fill column indicator
 (setq-default fill-column 80)
+(setq display-fill-column-indicator-column t)
+(setq display-fill-column-indicator-character ?|)
+(add-hook 'prog-mode-hook #'display-fill-column-indicator-mode)
+
 (setq x-select-enable-clipboard t)
 (setq confirm-kill-emacs 'yes-or-no-p)
 
@@ -285,31 +291,18 @@
   (let ((theme (getenv "SYSTEM_THEME")))
     (and theme (if (string-prefix-p text theme) t nil))))
 
-(cond ((system-theme-starts-with "seoul256")
-       (use-package seoul256-theme
-                    :ensure t
-                    :init
-                    (if (system-theme-is "seoul256-dark")
-                      (setq seoul256-background 233)
-                      (setq seoul256-background 254))
-                    :config
-                    (load-theme 'seoul256 t)))
-      ((system-theme-is "zenburn")
-       (use-package zenburn-theme
-                    :ensure t
-                    :config
-                    (load-theme 'zenburn t)))
-      ((system-theme-is "nord")
+(cond ((system-theme-is "nord")
        (use-package nord-theme
                     :ensure t
                     :config
                     (load-theme 'nord t)))
-      ((system-theme-is "space-vim-light")
-       (use-package spacemacs-theme
+      ((system-theme-is "iceberg-dark")
+       (use-package iceberg-theme
                     :ensure t
-                    :defer t
-                    :init (load-theme 'spacemacs-light t)))
-      (t (use-package challenger-deep-theme
-                      :ensure t
-                      :config
-                      (load-theme 'challenger-deep t))))
+                    :config
+                    (iceberg-theme-create-theme-file)
+                    (load-theme 'solarized-iceberg-dark t)))
+      (t (use-package gruvbox-theme
+                    :ensure t
+                    :config
+                    (load-theme 'gruvbox-light-soft t))))
