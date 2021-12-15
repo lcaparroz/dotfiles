@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Set terminfo dir (kitty sets it to its own dir, conflicts with tmux)
+export TERMINFO='/usr/share/terminfo/'
+
 # Load OS specific profile file
 if [ -r "${HOME}/.bashrc" ]
 then

@@ -112,6 +112,9 @@ let &t_SI = "\<Esc>[6 q"
 let &t_SR = "\<Esc>[4 q"
 let &t_EI = "\<Esc>[2 q"
 
+" Force italics rendering
+let &t_ZH = "\<Esc>[3m"
+
 " Automatically redraw
 autocmd FocusGained * redraw!
 
