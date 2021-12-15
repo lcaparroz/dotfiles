@@ -112,6 +112,9 @@ let &t_SI = "\<Esc>[6 q"
 let &t_SR = "\<Esc>[4 q"
 let &t_EI = "\<Esc>[2 q"
 
+" Automatically redraw
+autocmd FocusGained * redraw!
+
 " Highlight cursor line
 set cursorline
 
@@ -396,9 +399,6 @@ endfunction
 
 command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 
-" markdown-preview configuration
-let g:mkdp_filetypes = ['markdown', 'mermaid']
-
 " vim-test configuration
 let g:test#echo_command = 0
 let g:test#preserve_screen = 1
@@ -431,10 +431,10 @@ nnoremap <leader>rg :RG<cr>
 nnoremap <leader>/  :BLines<cr>
 
 " NERDTree mappings
-nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-t> :NERDTreeToggle<cr>
 
 " tagbar mappings
-nnoremap <leader>; :TagbarOpenAutoClose<CR>
+nnoremap <leader>; :TagbarOpenAutoClose<cr>
 
 " vim-fugitive mappings
 nnoremap <leader>gb :Git blame<cr>
@@ -454,8 +454,11 @@ nnoremap <leader>tf :TestFile<cr>
 nnoremap <leader>tl :TestLast<cr>
 nnoremap <leader>tv :TestVisit<cr>
 
-" vimux configuration
-nnoremap <Leader>vz :VimuxZoomRunner<CR>
+" vimux mappings
+nnoremap <Leader>vz :VimuxZoomRunner<cr>
+
+" Goyo mappings
+nnoremap <Leader>jg :Goyo<cr>
 
 " custom mappings
 nnoremap <leader>dff :windo diffthis<cr>
