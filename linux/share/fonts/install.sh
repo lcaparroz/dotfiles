@@ -132,10 +132,10 @@ install_font_from_zip_file() {
   local -r font_dir="${USER_FONTS_DIR}/${github_owner}"
 
   echo "=> Installing '${github_owner}/${github_repo}'"
-  echo "   Downloading the asset with file expression '${filename_regexp}'"
+  echo "   Downloading the asset with file expression '${zip_file_regexp}'"
 
   local asset_path
-  if ! asset_path="$(download_asset "${github_owner}" "${github_repo}" "${filename_regexp}")"
+  if ! asset_path="$(download_asset "${github_owner}" "${github_repo}" "${zip_file_regexp}")"
   then
     echo "   Downloading the asset has failed"
     return 1
