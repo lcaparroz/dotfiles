@@ -445,9 +445,10 @@ nnoremap <leader>gg :Git<cr>
 nnoremap <leader>gh :SignifyHunkDiff<cr>
 
 " vim-rails mappings
-nnoremap <leader>ra :A<cr>
+nnoremap <leader>ra :AV<cr>
 
 " vim-test mappings
+nnoremap <leader>ta :TestSuite<cr>
 nnoremap <leader>tt :TestNearest<cr>
 nnoremap <leader>tf :TestFile<cr>
 nnoremap <leader>tl :TestLast<cr>
