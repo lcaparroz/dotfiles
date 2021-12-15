@@ -2,7 +2,7 @@
 # https://github.com/gkeep/iceberg-dark/
 
 # Status bar
-set-option -g status-justify center
+set-option -g status-justify centre
 
 # Basic status bar colors
 set-option -g status-style bg=black,fg=white
@@ -55,7 +55,7 @@ set-option -g clock-mode-colour '#454B68'
 set-option -g message-style bg='#2E3244',fg=white
 
 # Command message
-set-option -g message-command-style bg='#2E3244',white
+set-option -g message-command-style bg='#2E3244',fg=white
 
 # Mode
 set-option -g mode-style bg='#2E3244',fg=white

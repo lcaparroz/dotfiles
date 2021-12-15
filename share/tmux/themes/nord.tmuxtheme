@@ -18,7 +18,7 @@ set-option -g status-right-style bg=brightblack,fg=white
 set -gs @sr_in '#[bg=black,fg=brightblack,none]#[bg=brightblack,none]'
 set -gs @sr_sep '#[bg=brightblack,fg=cyan,none]#[bg=cyan,fg=brightblack,bold]'
 
-set-option -g status-right '#{@sr_in} #(thyme-format white) #{@sr_sep2} %H:%M '
+set-option -g status-right '#{@sr_in} #(thyme-format white) #{@sr_sep} %H:%M '
 
 # Window status
 set-option -gw window-status-style bg=brightblack,fg=white,italics

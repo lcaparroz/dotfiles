@@ -2,7 +2,7 @@
 # https://github.com/sainnhe/gruvbox-material/
 
 # Status bar
-set-option -g status-justify center
+set-option -g status-justify centre
 
 # Basic status bar colors
 set-option -g status-style bg='#EBDBB2',fg='#4F3829'
