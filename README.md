@@ -4,7 +4,7 @@ Dotfiles for customization of `bash`, `vim` and `tmux`.
 
 ## Dependencies
 
-The following softwares must be installed prior to configuring these dotfiles:
+The following software must be installed prior to configuring these dotfiles:
 
 ### Common (cross OS)
 
