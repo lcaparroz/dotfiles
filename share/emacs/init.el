@@ -75,6 +75,9 @@
 (setq scroll-conservatively 100000)
 (setq scroll-preserve-screen-position 1)
 
+;; No soft-wraping of long lines
+(setq-default truncate-lines t)
+
 ;; Enable y/n answers
 (fset 'yes-or-no-p 'y-or-n-p)
 
@@ -173,12 +176,6 @@
   (setq whitespace-global-modes '(not org-mode))
   (global-whitespace-mode))
 
-
-(use-package windmove
-  :config
-  ;; shift + arrow keys to switch between windows
-  (windmove-default-keybindings))
-
 ;; Third-party packages
 
 ;; Create and set the cider history directory
@@ -204,9 +201,6 @@
 (use-package clojure-mode-extra-font-locking
   :ensure t
   :requires clojure-mode-extra-font-locking)
-
-(use-package deft
-  :ensure t)
 
 ;; https://github.com/purcell/exec-path-from-shell
 (use-package exec-path-from-shell
@@ -282,6 +276,11 @@
   :config
   (add-hook 'after-init-hook 'inf-ruby-switch-setup))
 
+(use-package evil
+  :ensure t
+  :config
+  (evil-mode 1))
+
 ;; Color themes
 (defun system-theme-is (theme-name)
   (let ((theme (getenv "SYSTEM_THEME")))
@@ -302,7 +301,12 @@
                     :config
                     (iceberg-theme-create-theme-file)
                     (load-theme 'solarized-iceberg-dark t)))
-      (t (use-package gruvbox-theme
+      ((system-theme-is "gruvbox-material-light")
+         (use-package gruvbox-theme
                     :ensure t
                     :config
-                    (load-theme 'gruvbox-light-soft t))))
+                    (load-theme 'gruvbox-light-soft t)))
+      (t (use-package material-theme
+                    :ensure t
+                    :config
+                    (load-theme 'material-light t))))
