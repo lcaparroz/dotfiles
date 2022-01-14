@@ -4,7 +4,7 @@
 turn_display_on() {
   local -r display="$1"
 
-  [ -n "${display}" ] && xrandr --output "${display}" --auto
+  [ -n "${display}" ] && xrandr --output "${display}" --primary --auto
 }
 
 turn_display_off() {
@@ -41,23 +41,23 @@ turn_secondary_on_relative_to_primary() {
 
   case "${position}" in
     above)
-      xrandr --output "${SECONDARY_DISPLAY}" --auto \
+      xrandr --output "${SECONDARY_DISPLAY}" --primary --auto \
         --above "${PRIMARY_DISPLAY}"
       ;;
     below)
-      xrandr --output "${SECONDARY_DISPLAY}" --auto \
+      xrandr --output "${SECONDARY_DISPLAY}" --primary --auto \
         --below "${PRIMARY_DISPLAY}"
       ;;
     left)
-      xrandr --output "${SECONDARY_DISPLAY}" --auto \
+      xrandr --output "${SECONDARY_DISPLAY}" --primary --auto \
         --left-of "${PRIMARY_DISPLAY}"
       ;;
     right)
-      xrandr --output "${SECONDARY_DISPLAY}" --auto \
+      xrandr --output "${SECONDARY_DISPLAY}" --primary --auto \
         --right-of "${PRIMARY_DISPLAY}"
       ;;
     mirror)
-      xrandr --output "${SECONDARY_DISPLAY}" --auto \
+      xrandr --output "${SECONDARY_DISPLAY}" --primary --auto \
         --same-as "${PRIMARY_DISPLAY}"
       ;;
     *)
