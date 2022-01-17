@@ -3,6 +3,7 @@
 
 # Status bar
 set-option -g status-justify centre
+set-option -g window-status-separator ' '
 
 # Basic status bar colors
 set-option -g status-style bg=black,fg=white
@@ -21,22 +22,23 @@ set -gs @sr_sep '#[bg=#2E3244,fg=#454B68]#[bg=#454B68,fg=white,bold]'
 set-option -g status-right '#{@sr_in}#(thyme-format brightblack) #{@sr_sep} %H:%M '
 
 # Window status
-set-option -gw window-status-style bg=default,fg=brightblack
-set-option -gw window-status-activity-style bg=green,fg=black
-set-option -gw window-status-bell-style bg=red,fg=black
+set-option -gw window-status-style bg=brightblack,fg=brightblack
+set-option -gw window-status-bell-style bg=red,fg=red
 
-set -gs @ws_in  '#[bg=black,none]#[default]'
-set -gs @ws_out '#[bg=black,none]#[default]'
+set -gs @ws_in  '#[bg=black,none]#[bg=default,fg=black]'
+set -gs @ws_sep '#[bg=#262A40,fg=default]'
+set -gs @ws_out '#[bg=black,fg=#262A40]#[default]'
 
-set-option -gw window-status-format '#[fg=#{?window_bell_flag,red,#{?window_activity_flag,green,black}}]#{@ws_in} #I ) #W #[fg=#{?window_bell_flag,red,#{?window_activity_flag,green,black}}]#{@ws_out}'
+set-option -gw window-status-format '#{@ws_in} #I #{@ws_sep} #W #{@ws_out}'
 
 # Window status current
 set-option -gw window-status-current-style bg='#2E3244',fg=white
 
-set -gs @wsc_in  '#[bg=black,fg=#2E3244,none]#[default]'
+set -gs @wsc_in  '#[bg=black,fg=white,none]#[bg=white,fg=#2E3244]'
+set -gs @wsc_sep '#[bg=#2E3244,fg=white]#[default]'
 set -gs @wsc_out '#[bg=black,fg=#2E3244,none]#[default]'
 
-set-option -gw window-status-current-format '#{@wsc_in} #I ) #W #{@wsc_out}'
+set-option -gw window-status-current-format '#{@wsc_in} #I #{@wsc_sep} #W #{@wsc_out}'
 
 # Pane border
 set-option -g pane-border-style bg=default,fg='#2E3244'
