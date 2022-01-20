@@ -10,6 +10,7 @@ Plug 'arcticicestudio/nord-vim'
 Plug 'cocopon/iceberg.vim'
 Plug 'dense-analysis/ale'
 Plug 'dominikduda/vim_current_word'
+Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'fatih/vim-go'
 Plug 'gkeep/iceberg-dark'
 Plug 'hashivim/vim-terraform'

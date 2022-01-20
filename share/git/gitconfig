@@ -77,3 +77,14 @@
 	plus-non-emph-style           = "#B3C3CC" "#384851"
 	minus-emph-style              = "#C6C8D1" "#5B7881"
 	plus-emph-style               = "#C6C8D1" "#5B7881"
+
+[delta "dracula"]
+	dark = true
+	minus-style                   = red       black
+	minus-empty-line-marker-style = red       black
+	plus-style                    = green     "#282A36"
+	plus-empty-line-marker-style  = green     "#282A36"
+	minus-non-emph-style          = "#FFB86C" "#282A36"
+	plus-non-emph-style           = "#FFB86C" "#282A36"
+	minus-emph-style              = "#282A36" "#FFB86C"
+	plus-emph-style               = "#282A36" "#FFB86C"

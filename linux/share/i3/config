@@ -197,12 +197,13 @@ mode "$mode_screenshot" {
 bindsym $mod+Print mode "$mode_screenshot"
 
 # terminal theme selection
-set $mode_terminal Theme (g) gruvbox-material-light, (n) nord, (i) iceberg-dark
+set $mode_terminal Theme (g) gruvbox-material-light, (n) nord, (i) iceberg-dark, (d) dracula
 
 mode "$mode_terminal" {
   bindsym g exec --no-startup-id env SYSTEM_THEME="gruvbox-material-light" bash -c "source ~/.dotfiles/share/bin/system_theme && kitty --detach", mode "default"
   bindsym n exec --no-startup-id env SYSTEM_THEME="nord" bash -c "source ~/.dotfiles/share/bin/system_theme && kitty --detach", mode "default"
   bindsym i exec --no-startup-id env SYSTEM_THEME="iceberg-dark" bash -c "source ~/.dotfiles/share/bin/system_theme && kitty --detach", mode "default"
+  bindsym d exec --no-startup-id env SYSTEM_THEME="dracula" bash -c "source ~/.dotfiles/share/bin/system_theme && kitty --detach", mode "default"
 
   # back to normal: Enter or Escape
   bindsym Return mode "default"
