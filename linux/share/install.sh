@@ -51,13 +51,8 @@ then
 
   if [ -n "$(command -v dunst)" ]
   then
-    if [ -f "/usr/share/dunst/dunstrc" ]
-    then
-      create_directory "${HOME}/.config/dunst"
-
-      create_symbolic_link "/usr/share/dunst/dunstrc" \
-        "${HOME}/.config/dunst/dunstrc"
-    fi
+    create_directory "${HOME}/.config/dunst"
+    create_dotfile_symlink "linux/share/dunst/dunstrc" "${HOME}/.config/dunst/dunstrc"
   fi
 fi
 
