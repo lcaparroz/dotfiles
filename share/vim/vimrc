@@ -230,10 +230,6 @@ let g:lightline = {
   \   'synstack': 'SynStack',
   \ },
   \ }
-let g:lightline.separator             = { 'left': "\ue0b8", 'right': "\ue0be" }
-let g:lightline.subseparator          = { 'left': "\ue0b9", 'right': "\ue0b9" }
-let g:lightline.tabline_separator     = { 'left': "\ue0bc", 'right': "\ue0ba" }
-let g:lightline.tabline_subseparator  = { 'left': "\ue0bb", 'right': "\ue0bb" }
 
 function! DeviconFiletype()
   return winwidth(0) > 70 ? (
@@ -305,6 +301,11 @@ function SetNordScheme()
   colorscheme nord
   let g:lightline.colorscheme = 'nord'
 
+  let g:lightline.separator             = { 'left': "\ue0b0", 'right': "\ue0b2" }
+  let g:lightline.subseparator          = { 'left': "\ue0b1", 'right': "\ue0b3" }
+  let g:lightline.tabline_separator     = { 'left': "\ue0b0", 'right': "\ue0b2" }
+  let g:lightline.tabline_subseparator  = { 'left': "\ue0b1", 'right': "\ue0b3" }
+
   call ReloadLightline()
 endfunction
 
@@ -325,6 +326,36 @@ function SetGruvboxMaterialLight()
   colorscheme gruvbox-material
   let g:lightline.colorscheme = 'gruvbox_material'
 
+  let g:lightline.separator             = { 'left': "\ue0b8", 'right': "\ue0be" }
+  let g:lightline.subseparator          = { 'left': "\ue0b9", 'right': "\ue0b9" }
+  let g:lightline.tabline_separator     = { 'left': "\ue0bc", 'right': "\ue0ba" }
+  let g:lightline.tabline_subseparator  = { 'left': "\ue0bb", 'right': "\ue0bb" }
+
+  call ReloadLightline()
+endfunction
+
+" Iceberg Dark Theme
+function SetIcebergDark()
+  set background=dark
+
+  colorscheme iceberg
+  let g:lightline.colorscheme = 'icebergDark'
+
+  let g:lightline.separator             = { 'left': "\ue0b4", 'right': "\ue0b6" }
+  let g:lightline.subseparator          = { 'left': ")", 'right': "(" }
+  let g:lightline.tabline_separator     = { 'left': "\ue0b4", 'right': "\ue0b6" }
+  let g:lightline.tabline_subseparator  = { 'left': ")", 'right': "(" }
+
+  call ReloadLightline()
+endfunction
+
+" Dracula Theme
+function SetDraculaTheme()
+  set background=dark
+
+  colorscheme dracula
+  let g:lightline.colorscheme = 'dracula'
+
   call ReloadLightline()
 endfunction
 
@@ -334,12 +365,9 @@ if $SYSTEM_THEME ==? 'nord'
 elseif $SYSTEM_THEME ==? 'gruvbox-material-light'
   call SetGruvboxMaterialLight()
 elseif $SYSTEM_THEME ==? 'iceberg-dark'
-  set background=dark
-
-  colorscheme iceberg
-  let g:lightline.colorscheme = 'icebergDark'
-
-  call ReloadLightline()
+  call SetIcebergDark()
+elseif $SYSTEM_THEME ==? 'dracula'
+  call SetDraculaTheme()
 else
   highlight LineNr cterm=NONE ctermbg=NONE ctermfg=grey
   highlight CursorLine cterm=NONE ctermbg=lightcyan ctermfg=NONE
