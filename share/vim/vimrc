@@ -1,7 +1,9 @@
 set encoding=UTF-8
 
 " ALE configuration
-let g:ale_completion_enabled = 0
+let g:ale_completion_enabled = 1
+let g:ale_hover_cursor = 1
+let g:ale_hover_to_floating_preview = 1
 
 " ALE linters configuration
 let g:ale_ruby_rubocop_executable = 'bundle'
@@ -71,6 +73,9 @@ let g:signify_sign_change_delete     = g:signify_sign_change . g:signify_sign_de
 
 " vim-signify doesn't show count on sign column
 let g:signify_sign_show_count = 0
+
+" vimux configuration
+let g:VimuxUseNearest = 1
 
 " Plugin manager
 so ~/.vim/plugins.vim
@@ -456,8 +461,8 @@ nnoremap <leader>fl :Lines<cr>
 nnoremap <leader>gc :Commits<cr>
 nnoremap <leader>gf :GFiles<cr>
 nnoremap <leader>gu :GFiles?<cr>
-nnoremap <leader>fb :Buffers<cr>
-nnoremap <leader>fw :W<cr>
+nnoremap <leader>b :Buffers<cr>
+nnoremap <leader>w :W<cr>
 nnoremap <leader>rg :RG<cr>
 nnoremap <leader>/  :BLines<cr>
 
@@ -479,11 +484,11 @@ nnoremap <leader>gh :SignifyHunkDiff<cr>
 nnoremap <leader>ra :AV<cr>
 
 " vim-test mappings
-nnoremap <leader>ta :TestSuite<cr>
-nnoremap <leader>tt :TestNearest<cr>
-nnoremap <leader>tf :TestFile<cr>
-nnoremap <leader>tl :TestLast<cr>
-nnoremap <leader>tv :TestVisit<cr>
+nnoremap <silent><leader>ta :TestSuite<cr>
+nnoremap <silent><leader>tt :TestNearest<cr>
+nnoremap <silent><leader>tf :TestFile<cr>
+nnoremap <silent><leader>tl :TestLast<cr>
+nnoremap <silent><leader>tv :TestVisit<cr>
 
 " vimux mappings
 nnoremap <Leader>vz :VimuxZoomRunner<cr>
