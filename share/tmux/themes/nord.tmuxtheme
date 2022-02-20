@@ -18,24 +18,24 @@ set-option -g status-right-style bg=brightblack,fg=white
 set -gs @sr_in '#[bg=black,fg=brightblack,none]#[bg=brightblack,none]'
 set -gs @sr_sep '#[bg=brightblack,fg=cyan,none]#[bg=cyan,fg=brightblack,bold]'
 
-set-option -g status-right '#{@sr_in} #(thyme-format white) #{@sr_sep} %H:%M '
+set-option -g status-right '#{@sr_in}#(thyme-format white)#{@sr_sep} %H:%M '
 
 # Window status
-set-option -gw window-status-style bg=white,fg=white
+set-option -gw window-status-style bg=brightblack,fg=white
 set-option -gw window-status-bell-style bg=magenta,fg=magenta
 
-set -gs @ws_in  '#[fg=black,none]#[bg=default,fg=black]'
-set -gs @ws_sep '#[bg=brightblack,fg=default]'
-set -gs @ws_out '#[bg=black,fg=brightblack]#[default]'
+set -gs @ws_in  '#[fg=black]#[fg=default]'
+set -gs @ws_sep ''
+set -gs @ws_out '#[bg=black,fg=brightblack]#[none]'
 
 set-option -gw window-status-format '#{@ws_in} #I #{@ws_sep} #W #{@ws_out}'
 
 # Window status current
-set-option -gw window-status-current-style bg=brightblack,fg=cyan,bold
+set-option -gw window-status-current-style bg=cyan,fg=black,bold
 
-set -gs @wsc_in  '#[bg=cyan,fg=black,none]#[bold]'
-set -gs @wsc_sep '#[bg=brightblack,fg=cyan,none]#[default]'
-set -gs @wsc_out '#[bg=black,fg=brightblack,none]#[default]'
+set -gs @wsc_in  ''
+set -gs @wsc_sep ''
+set -gs @wsc_out '#[bg=black,fg=cyan,none]#[default]'
 
 set-option -gw window-status-current-format '#{@wsc_in} #I #{@wsc_sep} #W #{@wsc_out}'
 

@@ -1,29 +1,43 @@
-# Inspired by iceberg-dark theme for vim (theme's port for tmux)
-# https://github.com/gkeep/iceberg-dark/
+# Inspired by dracula theme for vim
+# https://github.com/dracula/tmux/tree/a966029b9938badd9ed945b634b917e574c0c322/
 
 # Status bar
-set-option -g status-justify center
-set-option -g window-status-separator ' '
+set-option -g status-justify left
 
 # Basic status bar colors
 set-option -g status-style bg='#44475A',fg=white
 
 # Left side of status bar
 set-option -g status-left-style bg=green,fg='#282A36',bold
-set-option -g status-left ' #S '
+set -gs @sl_out '#[bg=#44475A,fg=green]'
+
+set-option -g status-left ' #S #{@sl_out}'
 
 # Right side of status bar
 set-option -g status-right-style bg=brightblack,fg=white
-set-option -g status-right '#[bg=brightmagenta] #(thyme-format black black black black black) #[default] %H:%M '
+set -gs @sr_in '#[bg=#44475A,fg=blue,none]#[bg=blue]'
+set -gs @sr_sep '#[bg=blue,fg=brightblack,none]#[bg=default,fg=default,bold]'
+
+set-option -g status-right '#{@sr_in}#(thyme-format "#44475A" "#44475A" "#44475A" "#44475A" "#44475A")#{@sr_sep} %H:%M '
 
 # Window status
-set-option -gw window-status-style bg='#636783',fg=brightblack
+set-option -gw window-status-style bg='#44475A',fg=white
 set-option -gw window-status-bell-style bg=red,fg=red
-set-option -gw window-status-format '#[fg=#44475A] #I #[bg=#44475A,fg=default] #W '
+
+set -gs @ws_in  ' '
+set -gs @ws_sep ''
+set -gs @ws_out ' '
+
+set-option -gw window-status-format '#{@ws_in} #I #{@ws_sep} #W #{@ws_out}'
 
 # Window status current
-set-option -gw window-status-current-style bg=brightblack,fg=white
-set-option -gw window-status-current-format ' #I #[bg=#44475A] #W '
+set-option -gw window-status-current-style bg=brightblack,fg=white,bold
+
+set -gs @wsc_in  '#[fg=#44475A]#[fg=white]'
+set -gs @wsc_sep ''
+set -gs @wsc_out '#[bg=#44475A,fg=brightblack]'
+
+set-option -gw window-status-current-format '#{@wsc_in} #I #{@wsc_sep} #W #{@wsc_out}'
 
 # Pane border
 set-option -g pane-border-style bg=default,fg='#44475A'

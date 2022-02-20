@@ -236,6 +236,12 @@ let g:lightline = {
   \ },
   \ }
 
+" Powerline seaparators
+let g:lightline.separator             = { 'left': "\ue0b0", 'right': "\ue0b2" }
+let g:lightline.subseparator          = { 'left': "\ue0b1", 'right': "\ue0b3" }
+let g:lightline.tabline_separator     = { 'left': "\ue0b0", 'right': "\ue0b2" }
+let g:lightline.tabline_subseparator  = { 'left': "\ue0b1", 'right': "\ue0b3" }
+
 function! DeviconFiletype()
   return winwidth(0) > 70 ? (
     \ strlen(&filetype) ?
@@ -268,23 +274,6 @@ if has('termguicolors')
   set termguicolors
 endif
 
-" fzf colors that match the colorscheme
-let g:fzf_colors = {
-  \ 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'border':  ['fg', 'Ignore'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment']
-  \ }
-
 " lightline reloading
 function ReloadLightline()
   call lightline#init()
@@ -293,6 +282,8 @@ endfunction
 
 " Nord Theme
 function SetNordScheme()
+  set background=dark
+
   let g:nord_bold_vertical_split_line = 1
   let g:nord_cursor_line_number_background = 1
   let g:nord_uniform_diff_background = 1
@@ -306,11 +297,6 @@ function SetNordScheme()
   colorscheme nord
   let g:lightline.colorscheme = 'nord'
 
-  let g:lightline.separator             = { 'left': "\ue0b0", 'right': "\ue0b2" }
-  let g:lightline.subseparator          = { 'left': "\ue0b1", 'right': "\ue0b3" }
-  let g:lightline.tabline_separator     = { 'left': "\ue0b0", 'right': "\ue0b2" }
-  let g:lightline.tabline_subseparator  = { 'left': "\ue0b1", 'right': "\ue0b3" }
-
   call ReloadLightline()
 endfunction
 
@@ -319,7 +305,7 @@ function SetGruvboxMaterialLight()
   set background=light
 
   let g:gruvbox_material_palette = 'material'
-  let g:gruvbox_material_background = 'soft'
+  let g:gruvbox_material_background = 'hard'
   let g:gruvbox_material_current_word = 'grey background'
   let g:gruvbox_material_diagnostic_text_highlight = 1
 
@@ -331,25 +317,19 @@ function SetGruvboxMaterialLight()
   colorscheme gruvbox-material
   let g:lightline.colorscheme = 'gruvbox_material'
 
-  let g:lightline.separator             = { 'left': "\ue0b8", 'right': "\ue0be" }
-  let g:lightline.subseparator          = { 'left': "\ue0b9", 'right': "\ue0b9" }
-  let g:lightline.tabline_separator     = { 'left': "\ue0bc", 'right': "\ue0ba" }
-  let g:lightline.tabline_subseparator  = { 'left': "\ue0bb", 'right': "\ue0bb" }
-
   call ReloadLightline()
 endfunction
 
-" Iceberg Dark Theme
-function SetIcebergDark()
-  set background=dark
+" Edge Light Theme
+function SetEdgeLight()
+  set background=light
 
-  colorscheme iceberg
-  let g:lightline.colorscheme = 'icebergDark'
+  let g:edge_style = 'edge'
+  let g:edge_enable_italic = 1
+  let g:edge_show_eob = 0
 
-  let g:lightline.separator             = { 'left': "\ue0b4", 'right': "\ue0b6" }
-  let g:lightline.subseparator          = { 'left': ")", 'right': "(" }
-  let g:lightline.tabline_separator     = { 'left': "\ue0b4", 'right': "\ue0b6" }
-  let g:lightline.tabline_subseparator  = { 'left': ")", 'right': "(" }
+  colorscheme edge
+  let g:lightline.colorscheme = 'edge'
 
   call ReloadLightline()
 endfunction
@@ -369,8 +349,8 @@ if $SYSTEM_THEME ==? 'nord'
   call SetNordScheme()
 elseif $SYSTEM_THEME ==? 'gruvbox-material-light'
   call SetGruvboxMaterialLight()
-elseif $SYSTEM_THEME ==? 'iceberg-dark'
-  call SetIcebergDark()
+elseif $SYSTEM_THEME ==? 'edge-light'
+  call SetEdgeLight()
 elseif $SYSTEM_THEME ==? 'dracula'
   call SetDraculaTheme()
 else
@@ -379,6 +359,23 @@ else
   highlight CursorLineNR cterm=bold ctermbg=lightcyan ctermfg=darkblue
   highlight Search cterm=NONE ctermbg=lightgreen ctermfg=NONE
 endif
+
+" fzf colors that match the colorscheme
+let g:fzf_colors = {
+  \ 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment']
+  \ }
 
 " Do not automatically insert comment leader after hitting o/O (normal mode)
 autocmd FileType * setlocal formatoptions-=o

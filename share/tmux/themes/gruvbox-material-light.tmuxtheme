@@ -2,61 +2,61 @@
 # https://github.com/sainnhe/gruvbox-material/
 
 # Status bar
-set-option -g status-justify centre
+set-option -g status-justify left
 
 # Basic status bar colors
-set-option -g status-style bg='#EBDBB2',fg='#4F3829'
+set-option -g status-style bg='#F5EDCA',fg='#4F3829'
 
 # Left side of status bar
-set-option -g status-left-style bg='#7C6F64',fg='#F2E5BC',bold
-set -gs @sl_sep '#[fg=#EBDBB2]#[default]'
+set-option -g status-left-style bg='#7C6F64',fg='#F3EAC7',bold
+set -gs @sl_sep '#[bg=#F3EAC7,fg=#7C6F64]#[default]'
 
 set-option -g status-left ' #S #{@sl_sep}'
 
 # Right side of status bar
-set-option -g status-right-style bg='#DAC9A5',fg='#EBDBB2'
-set -gs @sr_in '#[default]#[fg=#4F3829]'
-set -gs @sr_sep '#[bg=#7C6F64,fg=#DAC9A5]#[fg=#EBDBB2,bold]'
+set-option -g status-right-style bg='#EEE0B7',fg='#EEE0B7'
+set -gs @sr_in '#[bg=#F3EAC7,fg=#EEE0B7]#[bg=default]'
+set -gs @sr_sep '#[fg=#7C6F64]#[bg=#7C6F64,fg=#F3EAC7,bold]'
 
 set-option -g status-right '#{@sr_in}#(thyme-format "#7C6F64")#{@sr_sep} %H:%M '
 
 # Window status
-set-option -gw window-status-style bg='#7C6F64',fg='#7C6F64'
+set-option -gw window-status-style bg=default,fg='#7C6F64'
 set-option -gw window-status-bell-style bg=red,fg=red
 
-set -gs @ws_in  '#[fg=#EBDBB2,none]#[bg=default,fg=#F2E5BC]'
-set -gs @ws_sep '#[fg=#DAC9A5,none]#[bg=#DAC9A5,fg=default]'
-set -gs @ws_out '#[fg=#EBDBB2,none]#[default]'
+set -gs @ws_in  ' '
+set -gs @ws_sep ''
+set -gs @ws_out ' '
 
 set-option -gw window-status-format '#{@ws_in} #I #{@ws_sep} #W #{@ws_out}'
 
 # Window status current
-set-option -gw window-status-current-style bg='#DAC9A5',fg='#4F3829'
+set-option -gw window-status-current-style bg='#EEE0B7',fg='#4F3829'
 
-set -gs @wsc_in  '#[bg=#4F3829,fg=#EBDBB2]#[fg=#F2E5BC]'
-set -gs @wsc_sep '#[fg=#DAC9A5,none]#[default]'
-set -gs @wsc_out '#[fg=#EBDBB2,none]#[default]'
+set -gs @wsc_in  '#[fg=#F5EDCA]#[fg=default]'
+set -gs @wsc_sep ''
+set -gs @wsc_out '#[bg=#F5EDCA,fg=#EEE0B7]'
 
 set-option -gw window-status-current-format '#{@wsc_in} #I #{@wsc_sep} #W #{@wsc_out}'
 
 # Pane border
-set-option -g pane-border-style bg=default,fg='#DAC9A5'
+set-option -g pane-border-style bg=default,fg='#EEE0B7'
 
 # Active pane border
 set-option -g pane-active-border-style bg=default,fg='#7C6F64'
 
 # Pane number indicator
-set-option -g display-panes-colour '#DAC9A5'
+set-option -g display-panes-colour '#EEE0B7'
 set-option -g display-panes-active-colour '#7C6F64'
 
 # Clock mode
 set-option -g clock-mode-colour '#7C6F64'
 
 # Message
-set-option -g message-style bg='#DAC9A5',fg='#7C6F64'
+set-option -g message-style bg='#EEE0B7',fg='#7C6F64'
 
 # Command message
-set-option -g message-command-style bg='#DAC9A5',fg='#7C6F64'
+set-option -g message-command-style bg='#EEE0B7',fg='#7C6F64'
 
 # Mode
-set-option -g mode-style bg='#DAC9A5',fg='#7C6F64'
+set-option -g mode-style bg='#EEE0B7',fg='#7C6F64'

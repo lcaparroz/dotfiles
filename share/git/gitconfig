@@ -45,6 +45,28 @@
 	inspect-raw-lines = true
 	keep-plus-minus-markers = true
 
+[delta "dracula"]
+	dark = true
+	minus-style                   = red       black
+	minus-empty-line-marker-style = red       black
+	plus-style                    = green     "#282A36"
+	plus-empty-line-marker-style  = green     "#282A36"
+	minus-non-emph-style          = "#FFB86C" "#282A36"
+	plus-non-emph-style           = "#FFB86C" "#282A36"
+	minus-emph-style              = "#282A36" "#FFB86C"
+	plus-emph-style               = "#282A36" "#FFB86C"
+
+[delta "edge-light"]
+	light = true
+	minus-style                   = syntax    "#F6E4E4"
+	minus-empty-line-marker-style = syntax    "#F6E4E4"
+	plus-style                    = syntax    "#E5EEE4"
+	plus-empty-line-marker-style  = syntax    "#E5EEE4"
+	minus-non-emph-style          = syntax    "#E3EAF6"
+	plus-non-emph-style           = syntax    "#E3EAF6"
+	minus-emph-style              = "#FAFAFA" "#5079BE"
+	plus-emph-style               = "#FAFAFA" "#5079BE"
+
 [delta "gruvbox-material-light"]
 	light = true
 	minus-style                   = syntax    "#F7D9B9"
@@ -66,25 +88,3 @@
 	plus-non-emph-style           = yellow "#3B4252"
 	minus-emph-style              = blue   brightblack bold
 	plus-emph-style               = blue   brightblack bold
-
-[delta "iceberg-dark"]
-	dark = true
-	minus-style                   = "#CEB0B6" "#53343B"
-	minus-empty-line-marker-style = "#CEB0B6" "#53343B"
-	plus-style                    = "#C0C5B9" "#45493E"
-	plus-empty-line-marker-style  = "#C0C5B9" "#45493E"
-	minus-non-emph-style          = "#B3C3CC" "#384851"
-	plus-non-emph-style           = "#B3C3CC" "#384851"
-	minus-emph-style              = "#C6C8D1" "#5B7881"
-	plus-emph-style               = "#C6C8D1" "#5B7881"
-
-[delta "dracula"]
-	dark = true
-	minus-style                   = red       black
-	minus-empty-line-marker-style = red       black
-	plus-style                    = green     "#282A36"
-	plus-empty-line-marker-style  = green     "#282A36"
-	minus-non-emph-style          = "#FFB86C" "#282A36"
-	plus-non-emph-style           = "#FFB86C" "#282A36"
-	minus-emph-style              = "#282A36" "#FFB86C"
-	plus-emph-style               = "#282A36" "#FFB86C"
