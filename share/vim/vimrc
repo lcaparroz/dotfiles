@@ -200,6 +200,12 @@ set showtabline=2
 set laststatus=2
 set ruler
 
+" lightline bufferline
+let g:lightline#bufferline#show_number = 1
+let g:lightline#bufferline#number_separator = ':'
+let g:lightline#bufferline#enable_devicons = 1
+let g:lightline#bufferline#icon_position = 'first'
+
 " Lightline configuration
 let g:lightline = {
   \ 'active': {
@@ -216,7 +222,7 @@ let g:lightline = {
   \   ],
   \ },
   \ 'tabline': {
-  \   'left': [ [ 'tabs' ] ],
+  \   'left': [ [ 'buffers' ] ],
   \   'right': [ [ 'filetype' ], [ 'fileformat', 'fileencoding' ], [ 'readonly' ] ]
   \ },
   \ 'tab': {
@@ -228,11 +234,17 @@ let g:lightline = {
   \   'percent': "\uf8ef %P",
   \   'lineinfo': "\ufad6 %3l:%-3v",
   \ },
+  \ 'component_expand': {
+  \   'buffers': 'lightline#bufferline#buffers'
+  \ },
   \ 'component_function': {
   \   'filename': 'DeviconFilename',
   \   'filetype': 'DeviconFiletype',
   \   'gitbranch': 'DeviconGitBranch',
   \   'synstack': 'SynStack',
+  \ },
+  \ 'component_type': {
+  \   'buffers': 'tabsel'
   \ },
   \ }
 
