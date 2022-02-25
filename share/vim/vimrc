@@ -217,8 +217,7 @@ let g:lightline = {
   \   'right': [
   \     [ 'lineinfo' ],
   \     [ 'percent'],
-  \     [ 'charvaluehex' ],
-  \     [ 'synstack' ],
+  \     [ 'synstack', 'charvaluehex' ],
   \   ],
   \ },
   \ 'tabline': {
@@ -230,7 +229,7 @@ let g:lightline = {
   \   'inactive': [ 'tabnum', 'filename', 'modified' ]
   \ },
   \ 'component': {
-  \   'charvaluehex': "\uf246  0x%02B",
+  \   'charvaluehex': "0x%02B",
   \   'percent': "\uf8ef %P",
   \   'lineinfo': "\ufad6 %3l:%-3v",
   \ },
@@ -277,7 +276,7 @@ endfunction
 function! SynStack()
   if exists("*synstack")
     let highlights = map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
-    return (len(highlights) ? highlights[-1] : "--")
+    return "\uf246 " . (len(highlights) ? highlights[-1] : "--")
   endif
 endfunc
 
@@ -470,8 +469,8 @@ nnoremap <leader>fl :Lines<cr>
 nnoremap <leader>gc :Commits<cr>
 nnoremap <leader>gf :GFiles<cr>
 nnoremap <leader>gu :GFiles?<cr>
-nnoremap <leader>b :Buffers<cr>
-nnoremap <leader>w :W<cr>
+nnoremap <leader>b  :Buffers<cr>
+nnoremap <leader>w  :W<cr>
 nnoremap <leader>rg :RG<cr>
 nnoremap <leader>/  :BLines<cr>
 
