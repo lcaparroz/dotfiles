@@ -50,48 +50,41 @@ __inside_gitdir() {
 
 __prompt_start() {
 	local prompt
-	prompt="${PROMPT_DECO}┌╼[\e[0;1m$(whoami)\e[0m"
-	prompt+="${PROMPT_DECO}@\e[0;1m$(hostname)\e[0m"
+	prompt=""
 
 	local basedir
 	if basedir="$(__git_basedir)"
 	then
-		prompt+="${PROMPT_DECO}]╾─╼[\e[0m"
-		prompt+="\e[1;35m${basedir}${PROMPT_DECO}/\e[0m"
-		prompt+="\e[1;33m$(__git_commit || echo "--")${PROMPT_DECO}/\e[0m"
-	elif inside_gitdir="$(__inside_gitdir)" && [ "${inside_gitdir}" = true ]
-	then
-		prompt+="${PROMPT_DECO}]╾─╼[\e[0m"
+		prompt+="\e[35m${basedir}\e[0m/"
+		prompt+="\e[36m$(__git_subdir || dirs)\e[0m ("
+		prompt+="\e[33m$(__git_commit || echo "--")\e[0m/"
+	else
+		prompt+="\e[36m$(dirs)\e[0m"
 	fi
 
 	echo -e "${prompt}\e[0m"
 }
 
 __prompt_end() {
-	local prompt
-	prompt="${PROMPT_DECO}]\e[0m\n${PROMPT_DECO}└╼["
-	prompt+="\e[1;36m$(__git_subdir || dirs)"
-	prompt+="${PROMPT_DECO}]\e[0m"
-
-	echo -e "${prompt}\e[0m"
+	echo -e ")\n$(whoami)@$(hostname) $ "
 }
 
 __prompt_exit_code() {
 	local exit_code="${1}"
 
 	[ "${exit_code}" -eq 0 ] \
-		&& printf "${PROMPT_DECO}╾─╼[\e[0m\e[32m%d\e[0m${PROMPT_DECO}]\e[0m" "${exit_code}" \
-		|| printf "${PROMPT_DECO}╾─╼[\e[0m\e[31m%d\e[0m${PROMPT_DECO}]\e[0m" "${exit_code}"
+		&& printf "\e[0m[\e[32m%03d\e[0m]" "${exit_code}" \
+		|| printf "\e[0m[\e[31m%03d\e[0m]" "${exit_code}"
 }
 
-PROMPT_START="\n\e[0m\$(__prompt_start)\e[0m"
-PROMPT_END="\e[0m\$(__prompt_end)\e[0m"
-GIT_PROMPT_FORMAT="\e[0;1m%s"
+PROMPT_START="\e[0m\$(__prompt_start)\e[0m"
+PROMPT_END="$(__prompt_end)"
+GIT_PROMPT_FORMAT="\e[0m%s"
 
 if [ -r "${HOME}/.git-prompt.sh" ]
 then
 	# Bash prompt (PS1)
-	PROMPT_COMMAND='__git_ps1 "${PROMPT_START}" "${PROMPT_END}$(__prompt_exit_code "$?")\n❯ " "${GIT_PROMPT_FORMAT}"'
+	PROMPT_COMMAND='__git_ps1 "\n$(__prompt_exit_code "$?") ${PROMPT_START}" "${PROMPT_END}" "${GIT_PROMPT_FORMAT}"'
 else
 	PS1="${PROMPT_START}${PROMPT_END}"
 fi
