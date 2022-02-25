@@ -453,6 +453,16 @@ let test#ruby#rspec#options = {
   \ 'file':    '--format documentation',
   \ }
 
+" emmet-vim configuration
+let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall
+let g:user_emmet_leader_key='<C-X>'
+
+" bracey.vim configuration
+let g:bracey_refresh_on_save = 1
+let g:bracey_eval_on_save = 1
+let g:bracey_auto_start_server = 1
+
 " Map leader
 let mapleader = " "
 
