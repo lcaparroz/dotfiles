@@ -54,6 +54,7 @@ then
 	fi
 else
 	pomo_char='\ue001' # nf-pom-pomodoro_done
+	time_text=' --'
 	color="${long_break_color}"
 fi
 
