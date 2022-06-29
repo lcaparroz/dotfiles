@@ -10,10 +10,10 @@ export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
 # Dictionaries path for hunspell
-export DICPATH="${HOME}/.dictionaries"
+export DICPATH="$HOME/.dictionaries"
 
 # __git_ps1 options
-if [ -f "${HOME}/.git-prompt.sh" ]
+if [ -r "$HOME/.git-prompt.sh" ]
 then
 	export GIT_PS1_COMPRESSSPARSESTATE=true
 	export GIT_PS1_SHOWCOLORHINTS=true

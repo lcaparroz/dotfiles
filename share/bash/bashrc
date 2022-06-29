@@ -1,20 +1,20 @@
 #!/usr/bin/env bash
 
 # Import functions
-source "${HOME}/.dotfiles/share/bash/functions.sh"
+source "$HOME/.dotfiles/share/bash/functions.sh"
 
 # Source global definitions
 source_file "/etc/bashrc"
 source_file "/etc/bash.bashrc"
 
 # Source OS-specific configuration
-source_file "${HOME}/.bashrc.os"
+source_file "$HOME/.bashrc.os"
 
 # fzf keybindings (only on interactive shell sessions)
 if [ -n "$(command -v fzf)" ] && [[ $- =~ i ]]
 then
 	# fzf keybindings for git
-	source_file "${HOME}/.dotfiles/share/bash/fzf_git.sh"
+	source_file "$HOME/.dotfiles/share/bash/fzf_git.sh"
 
 	bind '"\er": redraw-current-line'
 	bind '"\C-g\C-f": "$(_fzf_git_status)\e\C-e\er"'
@@ -24,10 +24,10 @@ then
 fi
 
 # Get bash aliases from file if there is one
-source_file "${HOME}/.bash_aliases"
+source_file "$HOME/.bash_aliases"
 
 # Source machine-specific configuration
-source_file "${HOME}/.bashrc.local"
+source_file "$HOME/.bashrc.local"
 
 # Source git-prompt
 source_file "$HOME/.git-prompt.sh"
