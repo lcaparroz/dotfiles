@@ -31,7 +31,8 @@
 	show   = delta --features=\"decorations $SYSTEM_THEME\"
 
 [delta]
-	hyperlinks = true
+  conflictstyle = diff3
+	hyperlinks = false
 	navigate = true
 
 [delta "interactive"]
