@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 lock() {
-  i3lock -i ~/Pictures/desktop.png
+  i3lock -t -i ~/Pictures/desktop.png
 }
 
 case "$1" in
