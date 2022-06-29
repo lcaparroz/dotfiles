@@ -65,6 +65,10 @@ elif [ -f "/usr/share/git-core/contrib/completion/git-prompt.sh" ]
 then
   create_symbolic_link "/usr/share/git-core/contrib/completion/git-prompt.sh" \
     "${HOME}/.git-prompt.sh"
+elif [ -f "/usr/share/bash-completion/completions/git-prompt.sh" ]
+then
+  create_symbolic_link "/usr/share/bash-completion/completions/git-prompt.sh" \
+    "${HOME}/.git-prompt.sh"
 fi
 
 # fonts installation

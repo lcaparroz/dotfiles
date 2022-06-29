@@ -62,11 +62,17 @@ __prompt_start() {
 		prompt+="\e[36m$(dirs)\e[0m"
 	fi
 
-	echo -e "${prompt}\e[0m"
+	echo -e "${prompt}"
 }
 
 __prompt_end() {
-	echo -e ")\n$(whoami)@$(hostname) $ "
+	local prompt
+	prompt=""
+
+	[ "$(__git_basedir)" ] && prompt+=")"
+	prompt+="\n$(whoami)@$(hostname) $ "
+
+	echo -e "${prompt}"
 }
 
 __prompt_exit_code() {
@@ -78,7 +84,7 @@ __prompt_exit_code() {
 }
 
 PROMPT_START="\e[0m\$(__prompt_start)\e[0m"
-PROMPT_END="$(__prompt_end)"
+PROMPT_END="\$(__prompt_end)"
 GIT_PROMPT_FORMAT="\e[0m%s"
 
 if [ -r "${HOME}/.git-prompt.sh" ]

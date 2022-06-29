@@ -29,4 +29,7 @@ source_file "${HOME}/.bash_aliases"
 # Source machine-specific configuration
 source_file "${HOME}/.bashrc.local"
 
-source_file "${HOME}/.dotfiles/share/bash/prompt.sh"
+# Source git-prompt
+source_file "$HOME/.git-prompt.sh"
+
+source_file "$HOME/.dotfiles/share/bash/prompt.sh"
