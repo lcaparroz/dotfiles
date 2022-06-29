@@ -40,23 +40,23 @@ set -gs @wsc_out '#[bg=#EEF1F4,fg=#DDE2E7]'
 set-option -gw window-status-current-format '#{@wsc_in} #I #{@wsc_sep} #W #{@wsc_out}'
 
 # Pane border
-set-option -g pane-border-style bg=default,fg='#EEF1F4'
+set-option -g pane-border-style bg=default,fg='#DDE2E7'
 
 # Active pane border
-set-option -g pane-active-border-style bg=default,fg=black
+set-option -g pane-active-border-style bg=default,fg='#8790A0'
 
 # Pane number indicator
-set-option -g display-panes-colour '#EEF1F4'
-set-option -g display-panes-active-colour black
+set-option -g display-panes-colour '#DDE2E7'
+set-option -g display-panes-active-colour '#8790A0'
 
 # Clock mode
-set-option -g clock-mode-colour black
+set-option -g clock-mode-colour '#8790A0'
 
 # Message
-set-option -g message-style bg='#EEF1F4',fg=black
+set-option -g message-style bg='#DDE2E7',fg=black
 
 # Command message
-set-option -g message-command-style bg='#EEF1F4',fg=black
+set-option -g message-command-style bg='#DDE2E7',fg=black
 
 # Mode
-set-option -g mode-style bg='#EEF1F4',fg=black
+set-option -g mode-style bg='#EEF1F4',fg='#8790A0'
