@@ -5,6 +5,8 @@ set noexpandtab
 set noshiftround
 
 " vim-go configuration
+let g:go_def_mapping_enabled = 0
+let g:go_fmt_fail_silently = 0
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_extra_types = 1
 let g:go_highlight_fields = 1
