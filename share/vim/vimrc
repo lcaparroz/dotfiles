@@ -415,15 +415,31 @@ autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
 
 " vimwiki configuration (disable on markdown files by default)
-let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
 let g:vimwiki_global_ext = 0
 let g:vimwiki_filetypes = ['wiki']
+let g:vimwiki_list = [{
+  \ 'path': '~/workspace/sync/wiki',
+  \ 'name': 'wiki',
+  \ 'index': 'index',
+  \ 'syntax': 'markdown',
+  \ 'ext': '.md',
+  \ 'auto_export': 1,
+  \ 'auto_generate_tags': 1,
+  \ 'auto_tags': 1,
+  \ 'links_space_char': '-',
+  \ 'custom_wiki2html': 'vimwiki_markdown',
+  \ 'html_filename_parameterization': 1,
+  \ 'path_html': '~/workspace/sync/wiki/html',
+  \ 'template_default': 'default',
+  \ 'template_ext': '.tpl',
+  \ 'template_path': '~/workspace/sync/wiki/templates'
+  \ }]
 
 " previm configuration
 let g:previm_enable_realtime = 1
 
 let g:codi#interpreters = {
-  \'python': { 'bin': 'python3', 'prompt': '^\(>>>\|\.\.\.\) ' }
+  \ 'python': { 'bin': 'python3', 'prompt': '^\(>>>\|\.\.\.\) ' }
   \ }
 
 " fzf layout
