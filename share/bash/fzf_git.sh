@@ -4,6 +4,7 @@
 _is_in_git_repo() {
 	git rev-parse HEAD > /dev/null 2>&1
 }
+
 _fzf_tmux() {
 	fzf-tmux "$FZF_TMUX_OPTS" --reverse --bind ctrl-/:toggle-preview \
 	--preview-window down:70%:border-top:wrap:hidden "$@"

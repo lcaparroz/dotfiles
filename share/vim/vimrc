@@ -7,7 +7,7 @@ let g:ale_hover_to_floating_preview = 1
 
 " ALE linters configuration
 let g:ale_ruby_rubocop_executable = 'bundle'
-let g:ale_sh_shellcheck_exclusions = 'SC1090,SC1091'
+let g:ale_sh_shellcheck_exclusions = 'SC1090,SC1091,SC2016'
 let g:ale_cspell_options = '--gitignore'
 let g:ale_languagetool_options = '--autoDetect --level PICKY --mothertongue pt-BR '
 
