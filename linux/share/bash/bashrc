@@ -3,6 +3,9 @@
 # Import functions
 source "${HOME}/.dotfiles/share/bash/functions.sh"
 
+# Use dircolors configuration, if available
+[ -r "${HOME}/.dir_colors" ] && eval "$(dircolors -b ~/.dir_colors)"
+
 # Source fzf key-bindings/completion
 if [ -n "$(command -v fzf)" ]
 then
