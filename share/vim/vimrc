@@ -12,7 +12,7 @@ let g:ale_cspell_options = '--gitignore'
 let g:ale_languagetool_options = '--autoDetect --level PICKY --mothertongue pt-BR '
 
 let g:ale_linters = {
-  \ 'go': ['gobuild'],
+  \ 'go': ['gobuild', 'gopls'],
   \ 'ruby': ['rubocop', 'solargraph', 'cspell'],
   \ 'rust': ['analyzer', 'rustc'],
   \ 'sh': ['language_server', 'shell', 'shellcheck'],
@@ -56,6 +56,9 @@ let g:ale_completion_symbols = {
   \ 'type_parameter': 'type param',
   \ '<default>': 'v',
   \ }
+
+" vim-go configuration
+let g:go_def_mapping_enabled = 0
 
 " vim-devicon configuration
 let g:webdevicons_enable = 1

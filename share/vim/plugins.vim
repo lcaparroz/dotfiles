@@ -31,7 +31,7 @@ Plug 'turbio/bracey.vim', { 'do': 'npm install --prefix server' }
 Plug 'tyru/open-browser.vim'
 Plug 'vim-test/vim-test'
 
-Plug 'fatih/vim-go'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'hashivim/vim-terraform'
 Plug 'keith/rspec.vim'
 Plug 'leafOfTree/vim-vue-plugin'
