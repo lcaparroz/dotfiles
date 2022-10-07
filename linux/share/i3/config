@@ -94,10 +94,9 @@ set $ws1 "1: &#xf120; "
 set $ws2 "2: &#xf269; "
 # Workspace 3: email client (envelope_o symbol)
 set $ws3 "3: &#xf003; "
-# Workspace 4: social, Ferdi/Slack (comments_o symbol)
-set $ws4 "4: &#xf0e6; "
 # Workspace 5: music players (music_note symbol)
-set $ws5 "5: &#xf886; "
+set $ws4 "4: &#xf886; "
+set $ws5 "5"
 set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
@@ -132,9 +131,7 @@ bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
 assign [class="^Thunderbird$"] $ws3
-assign [class="^Ferdi$"] $ws4
-assign [class="^Slack$"] $ws4
-for_window [class="^Spotify$"] move to workspace $ws5
+for_window [class="^Spotify$"] move to workspace $ws4
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -212,6 +209,10 @@ mode "$mode_terminal" {
 
 bindsym $mod+Shift+Return mode "$mode_terminal"
 
+# scratchpad
+for_window [class="^kitty$" instance="^scratchpad$" title="^popup$"] floating enable, resize set 1080 720, move position center, move scratchpad
+bindsym $mod+semicolon [class="^kitty$" instance="^scratchpad$" title="^popup$"] scratchpad show
+
 # resize window
 mode "resize" {
   bindsym h resize shrink width 5 px or 5 ppt
@@ -279,3 +280,6 @@ bar {
 
 exec --no-startup-id xsetroot -solid "#000000"
 exec --no-startup-id ~/.fehbg
+
+# Start popup session in the scratchpad
+exec --no-startup-id popup

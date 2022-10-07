@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+diary_dir="$HOME/workspace/sync/wiki/diary"
+
+if [ -d  "$diary_dir" ]
+then
+	cd "$diary_dir" || exit
+
+	diary_file="$(fd --exact-depth 1 -t file '.*\d{4}(-\d{2}){2}' "$diary_dir" | sort --reverse | head -n 1)"
+
+	if [ -r "$diary_file" ]
+	then
+		vim "$diary_file" -c 'set signcolumn=no' -c Goyo
+	else
+		vim -c VimwikiMakeDiaryNote -c 'set signcolumn=no' -c Goyo
+	fi
+fi

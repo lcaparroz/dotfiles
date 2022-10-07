@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+kitty --detach --name=scratchpad --title=popup bash -c \
+	"tmux new-session -A -X -f 'ignore-size' -s 'popup' 'tmux source-file ~/.tmux/sessions/popup.tmux.conf'"
