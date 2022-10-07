@@ -1,32 +1,38 @@
 configuration {
-  modi: "combi,window";
-  columns: 1;
+  modes: "combi,window,filebrowser";
   font: "JetBrainsMono Nerd Font 14";
   location: 2;
+  yoffset: 0;
+  xoffset: 0;
+  fixed-num-lines: true;
   show-icons: false;
-  terminal: "rofi-sensible-terminal";
+  terminal: "xdg-terminal";
   ssh-client: "ssh";
-  ssh-command: "{terminal} -e {ssh-client} {host} [-p {port}]";
+  ssh-command: "{terminal} {ssh-client} {host} [-p {port}]";
   run-command: "{cmd}";
   run-list-command: "";
-  run-shell-command: "{terminal} -e {cmd}";
+  run-shell-command: "{terminal} {cmd}";
   window-command: "wmctrl -i -R {window}";
   window-match-fields: "all";
-  drun-match-fields: "name,generic,exec,categories";
+  // icon-theme: ;
+  drun-match-fields: "name,generic,exec,categories,keywords";
+  // drun-categories: ;
   drun-show-actions: false;
   drun-display-format: "{name} [<span weight='light' size='small'><i>({generic})</i></span>]";
+  drun-url-launcher: "xdg-open";
   disable-history: false;
   ignored-prefixes: "";
   sort: false;
-  // sorting-method: ;
+  sorting-method: "normal";
   case-sensitive: false;
   cycle: true;
   sidebar-mode: false;
+  hover-select: false;
   eh: 1;
   auto-select: false;
   parse-hosts: false;
   parse-known-hosts: true;
-  combi-modi: "run,drun";
+  combi-modes: "run,drun";
   matching: "fuzzy";
   tokenize: true;
   m: "-5";
@@ -46,16 +52,25 @@ configuration {
   show-match: true;
   max-history-size: 25;
   combi-hide-mode-prefix: false;
-  // matching-negate-char: '-';
+  combi-display-format: "{mode} {text}";
+  matching-negate-char: '-' /* unsupported */;
   // cache-dir: ;
+  window-thumbnail: false;
+  drun-use-desktop-cache: false;
+  drun-reload-desktop-cache: false;
+  normalize-match: false;
+  steal-focus: false;
+  // application-fallback-icon: ;
+  refilter-timeout-limit: 8192;
+  xserver-i300-workaround: false;
   pid: "/run/user/1000/rofi.pid";
-  /* display-window: ;
-  display-windowcd: ;
+  /* display-window: ; display-windowcd: ;
   display-run: ;
   display-ssh: ;
   display-drun: ;
   display-combi: ;
-  display-keys: ; */
+  display-keys: ;
+  display-filebrowser: ; */
   kb-primary-paste: "Control+V,Shift+Insert";
   kb-secondary-paste: "Control+v,Insert";
   kb-clear-line: "Control+w";
@@ -73,15 +88,19 @@ configuration {
   kb-remove-to-sol: "Control+u";
   kb-accept-entry: "Control+j,Control+m,Return,KP_Enter";
   kb-accept-custom: "Control+Return";
+  kb-accept-custom-alt: "Control+Shift+Return";
   kb-accept-alt: "Shift+Return";
   kb-delete-entry: "Shift+Delete";
   kb-mode-next: "Shift+Right,Control+Tab";
   kb-mode-previous: "Shift+Left,Control+ISO_Left_Tab";
+  kb-mode-complete: "Control+l";
   kb-row-left: "Control+Page_Up";
   kb-row-right: "Control+Page_Down";
-  kb-row-up: "Up,Control+p,ISO_Left_Tab";
+  kb-row-up: "Up,Control+p";
   kb-row-down: "Down,Control+n";
-  kb-row-tab: "Tab";
+  kb-row-tab: "";
+  kb-element-next: "Tab";
+  kb-element-prev: "ISO_Left_Tab";
   kb-page-prev: "Page_Up";
   kb-page-next: "Page_Down";
   kb-row-first: "Home,KP_Home";
@@ -128,6 +147,14 @@ configuration {
   me-select-entry: "MousePrimary";
   me-accept-entry: "MouseDPrimary";
   me-accept-custom: "Control+MouseDPrimary";
+  timeout {
+    action: "kb-cancel";
+    delay:  0;
+  }
+  filebrowser {
+    directories-first: true;
+    sorting-method:    "name";
+  }
 }
 
 @import "themes/seoul256_light.rasi"

@@ -1,4 +1,7 @@
-/* ROFI Color theme */
+/**
+ * Rofi Color Theme
+ * Rofi version: 1.7.5
+ **/
 
 * {
     red:                         #AF5F5F;
@@ -6,7 +9,6 @@
     blue:                        #5F87AE;
     magenta:                     #875F87;
     cyan:                        #5F8787;
-    yellow:                      #AF8760;
 
     background:                  #E1E1E1;     /* Light gray */
     background-color:            @background;
@@ -48,57 +50,59 @@
     spacing:                     2;
 }
 
-#element {
+element {
     border:  0;
     padding: 1px ;
+    spacing: 5px ;
+    cursor:  pointer;
 }
 
-#element.normal.normal {
+element normal.normal {
     background-color: @normal-background;
     text-color:       @normal-foreground;
 }
 
-#element.normal.active {
+element normal.active {
     background-color: @active-background;
     text-color:       @active-foreground;
 }
 
-#element.normal.urgent {
+element normal.urgent {
     background-color: @urgent-background;
     text-color:       @urgent-foreground;
 }
 
-#element.alternate.normal {
+element alternate.normal {
     background-color: @alternate-normal-background;
     text-color:       @alternate-normal-foreground;
 }
 
-#element.alternate.active {
+element alternate.active {
     background-color: @alternate-active-background;
     text-color:       @alternate-active-foreground;
 }
 
-#element.alternate.urgent {
+element alternate.urgent {
     background-color: @alternate-urgent-background;
     text-color:       @alternate-urgent-foreground;
 }
 
-#element.selected.normal {
+element selected.normal {
     background-color: @selected-normal-background;
     text-color:       @selected-normal-foreground;
 }
 
-#element.selected.active {
+element selected.active {
     background-color: @selected-active-background;
     text-color:       @selected-active-foreground;
 }
 
-#element.selected.urgent {
+element selected.urgent {
     background-color: @selected-urgent-background;
     text-color:       @selected-urgent-foreground;
 }
 
-#window {
+window {
     background-color: @background;
 
     border:           1px;
@@ -106,82 +110,85 @@
     width:            800px;
 }
 
-#message {
+message {
     border-color: @separatorcolor;
 
     border:       2px 0px 0px ;
     padding:      1px ;
 }
 
-#textbox {
+textbox {
     text-color: @foreground;
-
-    blink:      false;
 }
 
-#mainbox {
+mainbox {
     border:  0;
     padding: 0;
 
-    children:   [ mode-switcher,inputbar,listview ];
+    children:   [ "mode-switcher", "inputbar", "listview" ];
 }
 
-#mode-switcher {
-    border-color: @separatorcolor;
+button {
+    text-color: @normal-foreground;
 
-    border:       0px 0px 0px ;
-    margin:       0px 0px 0px;
-}
-
-#button {
+    cursor:     pointer;
+    spacing:    0;
     margin:  2px 0px 0px;
     padding: 2px;
 }
 
-#button.normal {
+button normal {
     background-color: @alternate-normal-background;
     text-color:       @alternate-normal-foreground;
 }
 
-#button.selected {
+button selected {
     background-color: @magenta;
     text-color:       @selected-normal-foreground;
 }
 
-#inputbar {
-    spacing:    0;
+inputbar {
     text-color: @normal-foreground;
-    padding:    2px ;
-    children:   [ prompt,textbox-prompt-colon,entry,case-indicator ];
-}
 
-#prompt {
     spacing:    0;
-    text-color: @magenta;
+    padding:    2px ;
+    children:   [ "prompt", "textbox-prompt-colon", "entry", "num-filtered-rows", "textbox-num-sep", "num-rows", "case-indicator" ];
 }
 
-#textbox-prompt-colon {
+prompt {
+    text-color: @magenta;
+
+    spacing:    0;
+}
+
+textbox-prompt-colon {
     text-color: @magenta;
 
     str:        "=>";
 
     expand:     false;
-    margin:     0px 0.3em 0em 0.3em ;
+    margin:     0em 0.3em 0em 0.3em ;
 }
 
-#entry {
+entry {
+    text-color:        @normal-foreground;
+
+    cursor:            text;
+    spacing:           0;
+
+    placeholder-color: Gray;
+    placeholder:       "Type to filter";
+
+    blink:             false;
+}
+
+case-indicator {
     text-color: @normal-foreground;
 
     spacing:    0;
 }
 
-#case-indicator {
-    text-color: @normal-foreground;
-
-    spacing:    0;
-}
-
-#listview {
+listview {
     border-color: @separatorcolor;
 
     dynamic:      true;
@@ -195,11 +202,43 @@
     padding:      5px 0px 0px ;
 }
 
-#scrollbar {
+scrollbar {
+    background-color: @background;
+    handle-color:     @foreground;
+
     width:            2px;
     border:           0;
     handle-width:     6px;
     padding:          1px;
-    background-color: @background;
-    handle-color:     @foreground;
+}
+
+mode-switcher {
+    border-color: @separatorcolor;
+
+    border:       0px 0px 0px ;
+    margin:       0px 0px 0px;
+}
+
+num-filtered-rows {
+    expand:     false;
+    text-color: Gray;
+}
+
+num-rows {
+    expand:     false;
+    text-color: Gray;
+}
+
+element-text {
+    background-color: transparent;
+    cursor:           inherit;
+    highlight:        inherit;
+    text-color:       inherit;
+}
+
+element-icon {
+    background-color: transparent;
+    size:             1.0000em ;
+    cursor:           inherit;
+    text-color:       inherit;
 }
