@@ -5,23 +5,23 @@
 set-option -g status-justify left
 
 # Basic status bar colors
-set-option -g status-style bg='#EEF1F4',fg='#DDE2E7'
+set-option -g status-style bg='#eef1f4',fg='#dde2e7'
 
 # Left side of status bar
-set-option -g status-left-style bg='#8790A0',fg='#EEF1F4',bold
-set -gs @sl_sep '#[bg=#EEF1F4,fg=#8790A0]'
+set-option -g status-left-style bg='#8790a0',fg='#eef1f4',bold
+set -gs @sl_sep '#[bg=#eef1f4,fg=#8790a0]'
 
 set-option -g status-left ' #S #{@sl_sep}'
 
 # Right side of status bar
-set-option -g status-right-style bg='#DDE2E7',fg='#EEF1F4'
-set -gs @sr_in '#[bg=#EEF1F4,fg=#DDE2E7]#[bg=default]'
-set -gs @sr_sep '#[fg=#8790A0]#[bg=#8790A0,fg=default,bold]'
+set-option -g status-right-style bg='#dde2e7',fg='#eef1f4'
+set -gs @sr_in '#[bg=#eef1f4,fg=#dde2e7]#[bg=default]'
+set -gs @sr_sep '#[fg=#8790a0]#[bg=#8790a0,fg=default,bold]'
 
-set-option -g status-right '#{@sr_in}#(thyme-format "#8790A0")#{@sr_sep} %H:%M '
+set-option -g status-right '#{@sr_in}#(thyme-format "#8790a0")#{@sr_sep} %H:%M '
 
 # Window status
-set-option -gw window-status-style bg=default,fg='#8790A0'
+set-option -gw window-status-style bg=default,fg='#8790a0'
 set-option -gw window-status-bell-style bg=red,fg=red
 
 set -gs @ws_in  ' '
@@ -31,32 +31,32 @@ set -gs @ws_out ' '
 set-option -gw window-status-format '#{@ws_in} #I #{@ws_sep} #W #{@ws_out}'
 
 # Window status current
-set-option -gw window-status-current-style bg='#DDE2E7',fg=black
+set-option -gw window-status-current-style bg='#dde2e7',fg=black
 
-set -gs @wsc_in  '#[fg=#EEF1F4]#[fg=default]'
+set -gs @wsc_in  '#[fg=#eef1f4]#[fg=default]'
 set -gs @wsc_sep ''
-set -gs @wsc_out '#[bg=#EEF1F4,fg=#DDE2E7]'
+set -gs @wsc_out '#[bg=#eef1f4,fg=#dde2e7]'
 
 set-option -gw window-status-current-format '#{@wsc_in} #I #{@wsc_sep} #W #{@wsc_out}'
 
 # Pane border
-set-option -g pane-border-style bg=default,fg='#DDE2E7'
+set-option -g pane-border-style bg=default,fg='#dde2e7'
 
 # Active pane border
-set-option -g pane-active-border-style bg=default,fg='#8790A0'
+set-option -g pane-active-border-style bg=default,fg='#8790a0'
 
 # Pane number indicator
-set-option -g display-panes-colour '#DDE2E7'
-set-option -g display-panes-active-colour '#8790A0'
+set-option -g display-panes-colour '#dde2e7'
+set-option -g display-panes-active-colour '#8790a0'
 
 # Clock mode
-set-option -g clock-mode-colour '#8790A0'
+set-option -g clock-mode-colour '#8790a0'
 
 # Message
-set-option -g message-style bg='#DDE2E7',fg=black
+set-option -g message-style bg='#dde2e7',fg=black
 
 # Command message
-set-option -g message-command-style bg='#DDE2E7',fg=black
+set-option -g message-command-style bg='#dde2e7',fg=black
 
 # Mode
-set-option -g mode-style bg='#EEF1F4',fg='#8790A0'
+set-option -g mode-style bg='#eef1f4',fg='#8790a0'
