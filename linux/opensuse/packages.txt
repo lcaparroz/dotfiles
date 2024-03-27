@@ -3,12 +3,14 @@ NetworkManager-applet
 ShellCheck
 bat
 bc
+brightnessctl
 docker
 docker-bash-completion
 dunst
 emacs
 fd
 feh
+flameshot
 fontawesome-fonts
 freetype
 fzf
@@ -22,6 +24,7 @@ i3lock
 i3status
 kitty
 lxappearance
+pasystray
 pavucontrol
 playerctl
 python3-docker-compose
