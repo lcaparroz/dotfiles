@@ -170,5 +170,5 @@ install_font_from_zip_file() {
   echo "   SUCCESS: '${github_repo}' installed"
 }
 
-# install_font_from_zip_file "JetBrains" "JetBrainsMono" "jetbrainsmono"
-install_font_from_zip_file "ryanoasis" "nerd-fonts" "jetbrainsmono"
+install_font_from_zip_file "JetBrains" "JetBrainsMono" "jetbrainsmono"
+# install_font_from_zip_file "ryanoasis" "nerd-fonts" "jetbrainsmono"

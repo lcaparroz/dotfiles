@@ -19,7 +19,6 @@ The following software must be installed prior to configuring these dotfiles:
 * [kitty](https://github.com/kovidgoyal/kitty) (GPU based terminal emulator)
 * [python3](https://www.python.org) (programming language)
 * [ripgrep](https://github.com/BurntSushi/ripgrep) (fast alternative to `grep`)
-* [tig](https://github.com/jonas/tig) (text-mode interface for git)
 * [tmux](https://github.com/tmux/tmux) (terminal multiplexer)
 * [vim](https://www.vim.org) (primary editor)
 

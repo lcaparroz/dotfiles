@@ -17,10 +17,10 @@ then
 	source_file "$HOME/.dotfiles/share/bash/fzf_git.sh"
 
 	bind '"\er": redraw-current-line'
-	bind '"\C-g\C-f": "$(_fzf_git_status)\e\C-e\er"'
-	bind '"\C-g\C-b": "$(_fzf_git_branch)\e\C-e\er"'
-	bind '"\C-g\C-h": "$(_fzf_git_log)\e\C-e\er"'
-	bind '"\C-g\C-u": "$(_fzf_git_stash)\e\C-e\er"'
+	bind '"\C-gf": "$(_fzf_git_status)\e\C-e\er"'
+	bind '"\C-gb": "$(_fzf_git_branch)\e\C-e\er"'
+	bind '"\C-gh": "$(_fzf_git_log)\e\C-e\er"'
+	bind '"\C-gu": "$(_fzf_git_stash)\e\C-e\er"'
 fi
 
 # Get bash aliases from file if there is one

@@ -1,6 +1,6 @@
 configuration {
   modes: "combi,window,filebrowser";
-  font: "JetBrainsMono Nerd Font 14";
+  font: "JetBrainsMono NF 14";
   location: 2;
   yoffset: 0;
   xoffset: 0;
