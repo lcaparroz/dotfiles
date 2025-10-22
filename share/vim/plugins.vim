@@ -31,17 +31,16 @@ Plug 'turbio/bracey.vim', { 'do': 'npm install --prefix server' }
 Plug 'tyru/open-browser.vim'
 Plug 'vim-test/vim-test'
 
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'hashivim/vim-terraform'
-Plug 'keith/rspec.vim'
 Plug 'leafOfTree/vim-vue-plugin'
 Plug 'mattn/emmet-vim'
+Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'mracos/mermaid.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'rust-lang/rust.vim'
 Plug 'tpope/vim-rails'
 Plug 'vim-ruby/vim-ruby'
-Plug 'vimwiki/vimwiki'
+" Plug 'vimwiki/vimwiki'
 
 Plug 'arcticicestudio/nord-vim'
 Plug 'dracula/vim', { 'as': 'dracula' }

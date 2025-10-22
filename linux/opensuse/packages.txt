@@ -1,6 +1,7 @@
 NetworkManager
 NetworkManager-applet
 ShellCheck
+autorandr
 bat
 bc
 brightnessctl
@@ -28,13 +29,14 @@ pasystray
 pavucontrol
 playerctl
 python3-docker-compose
-ranger
+rbenv
+rbenv-bash-completion
 redshift
 ripgrep
 ripgrep-bash-completion
 rofi
 scrot
-tig
 tmux
+universal-ctags
 xev
 yarn

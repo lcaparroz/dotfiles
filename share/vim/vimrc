@@ -6,22 +6,28 @@ let g:ale_hover_cursor = 1
 let g:ale_hover_to_floating_preview = 1
 
 " ALE linters configuration
+let g:ale_linters_explicit = 1
 let g:ale_ruby_rubocop_executable = 'bundle'
 let g:ale_sh_shellcheck_exclusions = 'SC1090,SC1091,SC2016'
 let g:ale_cspell_options = '--gitignore'
 let g:ale_languagetool_options = '--autoDetect --level PICKY --mothertongue pt-BR '
+let g:ale_css_stylelint_options = '--config=/home/lcaparroz/workspace/.stylelintrc.json'
+let g:ale_scss_stylelint_options = '--config=/home/lcaparroz/workspace/.stylelintrc.json'
 
 let g:ale_linters = {
+  \ 'css': ['stylelint'],
   \ 'go': ['gobuild', 'gopls'],
-  \ 'ruby': ['rubocop', 'solargraph', 'cspell'],
+  \ 'javascript': ['eslint'],
+  \ 'ruby': ['rubocop', 'solargraph'],
   \ 'rust': ['analyzer', 'rustc'],
+  \ 'scss': ['stylelint'],
   \ 'sh': ['language_server', 'shell', 'shellcheck'],
-  \ 'markdown': ['alex', 'languagetool'],
-  \ 'text': ['alex', 'languagetool'],
+  \ 'markdown': ['languagetool', 'marksman'],
   \ }
 let g:ale_fixers = {
   \ '*': ['remove_trailing_lines', 'trim_whitespace'],
   \ 'go': ['gofmt'],
+  \ 'javascript': ['biome'],
   \ 'rust': ['rustfmt'],
   \ 'terraform': ['terraform'],
   \ 'html': ['prettier'],
@@ -60,6 +66,9 @@ let g:ale_completion_symbols = {
 " vim-go configuration
 let g:go_def_mapping_enabled = 0
 
+" nerdtree configuration
+let NERDTreeShowHidden=1
+
 " vim-devicon configuration
 let g:webdevicons_enable = 1
 
@@ -68,10 +77,10 @@ let g:tagbar_use_cache = 0
 let g:tagbar_autofocus = 1
 
 " vim-signify configuration
-let g:signify_sign_add               = "\uf914"
-let g:signify_sign_delete            = "\uf873"
-let g:signify_sign_delete_first_line = "\uf873"
-let g:signify_sign_change            = "\ufc23"
+let g:signify_sign_add               = "\uf067"  " nf-fa-plus
+let g:signify_sign_delete            = "\uf068"  " nf-fa-minus
+let g:signify_sign_delete_first_line = "\uf068"  " nf-fa-minus
+let g:signify_sign_change            = "\Uf0725" " nf-md-tilde
 let g:signify_sign_change_delete     = g:signify_sign_change . g:signify_sign_delete_first_line
 
 " vim-signify doesn't show count on sign column
@@ -233,8 +242,8 @@ let g:lightline = {
   \ },
   \ 'component': {
   \   'charvaluehex': "0x%02B",
-  \   'percent': "\uf8ef %P",
-  \   'lineinfo': "\ufad6 %3l:%-3v",
+  \   'percent': "\Uf03f0 %P",
+  \   'lineinfo': "\Uf05d7 %3l:%-3v",
   \ },
   \ 'component_expand': {
   \   'buffers': 'lightline#bufferline#buffers'
@@ -268,7 +277,7 @@ function! DeviconGitBranch()
   let devicon_git_branch = FugitiveHead()
   return strlen(devicon_git_branch) ?
     \ "\uf126 " . devicon_git_branch :
-    \ "\uf755 " . expand('%:p:h:t')
+    \ "\uf114 " . expand('%:p:h:t')
 endfunction
 
 function! DeviconFilename()
@@ -411,32 +420,32 @@ highlight link SpecialKey NonText
 autocmd Filetype gitcommit setlocal spell
 autocmd Filetype markdown,mkd setlocal spell
 autocmd Filetype text setlocal spell
-autocmd Filetype wiki setlocal spell
+" autocmd Filetype wiki setlocal spell
 
 " Enable Limelight when using Goyo
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
 
 " vimwiki configuration (disable on markdown files by default)
-let g:vimwiki_global_ext = 0
-let g:vimwiki_filetypes = ['wiki']
-let g:vimwiki_list = [{
-  \ 'path': '~/workspace/sync/wiki',
-  \ 'name': 'wiki',
-  \ 'index': 'index',
-  \ 'syntax': 'markdown',
-  \ 'ext': '.md',
-  \ 'auto_export': 1,
-  \ 'auto_generate_tags': 1,
-  \ 'auto_tags': 1,
-  \ 'links_space_char': '-',
-  \ 'custom_wiki2html': 'vimwiki_markdown',
-  \ 'html_filename_parameterization': 1,
-  \ 'path_html': '~/workspace/sync/wiki/html',
-  \ 'template_default': 'default',
-  \ 'template_ext': '.tpl',
-  \ 'template_path': '~/workspace/sync/wiki/templates'
-  \ }]
+" let g:vimwiki_global_ext = 0
+" let g:vimwiki_filetypes = ['wiki']
+" let g:vimwiki_list = [{
+"   \ 'path': '~/workspace/sync/wiki',
+"   \ 'name': 'wiki',
+"   \ 'index': 'index',
+"   \ 'syntax': 'markdown',
+"   \ 'ext': '.md',
+"   \ 'auto_export': 1,
+"   \ 'auto_generate_tags': 1,
+"   \ 'auto_tags': 1,
+"   \ 'links_space_char': '-',
+"   \ 'custom_wiki2html': 'vimwiki_markdown',
+"   \ 'html_filename_parameterization': 1,
+"   \ 'path_html': '~/workspace/sync/wiki/html',
+"   \ 'template_default': 'default',
+"   \ 'template_ext': '.tpl',
+"   \ 'template_path': '~/workspace/sync/wiki/templates'
+"   \ }]
 
 " previm configuration
 let g:previm_enable_realtime = 1
@@ -446,10 +455,10 @@ let g:codi#interpreters = {
   \ }
 
 " fzf layout
-let g:fzf_layout = { 'down': '30%' }
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 
-" Disable preview on fzf
-let g:fzf_preview_window = ''
+" Enable preview on fzf
+let g:fzf_preview_window = ['hidden,right,50%,<70(up,40%)', 'ctrl-/']
 
 " Change default ripgrep fzf integration (doesn't use fzf as fuzzy finder)
 function! RipgrepFzf(query, fullscreen)
@@ -474,8 +483,8 @@ let test#ruby#rspec#options = {
 
 " emmet-vim configuration
 let g:user_emmet_install_global = 0
-autocmd FileType html,css EmmetInstall
 let g:user_emmet_leader_key='<C-X>'
+autocmd FileType html,css EmmetInstall
 
 " bracey.vim configuration
 let g:bracey_refresh_on_save = 1
@@ -528,10 +537,10 @@ nnoremap <silent><leader>tl :TestLast<cr>
 nnoremap <silent><leader>tv :TestVisit<cr>
 
 " vimux mappings
-nnoremap <Leader>vz :VimuxZoomRunner<cr>
+nnoremap <leader>vz :VimuxZoomRunner<cr>
 
 " Goyo mappings
-nnoremap <Leader>jg :Goyo<cr>
+nnoremap <leader>jg :Goyo<cr>
 
 " custom mappings
 nnoremap <leader>dff :windo diffthis<cr>

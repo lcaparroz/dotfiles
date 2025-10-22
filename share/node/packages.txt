@@ -1,0 +1,5 @@
+postcss
+postcss-scss
+stylelint
+stylelint-config-standard-scss
+stylelint-scss
