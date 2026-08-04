@@ -1,7 +1,6 @@
 set encoding=UTF-8
 
 " ALE configuration
-let g:ale_completion_enabled = 1
 let g:ale_hover_cursor = 1
 let g:ale_hover_to_floating_preview = 1
 
@@ -19,7 +18,7 @@ let g:ale_linters = {
   \ 'go': ['gobuild', 'gopls'],
   \ 'javascript': ['eslint'],
   \ 'ruby': ['rubocop', 'solargraph'],
-  \ 'rust': ['analyzer', 'rustc'],
+  \ 'rust': ['analyzer'],
   \ 'scss': ['stylelint'],
   \ 'sh': ['language_server', 'shell', 'shellcheck'],
   \ 'markdown': ['languagetool', 'marksman'],
@@ -63,6 +62,12 @@ let g:ale_completion_symbols = {
   \ '<default>': 'v',
   \ }
 
+let g:ale_rust_analyzer_config = {
+  \  'server': {
+  \    'extraEnv': { 'RUSTUP_TOOLCHAIN': 'stable' },
+  \  }
+  \}
+
 " vim-go configuration
 let g:go_def_mapping_enabled = 0
 
@@ -91,6 +96,8 @@ let g:VimuxUseNearest = 1
 
 " Plugin manager
 so ~/.vim/plugins.vim
+
+let g:ale_completion_enabled = 1
 
 " Set swap file updating time
 set updatetime=100

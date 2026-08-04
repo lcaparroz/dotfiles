@@ -7,6 +7,7 @@ endif
 
 call plug#begin('~/.vim/bundle')
 
+" Appearance
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
@@ -14,6 +15,7 @@ Plug 'mengelbrecht/lightline-bufferline'
 Plug 'mhinz/vim-signify'
 Plug 'ryanoasis/vim-devicons'
 
+" Tools
 Plug 'dense-analysis/ale'
 Plug 'dominikduda/vim_current_word'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -31,6 +33,7 @@ Plug 'turbio/bracey.vim', { 'do': 'npm install --prefix server' }
 Plug 'tyru/open-browser.vim'
 Plug 'vim-test/vim-test'
 
+" Languages
 Plug 'hashivim/vim-terraform'
 Plug 'leafOfTree/vim-vue-plugin'
 Plug 'mattn/emmet-vim'
@@ -42,6 +45,7 @@ Plug 'tpope/vim-rails'
 Plug 'vim-ruby/vim-ruby'
 " Plug 'vimwiki/vimwiki'
 
+" Themes
 Plug 'arcticicestudio/nord-vim'
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'sainnhe/edge'

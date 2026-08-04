@@ -1,7 +1,7 @@
 set nofoldenable
 
 " set omnifunc=ale#completion#OmniFunc
-" set completeopt=menu,menuone,popup,noselect,noinsert
+set completeopt=menu,menuone,popup,noselect,noinsert
 let b:ale_completion_enabled = 1
 
 " vim-ruby configuration
