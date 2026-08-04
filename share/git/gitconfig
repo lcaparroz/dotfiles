@@ -93,3 +93,10 @@
 	plus-non-emph-style           = yellow "#3B4252"
 	minus-emph-style              = blue   brightblack bold
 	plus-emph-style               = blue   brightblack bold
+[merge]
+	tool = vimdiff
+	conflictstyle = diff3
+[mergetool]
+	prompt = false
+[credential]
+	helper = cache
