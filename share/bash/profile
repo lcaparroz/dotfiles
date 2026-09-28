@@ -54,10 +54,20 @@ export SDKMAN_DIR="$HOME/.sdkman"
 # Init SDKMAN
 source_file "$SDKMAN_DIR/bin/sdkman-init.sh"
 
+# pyenv settings
+export PYENV_ROOT="$HOME/.pyenv"
+
+# Init pyenv
+eval "$(pyenv init - bash)"
+
 # List of paths to be loaded (in order of priority)
 read -r -d '' PATHS_TO_LOAD <<- EOM
 $HOME/opt/bin
+$PYENV_ROOT/bin
 $HOME/.rbenv/bin
+$HOME/.cargo/bin
+$HOME/.go/bin
+$HOME/.local/bin
 EOM
 
 # Initial PATH
@@ -66,7 +76,7 @@ MY_PATH="$HOME/bin:/usr/local/bin:/usr/bin:/bin"
 # Load list of paths into PATH
 for p in $PATHS_TO_LOAD
 do
-	[ -r "$p" ] && MY_PATH="$p:$MY_PATH"
+	[ -d "$p" ] && MY_PATH="$p:$MY_PATH"
 done
 export PATH="$MY_PATH"
 

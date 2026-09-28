@@ -43,4 +43,7 @@ done
 source_file_if_linux "$HOME/.dotfiles/linux/share/install.sh"
 source_file_if_macos "$HOME/.dotfiles/macos/install.sh"
 
+# Install rust-analyzer with rustup
+rustup component add rust-analyzer
+
 echo -e "\n# Finish #"
