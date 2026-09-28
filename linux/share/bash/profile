@@ -3,6 +3,7 @@
 # Default terminal for i3
 if [ "${XDG_CURRENT_DESKTOP}" = "i3" ] && [ "${XDG_SESSION_DESKTOP}" = "i3" ]
 then
+	export XDG_SESSION_TYPE="x11"
 	export TERMINAL="kitty"
 fi
 
