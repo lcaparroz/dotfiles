@@ -20,7 +20,7 @@ Plug 'dense-analysis/ale'
 Plug 'dominikduda/vim_current_word'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'metakirby5/codi.vim'
+" Plug 'metakirby5/codi.vim'
 Plug 'preservim/nerdtree'
 Plug 'preservim/tagbar'
 Plug 'preservim/vimux'
@@ -29,7 +29,7 @@ Plug 'rhysd/git-messenger.vim'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
-Plug 'turbio/bracey.vim', { 'do': 'npm install --prefix server' }
+" Plug 'turbio/bracey.vim', { 'do': 'npm install --prefix server' }
 Plug 'tyru/open-browser.vim'
 Plug 'vim-test/vim-test'
 

@@ -102,7 +102,7 @@ let g:ale_completion_enabled = 1
 " Set swap file updating time
 set updatetime=100
 
-" Inidicates a fast terminal connection
+" Indicates a fast terminal connection
 set ttyfast
 
 " Row numbers
@@ -121,12 +121,19 @@ set splitbelow
 " Scroll
 set scrolloff=0
 
-" Non text, special characters, and disable line wrapping
+" Non-text, special characters, and disable line wrapping
 set list listchars=tab:»\ ,lead:·,eol:¬,trail:·,nbsp:·,extends:↪,precedes:↩
 set nowrap
 
-" set showbreak=↪\
-" set wrap
+" Set text wrapping on buffers with no filetype defined
+if empty(&filetype)
+  setlocal textwidth=0
+  setlocal wrap
+  setlocal linebreak
+  setlocal breakindent
+  setlocal showbreak=↪·
+  setlocal formatoptions=ql
+endif
 
 " No vertical characters for separating windows
 set fillchars+=vert:│
@@ -266,7 +273,7 @@ let g:lightline = {
   \ },
   \ }
 
-" Powerline seaparators
+" Powerline separators
 let g:lightline.separator             = { 'left': "\ue0b0", 'right': "\ue0b2" }
 let g:lightline.subseparator          = { 'left': "\ue0b1", 'right': "\ue0b3" }
 let g:lightline.tabline_separator     = { 'left': "\ue0b0", 'right': "\ue0b2" }
@@ -493,10 +500,8 @@ let g:user_emmet_install_global = 0
 let g:user_emmet_leader_key='<C-X>'
 autocmd FileType html,css EmmetInstall
 
-" bracey.vim configuration
-let g:bracey_refresh_on_save = 1
-let g:bracey_eval_on_save = 1
-let g:bracey_auto_start_server = 1
+" git-messenger configuration
+let g:git_messenger_always_into_popup = v:true
 
 " Map leader
 let mapleader = " "
