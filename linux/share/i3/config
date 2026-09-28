@@ -50,7 +50,7 @@ bindsym $mod+period exec "1password --quick-access"
 
 # rofi
 bindsym $mod+d exec "rofi -show combi"
-bindsym $mod+Tab exec "rofi -show window"
+bindsym Mod1+Tab exec "rofi -show window"
 
 # start dmenu/dmenu desktop with Dracula theme
 
