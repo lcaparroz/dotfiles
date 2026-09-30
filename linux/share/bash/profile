@@ -5,12 +5,13 @@ if [ "${XDG_CURRENT_DESKTOP}" = "i3" ] && [ "${XDG_SESSION_DESKTOP}" = "i3" ]
 then
 	export XDG_SESSION_TYPE="x11"
 	export TERMINAL="kitty"
+
+	# Use Right Alt as the compose key
+	setxkbmap \
+		-model pc105 \
+		-layout "us" \
+		-option "compose:ralt"
 fi
 
-# Remap Caps Lock to Control, use Right Alt as the compose key
-setxkbmap \
-	-model pc105 \
-	-layout "us" \
-	-option "compose:ralt"
 
 source "${HOME}/.dotfiles/share/bin/system_theme"

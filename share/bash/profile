@@ -55,10 +55,13 @@ export SDKMAN_DIR="$HOME/.sdkman"
 source_file "$SDKMAN_DIR/bin/sdkman-init.sh"
 
 # pyenv settings
-export PYENV_ROOT="$HOME/.pyenv"
+if [ -n "$(command -v pyenv)" ]
+then
+	export PYENV_ROOT="$HOME/.pyenv"
 
-# Init pyenv
-eval "$(pyenv init - bash)"
+	# Init pyenv
+	eval "$(pyenv init - bash)"
+fi
 
 # List of paths to be loaded (in order of priority)
 read -r -d '' PATHS_TO_LOAD <<- EOM
