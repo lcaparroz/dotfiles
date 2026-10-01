@@ -274,10 +274,10 @@ let g:lightline = {
   \ }
 
 " Powerline separators
-let g:lightline.separator             = { 'left': "\ue0b0", 'right': "\ue0b2" }
-let g:lightline.subseparator          = { 'left': "\ue0b1", 'right': "\ue0b3" }
-let g:lightline.tabline_separator     = { 'left': "\ue0b0", 'right': "\ue0b2" }
-let g:lightline.tabline_subseparator  = { 'left': "\ue0b1", 'right': "\ue0b3" }
+let g:lightline.separator             = { 'left': "\ue0b4", 'right': "\ue0b6" }
+let g:lightline.subseparator          = { 'left': "\ue0b5", 'right': "\ue0b7" }
+let g:lightline.tabline_separator     = { 'left': "\ue0b4", 'right': "\ue0b6" }
+let g:lightline.tabline_subseparator  = { 'left': "\ue0b5", 'right': "\ue0b7" }
 
 function! DeviconFiletype()
   return winwidth(0) > 70 ? (
