@@ -33,7 +33,7 @@ __git_subdir() {
 	local -r levels_count="${#dir_levels[*]}"
 
 	local abbrev_path="${dir_levels[0]}"
-	for (( n = 1; n < levels_count - 1; n++))
+	for (( n = 1; n < levels_count - 1; n++ ))
 	do
 		local level="${dir_levels[n]}"
 		[ "${#level}" -gt 3 ] && level="${level:0:2}."
@@ -85,10 +85,12 @@ __prompt_exit_code() {
 
 PROMPT_START="\e[0m\$(__prompt_start)\e[0m"
 PROMPT_END="\$(__prompt_end)"
-GIT_PROMPT_FORMAT="\e[0m%s"
 
 if [ -r "${HOME}/.git-prompt.sh" ]
 then
+	source "$HOME/.git-prompt.sh"
+	GIT_PROMPT_FORMAT="\e[0m%s"
+
 	# Bash prompt (PS1)
 	PROMPT_COMMAND='__git_ps1 "\n$(__prompt_exit_code "$?") ${PROMPT_START}" "${PROMPT_END}" "${GIT_PROMPT_FORMAT}"'
 else

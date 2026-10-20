@@ -1,8 +1,14 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Helper functions
 source_file() {
 	[ -f "$1" ] && source "$1"
+}
+
+command_exist() {
+	command -v "$1" > /dev/null 2>&1 \
+		&& return 0 \
+		|| return 1
 }
 
 # Language settings
@@ -10,67 +16,63 @@ export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
 # Dictionaries path for hunspell
-export DICPATH="$HOME/.dictionaries"
+if command_exist hunspell
+then
+	export DICPATH="$HOME/.dictionaries"
+fi
 
 # __git_ps1 options
 if [ -r "$HOME/.git-prompt.sh" ]
 then
-	export GIT_PS1_COMPRESSSPARSESTATE=true
-	export GIT_PS1_SHOWCOLORHINTS=true
-	export GIT_PS1_SHOWDIRTYSTATE=true
-	export GIT_PS1_SHOWSTASHSTATE=true
-	export GIT_PS1_SHOWUNTRACKEDFILES=true
+	export GIT_PS1_COMPRESSSPARSESTATE="true"
+	export GIT_PS1_SHOWCOLORHINTS="true"
+	export GIT_PS1_SHOWCONFLICTSTATE="yes"
+	export GIT_PS1_SHOWDIRTYSTATE="true"
+	export GIT_PS1_SHOWSTASHSTATE="true"
+	export GIT_PS1_SHOWUNTRACKEDFILES="true"
 	export GIT_PS1_SHOWUPSTREAM="verbose"
 	export GIT_PS1_DESCRIBE_STYLE="branch"
 fi
 
-# Define vim/vi as the default editor, if available
-if [ -n "$(command -v vimx)" ]
+# Define vim as the default editor
+if command_exist vim
 then
-	export EDITOR=vimx
-elif [ -n "$(command -v vim)" ]
-then
-	export EDITOR=vim
-elif [ -n "$(command -v vi)" ]
-then
-	export EDITOR=vi
+	export EDITOR="vim"
 fi
 
 # FZF settings
-read -r -d '' FZF_CTRL_T_OPTS <<- EOM
---reverse
---bind ctrl-/:toggle-preview
---preview-window right:50%:border-left:hidden
---preview 'bat --color=always --style=grid,header {}'
-EOM
+if command_exist fzf
+then
+	read -r -d '' FZF_CTRL_T_OPTS <<- EOM
+	--reverse
+	--bind ctrl-/:toggle-preview
+	--preview-window right:50%:border-left:hidden
+	--preview 'bat --color=always --style=grid,header {}'
+	EOM
 
-export FZF_CTRL_T_COMMAND='fd --hidden --no-ignore --exclude ".git/" --type f'
-export FZF_CTRL_T_OPTS="$FZF_CTRL_T_OPTS"
-export FZF_TMUX_OPTS="-p 90%,90%"
+	export FZF_CTRL_T_COMMAND='fd --hidden --no-ignore --exclude ".git/" --type f'
+	export FZF_CTRL_T_OPTS="$FZF_CTRL_T_OPTS"
+	export FZF_TMUX_OPTS="-p 90%,90%"
+fi
 
 # SDKMAN settings
-export SDKMAN_DIR="$HOME/.sdkman"
-
-# Init SDKMAN
-source_file "$SDKMAN_DIR/bin/sdkman-init.sh"
+if command_exist sdk
+then
+	export SDKMAN_DIR="$HOME/.sdkman"
+fi
 
 # pyenv settings
-if [ -n "$(command -v pyenv)" ]
+if command_exist pyenv
 then
 	export PYENV_ROOT="$HOME/.pyenv"
-
-	# Init pyenv
-	eval "$(pyenv init - bash)"
 fi
 
 # List of paths to be loaded (in order of priority)
 read -r -d '' PATHS_TO_LOAD <<- EOM
-$HOME/opt/bin
 $PYENV_ROOT/bin
 $HOME/.rbenv/bin
 $HOME/.cargo/bin
 $HOME/.go/bin
-$HOME/.local/bin
 EOM
 
 # Initial PATH
